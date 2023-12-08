@@ -11,11 +11,14 @@ public class Kinematic : MonoBehaviour
     public Image fadeImage;
     public Animation fadeAnimation;
 
+    public int nextLevelIndex = -1;
+
     public List<GameObject> screens;
     public List<float> timers;
 
     [TextArea(3, 10)]
     public List<string> sentences;
+
 
     private int screenIndex = 0;
 
@@ -48,13 +51,13 @@ public class Kinematic : MonoBehaviour
         else
         {
             LoadNextLevel();
-            StopAllCoroutines();
         }
     }
 
     IEnumerator FullFade()
     {
-        yield return new WaitForSeconds(timers[screenIndex] - 1f);
+        float fadeTime = screenIndex < screens.Count ? (timers[screenIndex] - 1f) : 0f;
+        yield return new WaitForSeconds(fadeTime);
 
         fadeAnimation.Play("FadeClip");
 
@@ -67,8 +70,13 @@ public class Kinematic : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
-        if(SceneManager.GetSceneAt(nextScene) != null)
+        int nextScene = nextLevelIndex;
+        if(nextLevelIndex == -1)
+        {
+            nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        }
+
+        if(nextScene < SceneManager.sceneCountInBuildSettings)
         {
             StartCoroutine(LoadLevel(nextScene));
         }

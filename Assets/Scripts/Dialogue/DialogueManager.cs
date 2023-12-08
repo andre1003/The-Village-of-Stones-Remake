@@ -99,7 +99,7 @@ public class DialogueManager : MonoBehaviour
 
         if(dialogues.Count == 0)
         {
-
+            GameFlow.instance.Map();
         }
     }
 }

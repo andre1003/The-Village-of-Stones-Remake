@@ -60,11 +60,6 @@ public class GameFlow : MonoBehaviour
 
     public void Map()
     {
-
-    }
-
-    public void LoadLevel(int level)
-    {
-
+        MapMenu.instance.LoadMap();
     }
 }
