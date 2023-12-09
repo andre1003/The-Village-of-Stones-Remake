@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialogueCanvas;
     public TextMeshProUGUI sentenceText;
     public TextMeshProUGUI nameText;
+    public Image speakingCharacterImage;
 
     public int dialoguesBeforeBossfight = 1;
 
@@ -69,8 +71,9 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        nameText.text = dialogues[0].names[0] + ":";
+        nameText.text = dialogues[0].names[0];
         sentenceText.text = dialogues[0].sentences[0];
+        speakingCharacterImage.sprite = dialogues[0].sprites[0];
         dialogues[0].NextSentence();
         canNextSentence = true;
     }

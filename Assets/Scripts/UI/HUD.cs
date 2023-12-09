@@ -40,14 +40,17 @@ public class HUD : MonoBehaviour
     // Healths
     public Slider playerHealth;
     public Slider enemyHealth;
+    public List<GameObject> healthObjects;
 
 
     private float basePlayerHealth;
     private float baseEnemyHealth;
+    private bool isPlayerTurn;
 
     void Start()
     {
         InitialSetup();
+        isPlayerTurn = Bossfight.instance.IsPlayerTurn();
     }
 
     void Update()
@@ -55,12 +58,22 @@ public class HUD : MonoBehaviour
         currentCharacterText.text = Bossfight.instance.GetCurrentTurnCharacterName();
         playerHealthText.text = Bossfight.instance.characters[0].health.ToString();
         enemyHealthText.text = Bossfight.instance.characters[1].health.ToString();
+        playerHealth.value = Bossfight.instance.characters[0].health / basePlayerHealth;
+        enemyHealth.value = Bossfight.instance.characters[1].health / baseEnemyHealth;
+
+        if(isPlayerTurn != Bossfight.instance.IsPlayerTurn())
+        {
+            UpdateActionsInteractable();
+        }
+    }
+
+    private void UpdateActionsInteractable()
+    {
+        isPlayerTurn = Bossfight.instance.IsPlayerTurn();
         foreach(Button action in playerActions)
         {
             action.interactable = Bossfight.instance.IsPlayerTurn();
         }
-        playerHealth.value = Bossfight.instance.characters[0].health / basePlayerHealth;
-        enemyHealth.value = Bossfight.instance.characters[1].health / baseEnemyHealth;
     }
 
     private void InitialSetup()
@@ -99,5 +112,9 @@ public class HUD : MonoBehaviour
     public void SetHUDVisibility(bool visibility)
     {
         hudCanvas.SetActive(visibility);
+        foreach(GameObject healthObject in healthObjects)
+        {
+            healthObject.SetActive(visibility);
+        }
     }
 }
