@@ -28,14 +28,51 @@ public class MapMenu : MonoBehaviour
     public AnimationClip fadeIn;
     public AnimationClip fadeOut;
 
-    public int index = 1;
-    public int mapIndex;
+    public List<float> levelPostionsX;
+    public RectTransform playerRectTransform;
 
+    public int index = 0;
+
+
+    private int previousIndex;
+    private float time;
+    private float timeToReachTarget = 2f;
+    private Vector3 origin;
+    private Vector3 target;
+
+
+    void Update()
+    {
+        if(!playerRectTransform || playerRectTransform.localPosition == target)
+        {
+            return;
+        }
+
+        time += Time.deltaTime / timeToReachTarget;
+        playerRectTransform.localPosition = Vector3.Lerp(origin, target, time);
+    }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         fadeCanvas.SetActive(true);
         StartCoroutine(FadeInScreen());
+
+        GameObject[] mapPlayer = GameObject.FindGameObjectsWithTag("MapPlayer");
+        playerRectTransform = mapPlayer.Length == 0 ? null : mapPlayer[0].GetComponent<RectTransform>();
+        if(!playerRectTransform)
+        {
+            return;
+        }
+
+        float x = levelPostionsX[previousIndex];
+        float y = playerRectTransform.localPosition.y;
+        float z = playerRectTransform.localPosition.z;
+        origin = new Vector3(x, y, z);
+
+        x = levelPostionsX[index];
+        target = new Vector3(x, y, z);
+
+        time = 0f;
     }
 
     public void LoadMap()
@@ -68,7 +105,8 @@ public class MapMenu : MonoBehaviour
 
     IEnumerator LoadLevelAsync()
     {
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(index);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(index + 1);
+        previousIndex = index;
         index++;
         while(!asyncOperation.isDone)
         {
@@ -82,7 +120,7 @@ public class MapMenu : MonoBehaviour
         fadeAnimation.Play();
         yield return new WaitForSeconds(fadeOut.length);
 
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(mapIndex);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Map");
         while(!asyncOperation.isDone)
         {
             yield return null;

@@ -17,9 +17,11 @@ public class GameFlow : MonoBehaviour
     #endregion
 
     public AudioSource audioSource;
-
     public AudioClip dialogue;
     public AudioClip fight;
+
+    public bool isFinalLevel = false;
+
 
     void Start()
     {

@@ -134,9 +134,11 @@ GameObject:
   - component: {fileID: 129633604}
   - component: {fileID: 129633606}
   - component: {fileID: 129633605}
+  - component: {fileID: 129633608}
+  - component: {fileID: 129633607}
   m_Layer: 5
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: MapPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250.4, y: -18.3}
+  m_AnchoredPosition: {x: -250, y: -18}
   m_SizeDelta: {x: 45, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129633605
@@ -198,6 +200,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129633603}
   m_CullTransparentMesh: 1
+--- !u!111 &129633607
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129633603}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &129633608
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129633603}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bc8c58b7ce5bcac4bbdcdfb1378d9b92, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &282159686
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +648,6 @@ GameObject:
   - component: {fileID: 860099665}
   - component: {fileID: 860099664}
   - component: {fileID: 860099663}
-  - component: {fileID: 860099669}
   m_Layer: 5
   m_Name: FadeCanvas
   m_TagString: Untagged
@@ -730,18 +767,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &860099669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860099662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fb752285810b0f46b225835bb196c3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1002621880
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,7 +876,13 @@ MonoBehaviour:
   fadeAnimation: {fileID: 860099663}
   fadeIn: {fileID: 7400000, guid: e71547586a34e4743b3a05bdd9b4282b, type: 2}
   fadeOut: {fileID: 7400000, guid: 19174533a0524084b93872349a04e174, type: 2}
-  index: 1
+  levelPostionsX:
+  - -250
+  - -85
+  - 85
+  - 250
+  playerRectTransform: {fileID: 129633604}
+  index: 0
   mapIndex: 2
 --- !u!4 &1126691298
 Transform:

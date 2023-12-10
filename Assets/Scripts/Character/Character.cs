@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
@@ -75,6 +76,16 @@ public class Character : MonoBehaviour
         health -= damage;
         if(health <= 0)
             isDead = true;
+        else if(damage > 0f)
+            StartCoroutine(TakeHitAnimation());
+    }
+
+    IEnumerator TakeHitAnimation()
+    {
+        animator.SetBool("tookHit", true);
+        float length = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        yield return new WaitForSeconds(length);
+        animator.SetBool("tookHit", false);
     }
 
     public float CalculateDamage()
@@ -128,7 +139,16 @@ public class Character : MonoBehaviour
         PlayAudioFX(healClip);
         health = Mathf.Clamp(health + basicHeal, 0, baseHealth);
         Bossfight.instance.NextRound();
-        HUD.instance.SetInfo(name + " curou!");        
+        HUD.instance.SetInfo(name + " curou!");
+        StartCoroutine(HealAnimation());
+    }
+
+    IEnumerator HealAnimation()
+    {
+        animator.SetBool("healed", true);
+        float length = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        yield return new WaitForSeconds(length);
+        animator.SetBool("healed", false);
     }
 
     public void TakeDecision()
