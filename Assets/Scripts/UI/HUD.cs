@@ -42,10 +42,16 @@ public class HUD : MonoBehaviour
     public Slider enemyHealth;
     public List<GameObject> healthObjects;
 
+    // Damage bars
+    public Slider playerDamageBar;
+    public Slider enemyDamageBar;
+    public float speed = 20f;
+
 
     private float basePlayerHealth;
     private float baseEnemyHealth;
     private bool isPlayerTurn;
+    
 
     void Start()
     {
@@ -115,6 +121,14 @@ public class HUD : MonoBehaviour
         foreach(GameObject healthObject in healthObjects)
         {
             healthObject.SetActive(visibility);
+        }
+    }
+
+    public void DisablePlayerActions()
+    {
+        foreach(Button action in playerActions)
+        {
+            action.interactable = false;
         }
     }
 }

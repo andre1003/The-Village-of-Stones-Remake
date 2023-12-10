@@ -75,8 +75,14 @@ public class Bossfight : MonoBehaviour
         }
         character.TakeDecision();
     }
+
     public void NextRound()
     {
+        if(!isFighting)
+        {
+            return;
+        }
+
         turn++;
         characterIndex++;
         if(characterIndex == characters.Count)
@@ -89,6 +95,7 @@ public class Bossfight : MonoBehaviour
         }
         HUD.instance.SetTurnText(turn.ToString());
     }
+
     public Character GetCurrentTurnCharacter()
     {
         return characters[characterIndex];

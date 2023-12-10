@@ -25,6 +25,17 @@ public class Character : MonoBehaviour
     [Header("Heal")]
     public float basicHeal = 2f;
 
+    // Animation
+    [Header("Animation")]
+    public Animator animator;
+
+    // Audio
+    [Header("Audio")]
+    public AudioSource characterAudioSource;
+    public AudioClip attackClip;
+    public AudioClip healClip;
+    public AudioClip missClip;
+
     // Decision
     [Header("Decision")]
     [Range(1, 20)] public int attackSuccessChance;
@@ -87,6 +98,7 @@ public class Character : MonoBehaviour
         // Fail
         else
         {
+            PlayAudioFX(missClip);
             HUD.instance.SetInfo(name + " errou!");
             return 0;
         }
@@ -94,32 +106,46 @@ public class Character : MonoBehaviour
 
     public void Attack()
     {
+        PlayAudioFX(attackClip);
+        HUD.instance.DisablePlayerActions();
+        StartCoroutine(AttackAnimation());
+    }
+
+    IEnumerator AttackAnimation()
+    {
+        animator.SetBool("isAttacking", true);
+        float length = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        yield return new WaitForSeconds(length);
         float finalDamage = CalculateDamage();
         Bossfight.instance.GetEnemy().TakeHit(finalDamage);
         Bossfight.instance.NextRound();
+        animator.SetBool("isAttacking", false);
     }
+
 
     public void Heal()
     {
+        PlayAudioFX(healClip);
         health = Mathf.Clamp(health + basicHeal, 0, baseHealth);
         Bossfight.instance.NextRound();
-        HUD.instance.SetInfo(name + " curou!");
+        HUD.instance.SetInfo(name + " curou!");        
     }
 
     public void TakeDecision()
     {
         StartCoroutine(WaitForTakeDecision());
-        
-        // For now, let's make the AI just attack back
-        //DecisionMaker();
     }
+
 
     IEnumerator WaitForTakeDecision()
     {
         yield return new WaitForSeconds(Random.Range(1f, 3f));
 
         // For now, let's make the AI just attack back
-        DecisionMaker();
+        if(Bossfight.instance.isFighting)
+        {
+            DecisionMaker();
+        }
     }
 
     private void DecisionMaker()
@@ -133,5 +159,11 @@ public class Character : MonoBehaviour
         {
             Heal();
         }
+    }
+
+    private void PlayAudioFX(AudioClip clip)
+    {
+        characterAudioSource.clip = clip;
+        characterAudioSource.Play();
     }
 }
