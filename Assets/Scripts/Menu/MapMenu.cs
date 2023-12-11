@@ -43,7 +43,7 @@ public class MapMenu : MonoBehaviour
 
     void Update()
     {
-        if(!playerRectTransform || playerRectTransform.localPosition == target)
+        if(playerRectTransform == null || playerRectTransform.localPosition == target)
         {
             return;
         }

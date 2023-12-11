@@ -19,33 +19,37 @@ public class HUD : MonoBehaviour
     #endregion
 
     // HUD canvas
+    [Header("HUD")]
     public GameObject hudCanvas;
 
     // Fight end canvases
+    [Header("Fight outcomes")]
     public Canvas gameOver;
-    public Canvas playerWin;
+    public GameObject getStone;
 
     // Turn info
+    [Header("Turn info")]
     public TextMeshProUGUI turnText;
     public TextMeshProUGUI currentCharacterText;
     public TextMeshProUGUI turnInfoText;
 
     // Health
+    [Header("Health")]
     public TextMeshProUGUI playerHealthText;
     public TextMeshProUGUI enemyHealthText;
-
-    // Player actions
-    public List<Button> playerActions;
-
-    // Healths
     public Slider playerHealth;
     public Slider enemyHealth;
     public List<GameObject> healthObjects;
 
-    // Damage bars
-    public Slider playerDamageBar;
-    public Slider enemyDamageBar;
-    public float speed = 20f;
+    // Player actions
+    [Header("Player actions")]
+    public List<Button> playerActions;
+
+    // Animation
+    [Header("Get stone")]
+    public Animation getStoneAnimation;
+    public AnimationClip getStoneFadeIn;
+    public AnimationClip getStoneFadeOut;
 
 
     private float basePlayerHealth;
@@ -95,9 +99,18 @@ public class HUD : MonoBehaviour
         enemyHealth.value = 1;
     }
 
-    public void PlayerWins()
+    public void GetStone()
     {
-        playerWin.enabled = true;
+        StartCoroutine(GetStoneAnimation());
+    }
+
+    IEnumerator GetStoneAnimation()
+    {
+        getStone.SetActive(true);
+        getStoneAnimation.clip = getStoneFadeIn;
+        getStoneAnimation.Play();
+        yield return new WaitForSeconds(13f);
+        GameFlow.instance.Map();
     }
 
     public void GameOver()

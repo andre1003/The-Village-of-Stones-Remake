@@ -19,6 +19,7 @@ public class GameFlow : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip dialogue;
     public AudioClip fight;
+    public AudioClip getStone;
 
     public bool isFinalLevel = false;
 
@@ -52,7 +53,11 @@ public class GameFlow : MonoBehaviour
 
     public void EndLevel()
     {
-        HUD.instance.PlayerWins();
+        HUD.instance.GetStone();
+        audioSource.Stop();
+        audioSource.clip = getStone;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     public void GameOver()
