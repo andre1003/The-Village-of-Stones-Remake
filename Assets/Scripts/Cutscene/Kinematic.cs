@@ -31,6 +31,7 @@ public class Kinematic : MonoBehaviour
 
     public void StartKinematic()
     {
+        fadeAnimation.Play("FirstFade");
         sentenceText.text = sentences[screenIndex];
         StartCoroutine(WaitForNextScreen());
         StartCoroutine(FullFade());

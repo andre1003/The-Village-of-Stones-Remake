@@ -788,6 +788,7 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: e17efa57634f75541a138393266c1d98, type: 2}
   m_Animations:
+  - {fileID: 7400000, guid: dcc9ce4fc7604344b8c915350aafb490, type: 2}
   - {fileID: 7400000, guid: d548d770ce808b54fa36f45b69b32974, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
