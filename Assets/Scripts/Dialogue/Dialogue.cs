@@ -11,6 +11,8 @@ public class Dialogue : MonoBehaviour
     [TextArea(3, 10)]
     public List<string> sentences = new List<string>();
 
+    public DialogueAction action;
+
 
     public void NextSentence()
     {
@@ -22,5 +24,17 @@ public class Dialogue : MonoBehaviour
     public bool HasSentence()
     {
         return sentences.Count > 0;
+    }
+
+    public void ExecuteAction()
+    {
+        if(action != null)
+        {
+            action.Execute();
+        }
+        else
+        {
+            DialogueManager.instance.EndDialogue();
+        }
     }
 }

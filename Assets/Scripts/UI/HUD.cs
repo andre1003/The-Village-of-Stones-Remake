@@ -24,7 +24,8 @@ public class HUD : MonoBehaviour
 
     // Fight end canvases
     [Header("Fight outcomes")]
-    public Canvas gameOver;
+    public GameObject gameOver;
+    public Animation gameOverAnimation;
     public GameObject getStone;
 
     // Turn info
@@ -115,7 +116,8 @@ public class HUD : MonoBehaviour
 
     public void GameOver()
     {
-        gameOver.enabled = true;
+        gameOver.SetActive(true);
+        gameOverAnimation.Play();
     }
 
     public void SetInfo(string info)

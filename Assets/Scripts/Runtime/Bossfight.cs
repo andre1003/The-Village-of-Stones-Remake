@@ -53,13 +53,13 @@ public class Bossfight : MonoBehaviour
             // Game over
             if(character.isPlayer)
             {
-                HUD.instance.GameOver();
+                GameFlow.instance.GameOver();
+                isFighting = false;
             }
 
             // Next step
             else
             {
-                //HUD.instance.PlayerWins();
                 GameFlow.instance.EndBossfight();
                 isFighting = false;
             }

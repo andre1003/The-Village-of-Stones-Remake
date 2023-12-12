@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MapMenu : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class MapMenu : MonoBehaviour
 
     public int index = 0;
 
+    public Button startButton;
+
 
     private int previousIndex;
     private float time;
@@ -56,9 +59,14 @@ public class MapMenu : MonoBehaviour
     {
         fadeCanvas.SetActive(true);
         StartCoroutine(FadeInScreen());
+        FindPlayerRectTransform();
+        FindStartButton();
+    }
 
-        GameObject[] mapPlayer = GameObject.FindGameObjectsWithTag("MapPlayer");
-        playerRectTransform = mapPlayer.Length == 0 ? null : mapPlayer[0].GetComponent<RectTransform>();
+    private void FindPlayerRectTransform()
+    {
+        GameObject mapPlayer = GameObject.FindGameObjectWithTag("MapPlayer");
+        playerRectTransform = !mapPlayer ? null : mapPlayer.GetComponent<RectTransform>();
         if(!playerRectTransform)
         {
             return;
@@ -75,6 +83,20 @@ public class MapMenu : MonoBehaviour
         time = 0f;
     }
 
+    private void FindStartButton()
+    {
+        GameObject mapButton = GameObject.FindGameObjectWithTag("MapStartButton");
+        if(mapButton)
+        {
+            startButton = mapButton.GetComponent<Button>();
+            startButton.onClick.AddListener(LoadLevel);
+        }
+        else
+        {
+            startButton = null; 
+        }
+    }
+
     public void LoadMap()
     {
         fadeCanvas.SetActive(true);
@@ -85,6 +107,12 @@ public class MapMenu : MonoBehaviour
     {
         fadeCanvas.SetActive(true);
         StartCoroutine(FadeOutScreen());
+    }
+
+    public void IncrementLevelIndex()
+    {
+        previousIndex = index;
+        index++;
     }
 
     IEnumerator FadeOutScreen()
@@ -106,8 +134,6 @@ public class MapMenu : MonoBehaviour
     IEnumerator LoadLevelAsync()
     {
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(index + 1);
-        previousIndex = index;
-        index++;
         while(!asyncOperation.isDone)
         {
             yield return null;

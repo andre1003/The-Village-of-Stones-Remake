@@ -67,7 +67,8 @@ public class DialogueManager : MonoBehaviour
 
         if(!dialogues[0].HasSentence())
         {
-            EndDialogue();
+            canNextSentence = false;
+            dialogues[0].ExecuteAction();
             return;
         }
 
@@ -104,5 +105,12 @@ public class DialogueManager : MonoBehaviour
         {
             GameFlow.instance.EndLevel();
         }
+
+        NextSentence();
+    }
+
+    public void SetCanNextSentence(bool canNextSentence)
+    {
+        this.canNextSentence = canNextSentence;
     }
 }

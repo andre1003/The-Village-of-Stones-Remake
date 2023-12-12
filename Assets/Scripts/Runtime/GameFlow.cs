@@ -20,6 +20,7 @@ public class GameFlow : MonoBehaviour
     public AudioClip dialogue;
     public AudioClip fight;
     public AudioClip getStone;
+    public AudioClip gameOver;
 
     public bool isFinalLevel = false;
 
@@ -31,42 +32,41 @@ public class GameFlow : MonoBehaviour
 
     public void StartBossfight()
     {
-        audioSource.Stop();
-        audioSource.clip = fight;
-        audioSource.loop = true;
-        audioSource.Play();
-
+        ChangeAudio(fight);
         HUD.instance.SetHUDVisibility(true);
         Bossfight.instance.StartFight();
     }
 
     public void EndBossfight()
     {
-        audioSource.Stop();
-        audioSource.clip = dialogue;
-        audioSource.loop = true;
-        audioSource.Play();
-
+        ChangeAudio(dialogue);
         HUD.instance.SetHUDVisibility(false);
         DialogueManager.instance.NextSentence();
     }
 
     public void EndLevel()
     {
+        ChangeAudio(getStone);
         HUD.instance.GetStone();
-        audioSource.Stop();
-        audioSource.clip = getStone;
-        audioSource.loop = true;
-        audioSource.Play();
+        MapMenu.instance.IncrementLevelIndex();
     }
 
     public void GameOver()
     {
+        ChangeAudio(gameOver, false);
         HUD.instance.GameOver();
     }
 
     public void Map()
     {
         MapMenu.instance.LoadMap();
+    }
+
+    private void ChangeAudio(AudioClip clip, bool loop = true)
+    {
+        audioSource.Stop();
+        audioSource.clip = clip;
+        audioSource.loop = loop;
+        audioSource.Play();
     }
 }
