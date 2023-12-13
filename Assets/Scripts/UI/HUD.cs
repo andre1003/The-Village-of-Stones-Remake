@@ -157,6 +157,7 @@ public class HUD : MonoBehaviour
     // Disable all player actions
     public void DisablePlayerActions()
     {
+        CloseStonesSelection();
         foreach(Button action in playerActions)
         {
             action.interactable = false;
@@ -183,8 +184,12 @@ public class HUD : MonoBehaviour
             // Add listener to UseStone method. Because the method have a param, we need to use a delegate
             // to make the method callback when the button is clicked
             int stoneIndex = stonesNumber - 1;
-            stoneSelection.GetComponent<Button>().onClick.AddListener(
+            Button stoneButton = stoneSelection.GetComponent<Button>();
+            stoneButton.onClick.AddListener(
                 delegate { Bossfight.instance.GetPlayer().UseStone(stoneIndex); });
+
+            // Set stone button interactable
+            stoneButton.interactable = stone.CanUseStone();
 
             // Activate the button and add it to stone selection list
             stoneSelection.SetActive(true);

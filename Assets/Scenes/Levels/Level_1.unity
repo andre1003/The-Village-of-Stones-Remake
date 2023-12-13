@@ -478,11 +478,12 @@ MonoBehaviour:
   health: 150
   isDead: 0
   isPlayer: 0
-  basicDamage: 10
+  isInvencible: 0
+  basicDamage: 50
   magicDamage: 5
   basicArmor: 5
   magicArmor: 2
-  basicAttackSuccessDice: 6
+  basicAttackSuccessDice: 2
   magicAttackSuccessDice: 6
   minCriticalValue: 20
   basicHeal: 4
@@ -1076,6 +1077,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200563071}
   m_CullTransparentMesh: 1
+--- !u!1 &254970666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 254970668}
+  - component: {fileID: 254970669}
+  m_Layer: 0
+  m_Name: EarthStone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &254970668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254970666}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &254970669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254970666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6118081c6b513544be2c51f8debf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Earth Stone
+  description: The Earth Elemental Stone
+  cooldown: 6
+  isInCooldown: 0
+  uses: 1
+  basicArmorBuff: 10
+  magicArmorBuff: 10
 --- !u!1 &277074581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,7 +1503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 409300515}
-  - component: {fileID: 409300514}
+  - component: {fileID: 409300516}
   m_Layer: 0
   m_Name: FireStone
   m_TagString: Untagged
@@ -1459,23 +1511,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &409300514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409300513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16dbd774a99de584f97c482d710bdfd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Fire Stone
-  description: 
-  cooldown: 2
-  isInCooldown: 0
-  uses: 4
 --- !u!4 &409300515
 Transform:
   m_ObjectHideFlags: 0
@@ -1491,6 +1526,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &409300516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409300513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f41962a4c2b906a4caaf01e3df7b339e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Fire Stone
+  description: The Fire Elemental Stone
+  cooldown: 6
+  isInCooldown: 0
+  uses: 2
+  damage: 20
 --- !u!1 &418572006
 GameObject:
   m_ObjectHideFlags: 0
@@ -5046,6 +5099,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 708632792}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1448846470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1448846472}
+  - component: {fileID: 1448846473}
+  m_Layer: 0
+  m_Name: WaterStone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1448846472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448846470}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1448846473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448846470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 616def2ef06621d4fb87cec0bba4c563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Water Stone
+  description: The Water Elemental Stone
+  cooldown: 2
+  isInCooldown: 0
+  uses: 8
+  heal: 25
+  diceForFullHeal: 10
 --- !u!1001 &1457534515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5573,6 +5677,7 @@ MonoBehaviour:
   health: 100
   isDead: 0
   isPlayer: 1
+  isInvencible: 0
   basicDamage: 20
   magicDamage: 10
   basicArmor: 0
@@ -5583,7 +5688,9 @@ MonoBehaviour:
   basicHeal: 2
   stones:
   - {fileID: 277074583}
-  - {fileID: 409300514}
+  - {fileID: 409300516}
+  - {fileID: 1448846473}
+  - {fileID: 254970669}
   animator: {fileID: 1733076280}
   characterAudioSource: {fileID: 1527837593}
   attackClip: {fileID: 8300000, guid: 5d69e28971ac01b44b6ee1f3f587102d, type: 3}
@@ -6606,6 +6713,7 @@ MonoBehaviour:
   - {fileID: 1273481210}
   - {fileID: 20613355}
   - {fileID: 1462704862}
+  - {fileID: 1908976959}
   stoneButtonRectTrasform: {fileID: 1908976956}
   stoneSelectionPrefab: {fileID: 4585980327335145802, guid: 8f19684bb89fd914fb07bd63fe53e854, type: 3}
   getStoneAnimation: {fileID: 1801191421}
@@ -7028,3 +7136,5 @@ SceneRoots:
   - {fileID: 162730763}
   - {fileID: 277074582}
   - {fileID: 409300515}
+  - {fileID: 1448846472}
+  - {fileID: 254970668}

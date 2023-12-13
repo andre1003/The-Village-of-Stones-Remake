@@ -39,7 +39,7 @@ public class AirStone : Stone
         user.DebuffDamage(basicDamageBuff, magicDamageBuff);
         enemy.BuffArmor(basicArmorDebuff, magicArmorDebuff);
 
-        // Cal base remove effect method
+        // Call base remove effect method
         base.RemoveEffect();
     }
 }

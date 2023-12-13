@@ -7,8 +7,8 @@ public class Stone : MonoBehaviour
     /* The stones are:
      * - Water Stone: Heals the user;
      * - Fire Stone: Damage the enemy;
-     * - Earth Stone: Reduces the enemy damage;
-     * - Air Stone: Buff player and debuff enemy.
+     * - Earth Stone: Permanently increase user armor and give invulnerabilty for a moment;
+     * - Air Stone: Buff player damage and debuff enemy armor.
      * 
      * When the player get all the stones, a second life will be granted.
      */
@@ -76,5 +76,15 @@ public class Stone : MonoBehaviour
             cooldown = baseCooldown;
             RemoveEffect();
         }
+    }
+
+    // Can use this stone?
+    public bool CanUseStone()
+    {
+        if(isInCooldown || uses == 0)
+        {
+            return false;
+        }
+        return true;
     }
 }

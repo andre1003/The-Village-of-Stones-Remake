@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
     public float health;
     public bool isDead = false;
     public bool isPlayer = false;
+    public bool isInvencible = false;
 
     // Damage
     [Header("Damage")]
@@ -76,6 +77,12 @@ public class Character : MonoBehaviour
     // Take hit
     public void TakeHit(float damage, float armor)
     {
+        // If character is invencible, exit
+        if(isInvencible)
+        {
+            return;
+        }
+
         // Decrease health and check death
         health -= Mathf.Clamp(damage - armor, 0f, damage);
         CheckDeath(damage);
@@ -141,18 +148,42 @@ public class Character : MonoBehaviour
     // Perform a basic attack
     public void BasicAttack()
     {
+        // Play attack audio and disable player actions
         PlayAudioFX(attackClip);
         HUD.instance.DisablePlayerActions();
-        float enemyArmor = Bossfight.instance.GetEnemy().basicArmor;
+
+        // Check if enemy is invencible and if it is, exit
+        Character enemy = Bossfight.instance.GetEnemy();
+        if(enemy.isInvencible)
+        {
+            HUD.instance.SetInfo(enemy.name + " is invencible! No damage caused.");
+            Bossfight.instance.NextRound();
+            return;
+        }
+
+        // If enemy is NOT invencible, continue basic attack
+        float enemyArmor = enemy.basicArmor;
         StartCoroutine(AttackAnimation(basicDamage, enemyArmor, basicAttackSuccessDice));
     }
 
     // Perform a magic attack
     public void MagicAttack()
     {
+        // Play attack audio and disable player actions
         PlayAudioFX(attackClip);
         HUD.instance.DisablePlayerActions();
-        float enemyArmor = Bossfight.instance.GetEnemy().magicArmor;
+
+        // Check if enemy is invencible and if it is, exit
+        Character enemy = Bossfight.instance.GetEnemy();
+        if(enemy.isInvencible)
+        {
+            HUD.instance.SetInfo(enemy.name + " is invencible! No damage caused.");
+            Bossfight.instance.NextRound();
+            return;
+        }
+
+        // If enemy is NOT invencible, continue magic attack
+        float enemyArmor = enemy.magicArmor;
         StartCoroutine(AttackAnimation(magicDamage, enemyArmor, magicAttackSuccessDice));
     }
 
@@ -184,6 +215,25 @@ public class Character : MonoBehaviour
         health = Mathf.Clamp(health + basicHeal, 0, baseHealth);
         Bossfight.instance.NextRound();
         HUD.instance.SetInfo(name + " healed!");
+        StartCoroutine(HealAnimation());
+    }
+
+    // Heal character a certain amount of points
+    public void Heal(float heal)
+    {
+        PlayAudioFX(healClip);
+        health = Mathf.Clamp(health + heal, 0, baseHealth);
+        Bossfight.instance.NextRound();
+        HUD.instance.SetInfo(name + " healed!");
+        StartCoroutine(HealAnimation());
+    }
+
+    public void FullHeal()
+    {
+        PlayAudioFX(healClip);
+        health = baseHealth;
+        Bossfight.instance.NextRound();
+        HUD.instance.SetInfo(name + " fully healed!");
         StartCoroutine(HealAnimation());
     }
 
@@ -304,6 +354,8 @@ public class Character : MonoBehaviour
         {
             return;
         }
+        HUD.instance.DisablePlayerActions();
         stones[stoneIndex].Use(this, Bossfight.instance.GetEnemy());
+        Bossfight.instance.NextRound();
     }
 }
