@@ -55,6 +55,8 @@ public class PlayerStats : MonoBehaviour
     [Header("Heal")]
     public float basicHeal = 2f;
 
+
+    // Called on scene load
     public void OnSceneLoaded()
     {
         // Try to find player game object
@@ -84,10 +86,9 @@ public class PlayerStats : MonoBehaviour
 
         // Perform player initial setup
         player.InitialSetup();
-
-        Debug.Log("Player stats successfully loaded!");
     }
 
+    // Get bossfight rewards
     public void GetRewards(int coins, int xp)
     {
         this.coins += coins;
@@ -95,8 +96,10 @@ public class PlayerStats : MonoBehaviour
         CheckLevelUp();
     }
 
+    // Check level up
     private void CheckLevelUp()
     {
+        // If player has the required XP, level up
         if(xp >= nextLevelXp)
         {
             xp -= nextLevelXp;
@@ -105,6 +108,7 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    // Calculate next level required XP
     private void CalculateNextLevelXp()
     {
         nextLevelXp += 5;

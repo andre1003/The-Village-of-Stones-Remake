@@ -7,26 +7,33 @@ using UnityEngine.SceneManagement;
 
 public class Kinematic : MonoBehaviour
 {
+    // Sentence text
     public TextMeshProUGUI sentenceText;
+
+    // Fade
     public Image fadeImage;
     public Animation fadeAnimation;
 
+    // Cutscene screens and timers
     public List<GameObject> screens;
     public List<float> timers;
 
+    // Cutscene sentences
     [TextArea(3, 10)]
     public List<string> sentences;
 
 
+    // Current screen index
     private int screenIndex = 0;
 
 
-    // Start is called before the first frame update
+    // Start method
     void Start()
     {
         StartKinematic();
     }
 
+    // Start cutscene
     public void StartKinematic()
     {
         fadeAnimation.Play("FirstFade");
@@ -35,31 +42,40 @@ public class Kinematic : MonoBehaviour
         StartCoroutine(FullFade());
     }
 
+    // Wait for next cutscene screen
     IEnumerator WaitForNextScreen()
     {
+        // Wait for next screen
         yield return new WaitForSeconds(timers[screenIndex]);
         screens[screenIndex].SetActive(false);
         screenIndex++;
         
+        // If there are screens left, get next screen
         if(screenIndex < screens.Count)
         {
             sentenceText.text = sentences[screenIndex];
             screens[screenIndex].SetActive(true);
             StartCoroutine(WaitForNextScreen());
         }
+
+        // Else, load next scene
         else
         {
             LoadNextLevel();
         }
     }
 
+    // Perform full screen fade
     IEnumerator FullFade()
     {
+        // Get fade timer
         float fadeTime = screenIndex < screens.Count ? (timers[screenIndex] - 1f) : 0f;
         yield return new WaitForSeconds(fadeTime);
 
+        // Play full fade animation
         fadeAnimation.Play("FadeClip");
 
+        // If there are screens left, prepare for next full fade
         if(screenIndex < screens.Count)
         {
             yield return new WaitForSeconds(1f);
@@ -67,17 +83,19 @@ public class Kinematic : MonoBehaviour
         }
     }
 
+    // Load next level
     public void LoadNextLevel()
     {
         StartCoroutine(LoadLevel());
     }
 
+    // Load next level async
     IEnumerator LoadLevel()
     {
+        // Load map
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Map");
         while(!asyncLoad.isDone)
         {
-            // Update progress bar here
             yield return null;
         }
     }

@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class DialogueAction : MonoBehaviour
 {
+    // End dialogue action execution. Must be override!
     public virtual void Execute() { }
 }

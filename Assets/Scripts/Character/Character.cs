@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
@@ -34,6 +32,10 @@ public class Character : MonoBehaviour
     [Header("Heal")]
     public float basicHeal = 2f;
 
+    // Stones
+    [Header("Stones")]
+    public List<Stone> stones = new List<Stone>();
+
     // Animation
     [Header("Animation")]
     public Animator animator;
@@ -57,11 +59,13 @@ public class Character : MonoBehaviour
     private float baseHealth;
 
 
+    // Start method
     void Start()
     {
         InitialSetup();
     }
 
+    // Initial setup
     public void InitialSetup()
     {
         baseHealth = health;
@@ -69,25 +73,32 @@ public class Character : MonoBehaviour
     }
 
     #region Take Hit
+    // Take hit
     public void TakeHit(float damage, float armor)
     {
+        // Decrease health and check death
         health -= Mathf.Clamp(damage - armor, 0f, damage);
         CheckDeath(damage);
     }
 
+    // Check character's death
     private void CheckDeath(float damage)
     {
+        // If health is less or equal to 0, character is dead
         if(health <= 0)
         {
             isDead = true;
             PlayAudioFX(deathClip);
         }
+
+        // Else, just play hit animation
         else if(damage > 0f)
         {
             StartCoroutine(TakeHitAnimation());
         }
     }
 
+    // Take hit animation
     IEnumerator TakeHitAnimation()
     {
         animator.SetBool("tookHit", true);
@@ -98,8 +109,10 @@ public class Character : MonoBehaviour
     #endregion
 
     #region Damage
+    // Calculate damage
     public float CalculateDamage(float damage, float attackSuccessDice)
     {
+        // Get a random value between 1 and 20 (1d20 roll)
         int dice = Random.Range(1, 21);
 
         // Critical success
@@ -125,6 +138,7 @@ public class Character : MonoBehaviour
         }
     }
 
+    // Perform a basic attack
     public void BasicAttack()
     {
         PlayAudioFX(attackClip);
@@ -133,6 +147,7 @@ public class Character : MonoBehaviour
         StartCoroutine(AttackAnimation(basicDamage, enemyArmor, basicAttackSuccessDice));
     }
 
+    // Perform a magic attack
     public void MagicAttack()
     {
         PlayAudioFX(attackClip);
@@ -141,22 +156,28 @@ public class Character : MonoBehaviour
         StartCoroutine(AttackAnimation(magicDamage, enemyArmor, magicAttackSuccessDice));
     }
 
+    // Attack animation
     IEnumerator AttackAnimation(float damage, float armor, float attackSuccessDice)
     {
+        // Set attack animation
         animator.SetBool("isAttacking", true);
         float length = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
 
+        // Wait animation to end
         yield return new WaitForSeconds(length);
 
+        // Calculate damage and inflinge it to enemy
         float finalDamage = CalculateDamage(damage, attackSuccessDice);
         Bossfight.instance.GetEnemy().TakeHit(finalDamage, armor);
 
+        // Call next round
         Bossfight.instance.NextRound();
         animator.SetBool("isAttacking", false);
     }
     #endregion
 
     #region Heal
+    // Heal character
     public void Heal()
     {
         PlayAudioFX(healClip);
@@ -166,6 +187,7 @@ public class Character : MonoBehaviour
         StartCoroutine(HealAnimation());
     }
 
+    // Heal animation
     IEnumerator HealAnimation()
     {
         animator.SetBool("healed", true);
@@ -176,6 +198,7 @@ public class Character : MonoBehaviour
     #endregion
 
     #region Decision
+    // Adapt attack success chance for AI, based on character's health
     public void SuccessChanceAdapter()
     {
         if(isPlayer)
@@ -193,14 +216,16 @@ public class Character : MonoBehaviour
         }
     }
 
+    // Take decision
     public void TakeDecision()
     {
         StartCoroutine(WaitForTakeDecision());
     }
 
-
+    // Delayed take decision
     IEnumerator WaitForTakeDecision()
     {
+        // Wait 1 to 3 seconds before take decision
         yield return new WaitForSeconds(Random.Range(1f, 3f));
 
         // For now, let's make the AI just attack back
@@ -210,6 +235,7 @@ public class Character : MonoBehaviour
         }
     }
 
+    // AI round decision maker
     private void DecisionMaker()
     {
         int dice = Random.Range(1, 21);
@@ -224,9 +250,60 @@ public class Character : MonoBehaviour
     }
     #endregion
 
+    #region Buffs and Debuffs
+    // Buff character damage
+    public void BuffDamage(float basicDamageBuff, float magicDamageBuff)
+    {
+        basicDamage += basicDamageBuff;
+        magicDamage += magicDamageBuff;
+    }
+
+    // Debuff character damage
+    public void DebuffDamage(float basicDamageBuff, float magicDamageBuff)
+    {
+        basicDamage -= basicDamageBuff;
+        magicDamage -= magicDamageBuff;
+    }
+
+    // Buff character armor
+    public void BuffArmor(float basicArmorBuff, float magicArmorBuff)
+    {
+        basicArmor += basicArmorBuff;
+        magicArmor += magicArmorBuff;
+    }
+
+    // Debuff character armor
+    public void DebuffArmor(float basicArmorBuff, float magicArmorBuff)
+    {
+        basicArmor -= basicArmorBuff;
+        magicArmor -= magicArmorBuff;
+    }
+    #endregion
+
+    // Play new audio clip
     private void PlayAudioFX(AudioClip clip)
     {
         characterAudioSource.clip = clip;
         characterAudioSource.Play();
+    }
+
+    // Update all stones cooldown
+    public void UpdateAllStonesCooldown()
+    {
+        foreach(var stone in stones)
+        {
+            stone.UpdateCooldown();
+        }
+    }
+
+    // Use a stone
+    public void UseStone(int stoneIndex)
+    {
+        // Index is out of bounds handler
+        if(stoneIndex < 0 || stoneIndex >= stones.Count)
+        {
+            return;
+        }
+        stones[stoneIndex].Use(this, Bossfight.instance.GetEnemy());
     }
 }
