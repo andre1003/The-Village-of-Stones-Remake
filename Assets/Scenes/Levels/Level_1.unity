@@ -475,11 +475,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Plox
   description: The robber of Air Stone
-  health: 50
-  damage: 25
+  health: 100
   isDead: 0
   isPlayer: 0
-  attackSuccessPercent: 17
+  basicDamage: 10
+  magicDamage: 5
+  basicArmor: 5
+  magicArmor: 2
+  basicAttackSuccessDice: 6
+  magicAttackSuccessDice: 6
   minCriticalValue: 20
   basicHeal: 4
   animator: {fileID: 907890177}
@@ -488,8 +492,8 @@ MonoBehaviour:
   healClip: {fileID: 8300000, guid: 9f1a71c3592d25047a16dc8db11b823b, type: 3}
   missClip: {fileID: 8300000, guid: 2a34e1aca74d74d458061bf7c5326c14, type: 3}
   attackSuccessChance: 14
-  maxAttackSuccessChance: 17
-  minAttackSuccessChance: 10
+  maxAttackSuccessChance: 12
+  minAttackSuccessChance: 6
 --- !u!4 &117941774
 Transform:
   m_ObjectHideFlags: 0
@@ -515,7 +519,7 @@ AudioSource:
   m_GameObject: {fileID: 117941772}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 42c1702a470a52741a7746247eb875ca, type: 2}
+  OutputAudioMixerGroup: {fileID: -6943264065278085779, guid: 42c1702a470a52741a7746247eb875ca, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1306,7 +1310,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Voc\xEA recuperou a Pedra do Ar"
+  m_text: You have recovered the Air Stone
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c209fd7819bb68c4ab8cbdcd534e7e49, type: 2}
   m_sharedMaterial: {fileID: -3627453193131058725, guid: c209fd7819bb68c4ab8cbdcd534e7e49, type: 2}
@@ -3398,7 +3402,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Attack
+  m_text: 'Basic
+
+    Attack'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c209fd7819bb68c4ab8cbdcd534e7e49, type: 2}
   m_sharedMaterial: {fileID: -3627453193131058725, guid: c209fd7819bb68c4ab8cbdcd534e7e49, type: 2}
@@ -4250,7 +4256,7 @@ GameObject:
   - component: {fileID: 1273481214}
   - component: {fileID: 1273481213}
   m_Layer: 5
-  m_Name: AttackButton
+  m_Name: BasicAttackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4323,7 +4329,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1527837591}
         m_TargetAssemblyTypeName: Character, Assembly-CSharp
-        m_MethodName: Attack
+        m_MethodName: BasicAttack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4524,7 +4530,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stones
+  m_text: 'Magic
+
+    Attack'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c209fd7819bb68c4ab8cbdcd534e7e49, type: 2}
   m_sharedMaterial: {fileID: -3627453193131058725, guid: c209fd7819bb68c4ab8cbdcd534e7e49, type: 2}
@@ -4686,12 +4694,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names:
   - Plox
-  - "Her\xF3i"
+  - Hero
   - Plox
-  - "Her\xF3i"
+  - Hero
   - Plox
-  - "Her\xF3i"
-  - "Her\xF3i"
+  - Hero
+  - Hero
   sprites:
   - {fileID: 1333895851, guid: b05474ae51a70664b8ff8290c086fcf2, type: 3}
   - {fileID: -1305843611, guid: f16eabccd317fec4b8bfa69e5b9027c6, type: 3}
@@ -4701,13 +4709,13 @@ MonoBehaviour:
   - {fileID: -1807933691, guid: f16eabccd317fec4b8bfa69e5b9027c6, type: 3}
   - {fileID: -200262420, guid: f16eabccd317fec4b8bfa69e5b9027c6, type: 3}
   sentences:
-  - "VOC\xCA!?"
-  - "Oi? AH, \xE9 voc\xEA de novo Plox?"
-  - "Voc\xEA n\xE3o vai tirar ela de mim!"
-  - "Retirar o qu\xEA? Do que voc\xEA est\xE1 falando?"
-  - "Dessa j\xF3ia que achei atr\xE1s daquela \xE1rvore."
+  - YOU!?
+  - Hello? Oh, It's you again Plox?
+  - You will not take it from me!
+  - Take what? What are you talking about?
+  - I'm talking about this jewel that I found behind that tree.
   - ...
-  - "Essa joia \xE9... a... pedra elementar do ar..."
+  - This jewel is... the... air elemental stone...
   action: {fileID: 0}
 --- !u!4 &1444868465
 Transform:
@@ -4735,6 +4743,10 @@ PrefabInstance:
     - target: {fileID: 2975046332211589559, guid: 935a49b91b106f94b891f92e2d703b08, type: 3}
       propertyPath: m_Name
       value: DialogueCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975046332211589559, guid: 935a49b91b106f94b891f92e2d703b08, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9167055573051488899, guid: 935a49b91b106f94b891f92e2d703b08, type: 3}
       propertyPath: m_Pivot.x
@@ -4868,7 +4880,7 @@ GameObject:
   - component: {fileID: 1462704866}
   - component: {fileID: 1462704865}
   m_Layer: 5
-  m_Name: StoneButton
+  m_Name: MagicAttackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4939,13 +4951,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 487415915}
-        m_TargetAssemblyTypeName: ButtonClick, Assembly-CSharp
-        m_MethodName: Click
-        m_Mode: 2
+      - m_Target: {fileID: 1527837591}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: MagicAttack
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 92bc9c6480d1348458e93059b2caa84a, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5095,7 +5107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names:
   - Plox
-  - "Her\xF3i"
+  - Hero
   - Plox
   - Plox
   sprites:
@@ -5104,10 +5116,10 @@ MonoBehaviour:
   - {fileID: 1333895851, guid: b05474ae51a70664b8ff8290c086fcf2, type: 3}
   - {fileID: 1460561492, guid: b05474ae51a70664b8ff8290c086fcf2, type: 3}
   sentences:
-  - "DEVOLVE! ELA \xC9 MINHA!"
-  - "Ela pertence ao reino, voc\xEA n\xE3o pode ficar com ela."
-  - "Mas... Mas... ela \xE9 t\xE3o bonitinha..."
-  - QUERO ELA DE VOLTA!
+  - GIVE IT BACK! IT IS MINE!
+  - The stone belongs to the realm, you cannot take it.
+  - But... But.. It's so cute...
+  - I WANT IT BACK!
   action: {fileID: 0}
 --- !u!1 &1527454672
 GameObject:
@@ -5225,7 +5237,7 @@ GameObject:
   - component: {fileID: 1527837593}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5245,11 +5257,15 @@ MonoBehaviour:
   name: Hero
   description: The hero of the village
   health: 100
-  damage: 10
   isDead: 0
   isPlayer: 1
-  attackSuccessPercent: 6
-  minCriticalValue: 3
+  basicDamage: 20
+  magicDamage: 10
+  basicArmor: 0
+  magicArmor: 0
+  basicAttackSuccessDice: 10
+  magicAttackSuccessDice: 2
+  minCriticalValue: 15
   basicHeal: 2
   animator: {fileID: 1733076280}
   characterAudioSource: {fileID: 1527837593}
@@ -5404,8 +5420,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names:
   - Plox
-  - "Her\xF3i"
-  - "Her\xF3i"
+  - Hero
+  - Hero
   - Plox
   sprites:
   - {fileID: 1338288475, guid: b05474ae51a70664b8ff8290c086fcf2, type: 3}
@@ -5413,10 +5429,10 @@ MonoBehaviour:
   - {fileID: -200262420, guid: f16eabccd317fec4b8bfa69e5b9027c6, type: 3}
   - {fileID: 1338288475, guid: b05474ae51a70664b8ff8290c086fcf2, type: 3}
   sentences:
-  - "Poxa... S\xF3 queria uma decora\xE7\xE3o para casa. BUAAAAAAAAAH!"
-  - "Eu realmente n\xE3o posso deixar voc\xEA levar a pedra."
-  - "Mas isso \xE9 bem estranho, eu achava que os tr\xEAs monstros levaram as quatro
-    pedras... Como uma delas veio parar aqui?"
+  - Damn it... I just wanted a new home decor. BUAAAAAAAAAH!
+  - I really cannot let you have the stone.
+  - But this is odd, I thought that the three monsters took the four stones... How
+    did one of them end up here?
   - BUAAAAAAH!
   action: {fileID: 1541489334}
 --- !u!4 &1541489333
@@ -6205,6 +6221,10 @@ MonoBehaviour:
   characterIndex: 0
   turn: 1
   isFighting: 0
+  winXp: 5
+  winCoins: 50
+  loseXp: 1
+  loseCoins: 20
 --- !u!4 &1896666497
 Transform:
   m_ObjectHideFlags: 0

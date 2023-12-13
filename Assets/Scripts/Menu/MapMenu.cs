@@ -61,6 +61,7 @@ public class MapMenu : MonoBehaviour
         StartCoroutine(FadeInScreen());
         FindPlayerRectTransform();
         FindStartButton();
+        PlayerStats.instance.OnSceneLoaded();
     }
 
     private void FindPlayerRectTransform()
@@ -133,7 +134,8 @@ public class MapMenu : MonoBehaviour
 
     IEnumerator LoadLevelAsync()
     {
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(index + 1);
+        int levelNumber = index + 1;
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Level_" + levelNumber);
         while(!asyncOperation.isDone)
         {
             yield return null;

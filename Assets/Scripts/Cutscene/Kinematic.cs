@@ -11,8 +11,6 @@ public class Kinematic : MonoBehaviour
     public Image fadeImage;
     public Animation fadeAnimation;
 
-    public int nextLevelIndex = -1;
-
     public List<GameObject> screens;
     public List<float> timers;
 
@@ -71,21 +69,12 @@ public class Kinematic : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        int nextScene = nextLevelIndex;
-        if(nextLevelIndex == -1)
-        {
-            nextScene = SceneManager.GetActiveScene().buildIndex + 1;
-        }
-
-        if(nextScene < SceneManager.sceneCountInBuildSettings)
-        {
-            StartCoroutine(LoadLevel(nextScene));
-        }
+        StartCoroutine(LoadLevel());
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    IEnumerator LoadLevel()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelIndex);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Map");
         while(!asyncLoad.isDone)
         {
             // Update progress bar here

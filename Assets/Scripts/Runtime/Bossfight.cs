@@ -16,11 +16,19 @@ public class Bossfight : MonoBehaviour
     }
     #endregion
 
-
+    // Controllers
+    [Header("Controllers")]
     public List<Character> characters;
     public int characterIndex = 0;
     public int turn = 1;
     public bool isFighting = false;
+
+    // Rewards
+    [Header("Rewards")]
+    public int winXp;
+    public int winCoins;
+    public int loseXp;
+    public int loseCoins;
 
 
     void Update()

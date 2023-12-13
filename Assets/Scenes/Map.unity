@@ -408,6 +408,78 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 480285757}
+--- !u!1 &573701745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 573701746}
+  - component: {fileID: 573701748}
+  - component: {fileID: 573701747}
+  m_Layer: 0
+  m_Name: PlayerStats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &573701746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573701745}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &573701747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573701745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb752285810b0f46b225835bb196c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &573701748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573701745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cdc57379c4f57847b3d39bd962c3ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins: 0
+  level: 1
+  xp: 0
+  nextLevelXp: 5
+  name: Hero
+  description: The hero of the village
+  health: 100
+  basicDamage: 20
+  magicDamage: 10
+  basicArmor: 0
+  magicArmor: 0
+  basicAttackSuccessDice: 10
+  magicAttackSuccessDice: 2
+  minCriticalValue: 15
+  basicHeal: 5
 --- !u!1 &689017668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,4 +1616,5 @@ SceneRoots:
   - {fileID: 1616051056}
   - {fileID: 480285756}
   - {fileID: 1847091048}
+  - {fileID: 573701746}
   - {fileID: 282159689}

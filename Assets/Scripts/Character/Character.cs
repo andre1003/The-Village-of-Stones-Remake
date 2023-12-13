@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,14 +14,21 @@ public class Character : MonoBehaviour
     // Status
     [Header("Status")]
     public float health;
-    public float damage;
     public bool isDead = false;
     public bool isPlayer = false;
 
+    // Damage
+    [Header("Damage")]
+    public float basicDamage;
+    public float magicDamage;
+    public float basicArmor;
+    public float magicArmor;
+
     // Attack
     [Header("Attack")]
-    [Range(1, 20)] public int attackSuccessPercent = 6;
-    public int minCriticalValue = 20;
+    [Range(1, 20)] public int basicAttackSuccessDice = 6;  // Minimal value for basic attack success
+    [Range(1, 20)] public int magicAttackSuccessDice = 6;  // Minimal value for magic attack success
+    [Range(1, 20)] public int minCriticalValue = 20;
 
     // Heal
     [Header("Heal")]
@@ -50,10 +58,118 @@ public class Character : MonoBehaviour
 
     void Start()
     {
+        InitialSetup();
+    }
+
+    public void InitialSetup()
+    {
         baseHealth = health;
         attackSuccessChance = minAttackSuccessChance;
     }
 
+    #region Take Hit
+    public void TakeHit(float damage, float armor)
+    {
+        health -= Mathf.Clamp(damage - armor, 0f, damage);
+        CheckDeath(damage);
+    }
+
+    private void CheckDeath(float damage)
+    {
+        if(health <= 0)
+            isDead = true;
+        else if(damage > 0f)
+            StartCoroutine(TakeHitAnimation());
+    }
+
+    IEnumerator TakeHitAnimation()
+    {
+        animator.SetBool("tookHit", true);
+        float length = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        yield return new WaitForSeconds(length);
+        animator.SetBool("tookHit", false);
+    }
+    #endregion
+
+    #region Damage
+    public float CalculateDamage(float damage, float attackSuccessDice)
+    {
+        int dice = Random.Range(1, 21);
+
+        // Critical success
+        if(dice >= minCriticalValue)
+        {
+            HUD.instance.SetInfo(name + "'s critical hit! Total damage: " + 2 * damage);
+            return 2 * damage;
+        }
+
+        // Success
+        else if(dice >= attackSuccessDice)
+        {
+            HUD.instance.SetInfo(name + "'s successfull hit. Total damage: " + damage);
+            return damage;
+        }
+
+        // Fail
+        else
+        {
+            PlayAudioFX(missClip);
+            HUD.instance.SetInfo(name + " missed!");
+            return 0;
+        }
+    }
+
+    public void BasicAttack()
+    {
+        PlayAudioFX(attackClip);
+        HUD.instance.DisablePlayerActions();
+        float enemyArmor = Bossfight.instance.GetEnemy().basicArmor;
+        StartCoroutine(AttackAnimation(basicDamage, enemyArmor, basicAttackSuccessDice));
+    }
+
+    public void MagicAttack()
+    {
+        PlayAudioFX(attackClip);
+        HUD.instance.DisablePlayerActions();
+        float enemyArmor = Bossfight.instance.GetEnemy().magicArmor;
+        StartCoroutine(AttackAnimation(magicDamage, enemyArmor, magicAttackSuccessDice));
+    }
+
+    IEnumerator AttackAnimation(float damage, float armor, float attackSuccessDice)
+    {
+        animator.SetBool("isAttacking", true);
+        float length = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+
+        yield return new WaitForSeconds(length);
+
+        float finalDamage = CalculateDamage(damage, attackSuccessDice);
+        Bossfight.instance.GetEnemy().TakeHit(finalDamage, armor);
+
+        Bossfight.instance.NextRound();
+        animator.SetBool("isAttacking", false);
+    }
+    #endregion
+
+    #region Heal
+    public void Heal()
+    {
+        PlayAudioFX(healClip);
+        health = Mathf.Clamp(health + basicHeal, 0, baseHealth);
+        Bossfight.instance.NextRound();
+        HUD.instance.SetInfo(name + " healed!");
+        StartCoroutine(HealAnimation());
+    }
+
+    IEnumerator HealAnimation()
+    {
+        animator.SetBool("healed", true);
+        float length = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        yield return new WaitForSeconds(length);
+        animator.SetBool("healed", false);
+    }
+    #endregion
+
+    #region Decision
     public void SuccessChanceAdapter()
     {
         if(isPlayer)
@@ -69,86 +185,6 @@ public class Character : MonoBehaviour
         {
             attackSuccessChance = minAttackSuccessChance;
         }
-    }
-
-    public void TakeHit(float damage)
-    {
-        health -= damage;
-        if(health <= 0)
-            isDead = true;
-        else if(damage > 0f)
-            StartCoroutine(TakeHitAnimation());
-    }
-
-    IEnumerator TakeHitAnimation()
-    {
-        animator.SetBool("tookHit", true);
-        float length = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-        yield return new WaitForSeconds(length);
-        animator.SetBool("tookHit", false);
-    }
-
-    public float CalculateDamage()
-    {
-        int dice = Random.Range(1, 21);
-
-        // Critical success
-        if(dice >= minCriticalValue)
-        {
-            HUD.instance.SetInfo("Acerto crítico de " + name + "! Dano total: " + 2 * damage);
-            return 2 * damage;
-        }
-
-        // Success
-        else if(dice >= attackSuccessPercent)
-        {
-            HUD.instance.SetInfo("Acerto de " + name + ". Dano total: " + damage);
-            return damage;
-        }
-
-        // Fail
-        else
-        {
-            PlayAudioFX(missClip);
-            HUD.instance.SetInfo(name + " errou!");
-            return 0;
-        }
-    }
-
-    public void Attack()
-    {
-        PlayAudioFX(attackClip);
-        HUD.instance.DisablePlayerActions();
-        StartCoroutine(AttackAnimation());
-    }
-
-    IEnumerator AttackAnimation()
-    {
-        animator.SetBool("isAttacking", true);
-        float length = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-        yield return new WaitForSeconds(length);
-        float finalDamage = CalculateDamage();
-        Bossfight.instance.GetEnemy().TakeHit(finalDamage);
-        Bossfight.instance.NextRound();
-        animator.SetBool("isAttacking", false);
-    }
-
-
-    public void Heal()
-    {
-        PlayAudioFX(healClip);
-        health = Mathf.Clamp(health + basicHeal, 0, baseHealth);
-        Bossfight.instance.NextRound();
-        HUD.instance.SetInfo(name + " curou!");
-        StartCoroutine(HealAnimation());
-    }
-
-    IEnumerator HealAnimation()
-    {
-        animator.SetBool("healed", true);
-        float length = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-        yield return new WaitForSeconds(length);
-        animator.SetBool("healed", false);
     }
 
     public void TakeDecision()
@@ -173,13 +209,14 @@ public class Character : MonoBehaviour
         int dice = Random.Range(1, 21);
         if(dice >= attackSuccessChance)
         {
-            Attack();
+            BasicAttack();
         }
         else
         {
             Heal();
         }
     }
+    #endregion
 
     private void PlayAudioFX(AudioClip clip)
     {

@@ -24,6 +24,7 @@ public class DialogueActionLevel1 : DialogueAction
 
     IEnumerator BlackScreen()
     {
+        GameFlow.instance.PauseAmbienceAudio();
         blackScreen.SetActive(true);
         blackScreenAnimation.Play();
         yield return new WaitForSeconds(0.5f);
@@ -33,5 +34,6 @@ public class DialogueActionLevel1 : DialogueAction
         yield return new WaitForSeconds(2f);
         blackScreen.SetActive(false);
         DialogueManager.instance.SetCanNextSentence(true);
+        GameFlow.instance.UnPauseAmbienceAudio();
     }
 }
