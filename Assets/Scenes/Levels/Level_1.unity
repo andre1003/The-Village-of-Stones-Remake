@@ -475,7 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Plox
   description: The robber of Air Stone
-  health: 100
+  health: 20
   isDead: 0
   isPlayer: 0
   basicDamage: 10
@@ -491,6 +491,7 @@ MonoBehaviour:
   attackClip: {fileID: 8300000, guid: 5d69e28971ac01b44b6ee1f3f587102d, type: 3}
   healClip: {fileID: 8300000, guid: 9f1a71c3592d25047a16dc8db11b823b, type: 3}
   missClip: {fileID: 8300000, guid: 2a34e1aca74d74d458061bf7c5326c14, type: 3}
+  deathClip: {fileID: 8300000, guid: 93f18118b83989d4bbffda263a26ae6b, type: 3}
   attackSuccessChance: 14
   maxAttackSuccessChance: 12
   minAttackSuccessChance: 6
@@ -5272,6 +5273,7 @@ MonoBehaviour:
   attackClip: {fileID: 8300000, guid: 5d69e28971ac01b44b6ee1f3f587102d, type: 3}
   healClip: {fileID: 8300000, guid: 9f1a71c3592d25047a16dc8db11b823b, type: 3}
   missClip: {fileID: 8300000, guid: 2a34e1aca74d74d458061bf7c5326c14, type: 3}
+  deathClip: {fileID: 8300000, guid: 93f18118b83989d4bbffda263a26ae6b, type: 3}
   attackSuccessChance: 10
   maxAttackSuccessChance: 10
   minAttackSuccessChance: 2

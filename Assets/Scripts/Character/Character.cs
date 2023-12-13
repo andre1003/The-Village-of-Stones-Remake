@@ -44,6 +44,7 @@ public class Character : MonoBehaviour
     public AudioClip attackClip;
     public AudioClip healClip;
     public AudioClip missClip;
+    public AudioClip deathClip;
 
     // Decision
     [Header("Decision")]
@@ -77,9 +78,14 @@ public class Character : MonoBehaviour
     private void CheckDeath(float damage)
     {
         if(health <= 0)
+        {
             isDead = true;
+            PlayAudioFX(deathClip);
+        }
         else if(damage > 0f)
+        {
             StartCoroutine(TakeHitAnimation());
+        }
     }
 
     IEnumerator TakeHitAnimation()
