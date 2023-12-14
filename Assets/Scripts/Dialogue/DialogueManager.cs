@@ -133,6 +133,20 @@ public class DialogueManager : MonoBehaviour
         NextSentence();
     }
 
+    // Stop dialogue
+    public void StopDialogue()
+    {
+        // Reset dialogue info
+        nameText.text = "";
+        sentenceText.text = "";
+        dialogues.RemoveAt(0);
+        dialogueCount++;
+
+        // Deactivate dialogue canvas and block next sentence call
+        dialogueCanvas.SetActive(false);
+        canNextSentence = false;
+    }
+
     // Set next sentence controller
     public void SetCanNextSentence(bool canNextSentence)
     {

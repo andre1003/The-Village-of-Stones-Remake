@@ -73,6 +73,12 @@ public class Character : MonoBehaviour
         attackSuccessChance = minAttackSuccessChance;
     }
 
+    // Get baseHealth value
+    public float GetBaseHealth()
+    {
+        return baseHealth;
+    }
+
     #region Take Hit
     // Take hit
     public void TakeHit(float damage, float armor)

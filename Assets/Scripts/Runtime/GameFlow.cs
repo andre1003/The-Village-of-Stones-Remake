@@ -26,6 +26,9 @@ public class GameFlow : MonoBehaviour
     // Final level
     public bool isFinalLevel = false;
 
+    // Stone
+    public Stone stone;
+
 
     // Start method
     void Start()
@@ -49,16 +52,44 @@ public class GameFlow : MonoBehaviour
         ChangeAudio(dialogue);
         HUD.instance.SetHUDVisibility(false);
         DialogueManager.instance.NextSentence();
+        if(isFinalLevel && stone)
+        {
+            DialogueManager.instance.SetCanNextSentence(false);
+            GetStone();
+            StartCoroutine(WaitPlayerGetStone());
+        }
+    }
+
+    // Wait for player to get stone and change ambience audio
+    IEnumerator WaitPlayerGetStone()
+    {
+        yield return new WaitForSeconds(14f);
+        ChangeAudio(dialogue);
     }
 
     // End current level
     public void EndLevel()
     {
+        // If it is the final level, load the credits
+        if(isFinalLevel)
+        {
+            Credits();
+            return;
+        }
+
         // Change audio, set HUD to get stone, incremente the level index and give win rewards to player
-        ChangeAudio(getStone);
-        HUD.instance.GetStone();
+        GetStone();
         MapMenu.instance.IncrementLevelIndex();
         GiveRewards(true);
+    }
+
+    // Give stone to player
+    public void GetStone()
+    {
+        ChangeAudio(getStone);
+        HUD.instance.GetStone();
+        Bossfight.instance.GetPlayer().stones.Add(stone);
+        stone = null;
     }
 
     // Game over
@@ -75,6 +106,12 @@ public class GameFlow : MonoBehaviour
     public void Map()
     {
         MapMenu.instance.LoadMap();
+    }
+
+    // Load the credits
+    public void Credits()
+    {
+        MapMenu.instance.LoadCredits();
     }
 
     // Pause ambience music

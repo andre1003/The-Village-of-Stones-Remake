@@ -158,6 +158,12 @@ public class Bossfight : MonoBehaviour
         return characters[0];
     }
 
+    // Get boss
+    public Character GetBoss()
+    {
+        return characters[1];
+    }
+
     // Check if this is player's turn
     public bool IsPlayerTurn()
     {

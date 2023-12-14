@@ -473,8 +473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e87413b218f910c4fb6298bfd0f83275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Plox
-  description: The robber of Air Stone
+  name: Magus
+  description: The robber of Fire Stone
   health: 25
   isDead: 0
   isPlayer: 0
@@ -5626,7 +5626,7 @@ MonoBehaviour:
   magicDamage: 10
   basicArmor: 0
   magicArmor: 0
-  basicAttackSuccessDice: 10
+  basicAttackSuccessDice: 1
   magicAttackSuccessDice: 2
   minCriticalValue: 15
   basicHeal: 2
@@ -6375,6 +6375,7 @@ MonoBehaviour:
   getStone: {fileID: 8300000, guid: c5a877a50090d5340b3ee308f6d000ad, type: 3}
   gameOver: {fileID: 8300000, guid: a5c8a0cc486271a49a3c6a2b1fbb5737, type: 3}
   isFinalLevel: 0
+  stone: {fileID: 0}
 --- !u!114 &1896666499
 MonoBehaviour:
   m_ObjectHideFlags: 0

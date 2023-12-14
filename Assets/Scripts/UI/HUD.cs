@@ -109,6 +109,16 @@ public class HUD : MonoBehaviour
         enemyHealth.value = 1;
     }
 
+    public void ResetForNewFight()
+    {
+        // Reset texts
+        turnInfoText.text = "";
+        turnText.text = "1";
+
+        baseEnemyHealth = Bossfight.instance.characters[1].health;
+        enemyHealth.value = 1;
+    }
+
     // Get stone handler
     public void GetStone()
     {
@@ -121,8 +131,22 @@ public class HUD : MonoBehaviour
         getStone.SetActive(true);
         getStoneAnimation.clip = getStoneFadeIn;
         getStoneAnimation.Play();
+
         yield return new WaitForSeconds(13f);
-        GameFlow.instance.Map();
+
+        if(!GameFlow.instance.isFinalLevel)
+        {
+            GameFlow.instance.Map();
+        }
+        else
+        {
+            getStoneAnimation.clip = getStoneFadeOut;
+            getStoneAnimation.Play();
+
+            yield return new WaitForSeconds(getStoneFadeOut.length);
+            DialogueManager.instance.SetCanNextSentence(true);
+            getStone.SetActive(false);
+        }
     }
 
     // Game over handler

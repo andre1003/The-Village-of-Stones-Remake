@@ -138,7 +138,14 @@ public class MapMenu : MonoBehaviour
     public void LoadLevel()
     {
         fadeCanvas.SetActive(true);
-        StartCoroutine(FadeOutScreen());
+        int levelNumber = index + 1;
+        StartCoroutine(FadeOutScreen("Level_" + levelNumber));
+    }
+
+    public void LoadCredits()
+    {
+        fadeCanvas.SetActive(true);
+        StartCoroutine(FadeOutScreen("Credits"));
     }
 
     // Increment level index
@@ -149,12 +156,12 @@ public class MapMenu : MonoBehaviour
     }
 
     // Fade out screen and start loading level async
-    IEnumerator FadeOutScreen()
+    IEnumerator FadeOutScreen(string levelName)
     {
         fadeAnimation.clip = fadeOut;
         fadeAnimation.Play();
         yield return new WaitForSeconds(fadeOut.length);
-        StartCoroutine(LoadLevelAsync());
+        StartCoroutine(LoadLevelAsync(levelName));
     }
 
     // Fade in screen on new scene
@@ -167,10 +174,10 @@ public class MapMenu : MonoBehaviour
     }
 
     // Load level async
-    IEnumerator LoadLevelAsync()
+    IEnumerator LoadLevelAsync(string levelName)
     {
-        int levelNumber = index + 1;
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Level_" + levelNumber);
+        
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(levelName);
         while(!asyncOperation.isDone)
         {
             yield return null;
