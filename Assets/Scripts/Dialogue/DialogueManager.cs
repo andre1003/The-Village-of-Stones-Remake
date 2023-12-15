@@ -134,13 +134,18 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Stop dialogue
-    public void StopDialogue()
+    public void StopDialogue(bool skip = true)
     {
         // Reset dialogue info
         nameText.text = "";
         sentenceText.text = "";
-        dialogues.RemoveAt(0);
-        dialogueCount++;
+
+        // If requested, skip to next dialogue
+        if(skip)
+        {
+            dialogues.RemoveAt(0);
+            dialogueCount++;
+        }
 
         // Deactivate dialogue canvas and block next sentence call
         dialogueCanvas.SetActive(false);
