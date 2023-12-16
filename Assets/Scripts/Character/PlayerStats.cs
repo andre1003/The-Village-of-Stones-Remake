@@ -22,10 +22,15 @@ public class PlayerStats : MonoBehaviour
 
     // Non-combat info
     [Header("Non-Combat info")]
-    public int coins;
+    public float coins;
     public int level;
     public int xp;
     public int nextLevelXp;
+
+    public int basicArmorLvl = 1;
+    public int magicArmorLvl = 1;
+    public int basicDamageLvl = 1;
+    public int magicDamageLvl = 1;
 
     //* Character info *//
     // Info
