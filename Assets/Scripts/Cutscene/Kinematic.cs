@@ -36,7 +36,7 @@ public class Kinematic : MonoBehaviour
     // Start cutscene
     public void StartKinematic()
     {
-        fadeAnimation.Play("FirstFade");
+        fadeAnimation.Play(AnimationHelper.GetAnimationClipNameByIndex(fadeAnimation, 0));
         sentenceText.text = sentences[screenIndex];
         StartCoroutine(WaitForNextScreen());
         StartCoroutine(FullFade());
@@ -73,7 +73,7 @@ public class Kinematic : MonoBehaviour
         yield return new WaitForSeconds(fadeTime);
 
         // Play full fade animation
-        fadeAnimation.Play("FadeClip");
+        fadeAnimation.Play(AnimationHelper.GetAnimationClipNameByIndex(fadeAnimation, 1));
 
         // If there are screens left, prepare for next full fade
         if(screenIndex < screens.Count)

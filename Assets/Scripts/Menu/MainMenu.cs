@@ -5,10 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Fade
-    public GameObject fadeCanvas;
-    public Animation fadeAnimation;
-    public AnimationClip fadeInClip;
+    // Fader
+    public GameObject fadeGameObject;
+    public Fader fader;
 
 
     // Play game
@@ -21,10 +20,9 @@ public class MainMenu : MonoBehaviour
     IEnumerator StartGameAsync()
     {
         // Fade screen
-        fadeCanvas.SetActive(true);
-        fadeAnimation.clip = fadeInClip;
-        fadeAnimation.Play();
-        yield return new WaitForSeconds(fadeInClip.length);
+        fadeGameObject.SetActive(true);
+        fader.FadeIn(0.5f);
+        yield return new WaitForSeconds(0.6f);
 
         // Load first level async
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Prologue");

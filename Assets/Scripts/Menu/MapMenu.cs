@@ -27,8 +27,8 @@ public class MapMenu : MonoBehaviour
     // Fade
     public GameObject fadeCanvas;
     public Animation fadeAnimation;
-    public AnimationClip fadeIn;
-    public AnimationClip fadeOut;
+    public int fadeInIndex;
+    public int fadeOutIndex;
 
     // Map player
     public List<float> levelPostionsX;
@@ -64,13 +64,20 @@ public class MapMenu : MonoBehaviour
         time += Time.deltaTime / timeToReachTarget;
         playerRectTransform.localPosition = Vector3.Lerp(origin, target, time);
     }
+    // Increment level index
+    public void IncrementLevelIndex()
+    {
+        previousIndex = index;
+        index++;
+    }
 
+    #region On Scene Load
     // Called on scene load
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // Fade screen
         fadeCanvas.SetActive(true);
-        StartCoroutine(FadeInScreen());
+        StartCoroutine(FadeOutBlackScreen());
 
         // Try to find map player and start level button
         FindPlayerRectTransform();
@@ -126,7 +133,9 @@ public class MapMenu : MonoBehaviour
             startButton = null; 
         }
     }
+    #endregion
 
+    #region Level Load
     // Load map level
     public void LoadMap()
     {
@@ -139,37 +148,32 @@ public class MapMenu : MonoBehaviour
     {
         fadeCanvas.SetActive(true);
         int levelNumber = index + 1;
-        StartCoroutine(FadeOutScreen("Level_" + levelNumber));
+        StartCoroutine(FadeInBlackScreen("Level_" + levelNumber));
     }
 
     public void LoadCredits()
     {
         fadeCanvas.SetActive(true);
-        StartCoroutine(FadeOutScreen("Credits"));
+        StartCoroutine(FadeInBlackScreen("Credits"));
     }
+    #endregion
 
-    // Increment level index
-    public void IncrementLevelIndex()
+    #region IEnumerators
+    // Fade in black screen and start loading level async
+    IEnumerator FadeInBlackScreen(string levelName)
     {
-        previousIndex = index;
-        index++;
-    }
-
-    // Fade out screen and start loading level async
-    IEnumerator FadeOutScreen(string levelName)
-    {
-        fadeAnimation.clip = fadeOut;
-        fadeAnimation.Play();
-        yield return new WaitForSeconds(fadeOut.length);
+        AnimationClip clip = AnimationHelper.GetAnimationClipByIndex(fadeAnimation, fadeInIndex);
+        fadeAnimation.Play(clip.name);
+        yield return new WaitForSeconds(clip.length);
         StartCoroutine(LoadLevelAsync(levelName));
     }
 
-    // Fade in screen on new scene
-    IEnumerator FadeInScreen()
+    // Fade out black screen
+    IEnumerator FadeOutBlackScreen()
     {
-        fadeAnimation.clip = fadeIn;
-        fadeAnimation.Play();
-        yield return new WaitForSeconds(fadeIn.length);
+        AnimationClip clip = AnimationHelper.GetAnimationClipByIndex(fadeAnimation, fadeOutIndex);
+        fadeAnimation.Play(clip.name);
+        yield return new WaitForSeconds(clip.length);
         fadeCanvas.SetActive(false);
     }
 
@@ -187,10 +191,10 @@ public class MapMenu : MonoBehaviour
     // Load map async
     IEnumerator LoadMapAsync()
     {
-        // Fade out screen
-        fadeAnimation.clip = fadeOut;
-        fadeAnimation.Play();
-        yield return new WaitForSeconds(fadeOut.length);
+        // Fade in black screen
+        AnimationClip clip = AnimationHelper.GetAnimationClipByIndex(fadeAnimation, fadeInIndex);
+        fadeAnimation.Play(clip.name);
+        yield return new WaitForSeconds(clip.length);
 
         // Load map async
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Map");
@@ -199,4 +203,5 @@ public class MapMenu : MonoBehaviour
             yield return null;
         }
     }
+    #endregion
 }

@@ -10,6 +10,8 @@ public class Store : MonoBehaviour
     public bool isFirstTime = true;
     public GameObject firstTimeCanvas;
     public Animation firstTimeAnimation;
+    public int fadeInIndex;
+    public int fadeOutIndex;
 
     // Buffs per level
     [Header("Buffs per level")]
@@ -161,7 +163,9 @@ public class Store : MonoBehaviour
 
         // Enable UI
         storeCanvas.SetActive(true);
-        fadeAnimation.Play("FadeIn");
+        string clipName = AnimationHelper.GetAnimationClipNameByIndex(fadeAnimation, fadeInIndex);
+        fadeAnimation.Play(clipName);
+        Debug.Log("Open store... Playing: " + clipName);
 
         // Update costs
         UpdateInfo();
@@ -191,15 +195,16 @@ public class Store : MonoBehaviour
     // Close store
     public void CloseStore()
     {
-        fadeAnimation.Play("FadeOut");
         StartCoroutine(WaitForDeactivateCanvas());
     }
 
     // Wait for fade out to disable store canvas
     IEnumerator WaitForDeactivateCanvas()
     {
-        float lenght = fadeAnimation.GetClip("FadeOut").length;
-        yield return new WaitForSeconds(lenght);
+        AnimationClip clip = AnimationHelper.GetAnimationClipByIndex(fadeAnimation, fadeOutIndex);
+        fadeAnimation.Play(clip.name);
+        Debug.Log("Closing store... Playing: " + clip.name);
+        yield return new WaitForSeconds(clip.length);
         storeCanvas.SetActive(false);
     }
 

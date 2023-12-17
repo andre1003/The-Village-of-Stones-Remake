@@ -21,7 +21,7 @@ public class Settings : MonoBehaviour
     public Slider uiSlider;
 
     // Half volume value
-    public float halfVolumeValue = -40f;
+    [Range(-80f, 10f)] public float halfVolumeValue = -40f;
 
 
     // Start method
