@@ -1,7 +1,7 @@
 # The Village of Stones Remake
 
 <p align="center">
-  <img src="Assets/Art/Screens/Prologue/jogo-logo.jpeg" alt="The Village of Stones Logo" style="width: 300px;">
+  <img src="Assets/Art/Screens/Prologue/logo.jpeg" alt="The Village of Stones Logo" style="width: 300px;">
 </p>
 
 The Village of Stones Remake is, as the name suggests, a reimagination of the original game of the same name. Therefore, the original The Village of Stones is a game developed for Probability and Statistics subject of Computer Science undergraduate course of the São Paulo State University. Thus, both concepts of probability and statistics were implemented in its mechanics, so as to bring a practical application of the content that was taught in the discipline. The game used a probabilistic model to calculate critical damage.
