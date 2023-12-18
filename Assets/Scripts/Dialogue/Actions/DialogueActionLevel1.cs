@@ -10,7 +10,7 @@ public class DialogueActionLevel1 : DialogueAction
     // Action required elements
     public AudioSource audioSource;
     public GameObject blackScreen;
-    public Animation blackScreenAnimation;
+    public Fader blackScreenFader;
 
 
     // Action execute override
@@ -32,7 +32,7 @@ public class DialogueActionLevel1 : DialogueAction
         // Pause ambience audio and start black screen animation
         GameFlow.instance.PauseAmbienceAudio();
         blackScreen.SetActive(true);
-        blackScreenAnimation.Play();
+        blackScreenFader.FullFade(0.5f, 1.5f);
 
         // Wait 0.5 seconds
         yield return new WaitForSeconds(0.5f);
@@ -43,7 +43,7 @@ public class DialogueActionLevel1 : DialogueAction
         DialogueManager.instance.SetCanNextSentence(false);
 
         // Wait for black screen animation to end
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.1f);
 
         // Disable black screen, allow player to continue dialogue and unpause the ambience audio
         blackScreen.SetActive(false);

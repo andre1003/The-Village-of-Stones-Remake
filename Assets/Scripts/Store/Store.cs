@@ -9,7 +9,7 @@ public class Store : MonoBehaviour
     [Header("First time")]
     public bool isFirstTime = true;
     public GameObject firstTimeCanvas;
-    public Animation firstTimeAnimation;
+    public Fader firstTimeFader;
     public int fadeInIndex;
     public int fadeOutIndex;
 
@@ -38,7 +38,7 @@ public class Store : MonoBehaviour
     public TextMeshProUGUI basicDamageLvlText;
     public TextMeshProUGUI magicDamageLvlText;
     public GameObject storeCanvas;
-    public Animation fadeAnimation;
+    public Fader storeFader;
 
     // Static UI
     [Header("Static UI")]
@@ -163,9 +163,7 @@ public class Store : MonoBehaviour
 
         // Enable UI
         storeCanvas.SetActive(true);
-        string clipName = AnimationHelper.GetAnimationClipNameByIndex(fadeAnimation, fadeInIndex);
-        fadeAnimation.Play(clipName);
-        Debug.Log("Open store... Playing: " + clipName);
+        storeFader.FadeIn(0.5f);
 
         // Update costs
         UpdateInfo();
@@ -175,7 +173,7 @@ public class Store : MonoBehaviour
     private void OpenFirstTimeInfo()
     {
         firstTimeCanvas.SetActive(true);
-        firstTimeAnimation.Play();
+        firstTimeFader.FadeIn(0.5f);
         isFirstTime = false;
     }
 
@@ -201,10 +199,8 @@ public class Store : MonoBehaviour
     // Wait for fade out to disable store canvas
     IEnumerator WaitForDeactivateCanvas()
     {
-        AnimationClip clip = AnimationHelper.GetAnimationClipByIndex(fadeAnimation, fadeOutIndex);
-        fadeAnimation.Play(clip.name);
-        Debug.Log("Closing store... Playing: " + clip.name);
-        yield return new WaitForSeconds(clip.length);
+        storeFader.FadeOut(0.5f);
+        yield return new WaitForSeconds(0.6f);
         storeCanvas.SetActive(false);
     }
 

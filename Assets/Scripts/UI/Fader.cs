@@ -43,6 +43,7 @@ public class Fader : MonoBehaviour
     // Full fade delay
     IEnumerator FullFadeDelay(float duration, float delay)
     {
+        yield return new WaitForSeconds(duration);
         yield return new WaitForSeconds(delay);
         DoFade(0f, duration);
     }

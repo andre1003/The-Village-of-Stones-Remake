@@ -220,6 +220,8 @@ GameObject:
   - component: {fileID: 1815908737101622456}
   - component: {fileID: 6011213184273325510}
   - component: {fileID: 6290376913215443844}
+  - component: {fileID: 3459065554397549898}
+  - component: {fileID: 6946215419904492980}
   m_Layer: 5
   m_Name: DialogueCanvas
   m_TagString: Untagged
@@ -312,6 +314,31 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &3459065554397549898
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2975046332211589559}
+  m_Enabled: 1
+  m_Alpha: 0.07
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &6946215419904492980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2975046332211589559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74984b82bfd949544afcff2a1daa7cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadingCanvasGroup: {fileID: 3459065554397549898}
 --- !u!1 &3025997196684700247
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,8 +601,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278197211
-  m_fontColor: {r: 0.8584906, g: 0.10650592, b: 0, a: 1}
+    rgba: 4278198271
+  m_fontColor: {r: 1, g: 0.12328767, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

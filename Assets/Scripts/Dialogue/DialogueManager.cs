@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -22,6 +23,7 @@ public class DialogueManager : MonoBehaviour
 
     // Dialogue UI elements
     public GameObject dialogueCanvas;
+    public Fader dialogueFader;
     public TextMeshProUGUI sentenceText;
     public TextMeshProUGUI nameText;
     public Image speakingCharacterImage;
@@ -48,7 +50,8 @@ public class DialogueManager : MonoBehaviour
     // Start method
     void Start()
     {
-        NextSentence();
+        canNextSentence = false;
+        StartCoroutine(WaitForFadeIn());
     }
 
     // Update method
@@ -67,11 +70,25 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    // Wait for first fade in
+    IEnumerator WaitForFadeIn()
+    {
+        yield return new WaitForSeconds(1f);
+        dialogueCanvas.SetActive(true);
+        dialogueFader.FadeIn(0.5f);
+        canNextSentence = true;
+        NextSentence();
+    }
+
     // Get next dialogue sentence
     public void NextSentence()
     {
         // Activate dialogue canvas
-        dialogueCanvas.SetActive(true);
+        if(!dialogueCanvas.activeSelf)
+        {
+            dialogueCanvas.SetActive(true);
+            dialogueFader.FadeIn(0.5f);
+        }
 
         // If there are no dialogues left, exit
         if(dialogues.Count == 0)
@@ -111,13 +128,12 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        // Deactivate dialogue canvas and block next sentence call
-        dialogueCanvas.SetActive(false);
-        canNextSentence = false;
-
         // Start bossfight and exit
         if(dialogueCount == dialoguesBeforeBossfight)
         {
+            // Deactivate dialogue canvas and block next sentence call
+            StartCoroutine(FadeOut());
+            canNextSentence = false;
             GameFlow.instance.StartBossfight();
             return;
         }
@@ -125,6 +141,9 @@ public class DialogueManager : MonoBehaviour
         // If there are no more dialogues, end level and exit
         if(dialogues.Count == 0)
         {
+            // Deactivate dialogue canvas and block next sentence call
+            StartCoroutine(FadeOut());
+            canNextSentence = false;
             GameFlow.instance.EndLevel();
             return;
         }
@@ -148,7 +167,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Deactivate dialogue canvas and block next sentence call
-        dialogueCanvas.SetActive(false);
+        StartCoroutine(FadeOut());
         canNextSentence = false;
     }
 
@@ -156,5 +175,18 @@ public class DialogueManager : MonoBehaviour
     public void SetCanNextSentence(bool canNextSentence)
     {
         this.canNextSentence = canNextSentence;
+        if(!dialogueCanvas.activeSelf)
+        {
+            dialogueCanvas.SetActive(true);
+            dialogueFader.FadeIn(0.5f);
+        }
+    }
+
+    // Fade out
+    IEnumerator FadeOut()
+    {
+        dialogueFader.FadeOut(0.5f);
+        yield return new WaitForSeconds(1.1f);
+        dialogueCanvas.SetActive(false);
     }
 }

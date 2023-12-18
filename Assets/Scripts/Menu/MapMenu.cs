@@ -26,9 +26,7 @@ public class MapMenu : MonoBehaviour
 
     // Fade
     public GameObject fadeCanvas;
-    public Animation fadeAnimation;
-    public int fadeInIndex;
-    public int fadeOutIndex;
+    public Fader fader;
 
     // Map player
     public List<float> levelPostionsX;
@@ -162,25 +160,22 @@ public class MapMenu : MonoBehaviour
     // Fade in black screen and start loading level async
     IEnumerator FadeInBlackScreen(string levelName)
     {
-        AnimationClip clip = AnimationHelper.GetAnimationClipByIndex(fadeAnimation, fadeInIndex);
-        fadeAnimation.Play(clip.name);
-        yield return new WaitForSeconds(clip.length);
+        fader.FadeIn();
+        yield return new WaitForSeconds(1f);
         StartCoroutine(LoadLevelAsync(levelName));
     }
 
     // Fade out black screen
     IEnumerator FadeOutBlackScreen()
     {
-        AnimationClip clip = AnimationHelper.GetAnimationClipByIndex(fadeAnimation, fadeOutIndex);
-        fadeAnimation.Play(clip.name);
-        yield return new WaitForSeconds(clip.length);
+        fader.FadeOut();
+        yield return new WaitForSeconds(1.1f);
         fadeCanvas.SetActive(false);
     }
 
     // Load level async
     IEnumerator LoadLevelAsync(string levelName)
     {
-        
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(levelName);
         while(!asyncOperation.isDone)
         {
@@ -192,9 +187,8 @@ public class MapMenu : MonoBehaviour
     IEnumerator LoadMapAsync()
     {
         // Fade in black screen
-        AnimationClip clip = AnimationHelper.GetAnimationClipByIndex(fadeAnimation, fadeInIndex);
-        fadeAnimation.Play(clip.name);
-        yield return new WaitForSeconds(clip.length);
+        fader.FadeIn();
+        yield return new WaitForSeconds(1f);
 
         // Load map async
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Map");

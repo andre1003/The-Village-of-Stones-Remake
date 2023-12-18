@@ -33,7 +33,7 @@ public class GameFlow : MonoBehaviour
     // Start method
     void Start()
     {
-        HUD.instance.SetHUDVisibility(false);
+        HUD.instance.SetHUDVisibility(false, true);
     }
 
     // Start bossfight

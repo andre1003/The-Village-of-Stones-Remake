@@ -100,6 +100,7 @@ public class Character : MonoBehaviour
         // If health is less or equal to 0, character is dead
         if(health <= 0)
         {
+            health = 0;
             isDead = true;
             PlayAudioFX(deathClip);
         }

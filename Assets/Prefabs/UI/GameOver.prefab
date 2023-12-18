@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 2223464128225982038}
   - component: {fileID: 6537680351535266457}
   - component: {fileID: 321615795899569154}
-  - component: {fileID: 5334120755987131131}
+  - component: {fileID: 6770795673015389640}
   m_Layer: 5
   m_Name: GameOver
   m_TagString: Untagged
@@ -326,22 +326,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!111 &5334120755987131131
-Animation:
+--- !u!114 &6770795673015389640
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6003444206150705031}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 134d5587fbef09845a66cb9cb495cb3b, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 134d5587fbef09845a66cb9cb495cb3b, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74984b82bfd949544afcff2a1daa7cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadingCanvasGroup: {fileID: 321615795899569154}
 --- !u!1 &7374432127458294852
 GameObject:
   m_ObjectHideFlags: 0

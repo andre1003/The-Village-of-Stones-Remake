@@ -3929,7 +3929,7 @@ GameObject:
   - component: {fileID: 859635865}
   - component: {fileID: 859635864}
   - component: {fileID: 859635863}
-  - component: {fileID: 859635862}
+  - component: {fileID: 859635866}
   m_Layer: 5
   m_Name: FirstTimeStoreCanvas
   m_TagString: Untagged
@@ -3958,23 +3958,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!111 &859635862
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859635860}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 611ba0708f8916345bd0c653e92ecfbc, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 611ba0708f8916345bd0c653e92ecfbc, type: 2}
-  - {fileID: 7400000, guid: faf14d3ea92f3784c92552ab90f2696d, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!225 &859635863
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4022,11 +4005,24 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: -1
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &859635866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859635860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74984b82bfd949544afcff2a1daa7cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadingCanvasGroup: {fileID: 859635863}
 --- !u!1 &860099662
 GameObject:
   m_ObjectHideFlags: 0
@@ -4040,7 +4036,7 @@ GameObject:
   - component: {fileID: 860099666}
   - component: {fileID: 860099665}
   - component: {fileID: 860099664}
-  - component: {fileID: 860099663}
+  - component: {fileID: 860099669}
   m_Layer: 5
   m_Name: FadeCanvas
   m_TagString: Untagged
@@ -4048,23 +4044,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!111 &860099663
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860099662}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 19174533a0524084b93872349a04e174, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 19174533a0524084b93872349a04e174, type: 2}
-  - {fileID: 7400000, guid: faf14d3ea92f3784c92552ab90f2696d, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!225 &860099664
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4073,7 +4052,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860099662}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -4134,7 +4113,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -4160,6 +4139,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &860099669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860099662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74984b82bfd949544afcff2a1daa7cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadingCanvasGroup: {fileID: 860099664}
 --- !u!1 &867191757
 GameObject:
   m_ObjectHideFlags: 0
@@ -5535,7 +5527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeCanvas: {fileID: 860099662}
-  fadeAnimation: {fileID: 860099663}
+  fader: {fileID: 860099669}
   fadeInIndex: 0
   fadeOutIndex: 1
   levelPostionsX:
@@ -5545,7 +5537,7 @@ MonoBehaviour:
   - 250
   playerRectTransform: {fileID: 129633604}
   index: 3
-  startButton: {fileID: 0}
+  startButton: {fileID: 765981646}
 --- !u!4 &1126691298
 Transform:
   m_ObjectHideFlags: 0
@@ -6228,7 +6220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFirstTime: 1
   firstTimeCanvas: {fileID: 859635860}
-  firstTimeAnimation: {fileID: 859635862}
+  firstTimeFader: {fileID: 859635866}
   fadeInIndex: 0
   fadeOutIndex: 1
   basicArmorBuffPerLevel: 5
@@ -6243,7 +6235,7 @@ MonoBehaviour:
   basicDamageLvlText: {fileID: 1563313647}
   magicDamageLvlText: {fileID: 562644978}
   storeCanvas: {fileID: 1399641750}
-  fadeAnimation: {fileID: 1399641754}
+  storeFader: {fileID: 1399641756}
   coinsText: {fileID: 927653676}
   tempCostText: {fileID: 432192037}
   levelText: {fileID: 331964462}
@@ -6546,7 +6538,7 @@ GameObject:
   - component: {fileID: 1399641753}
   - component: {fileID: 1399641752}
   - component: {fileID: 1399641755}
-  - component: {fileID: 1399641754}
+  - component: {fileID: 1399641756}
   m_Layer: 5
   m_Name: StoreCanvas
   m_TagString: Untagged
@@ -6612,28 +6604,11 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: -1
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!111 &1399641754
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399641750}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 611ba0708f8916345bd0c653e92ecfbc, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 611ba0708f8916345bd0c653e92ecfbc, type: 2}
-  - {fileID: 7400000, guid: faf14d3ea92f3784c92552ab90f2696d, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!225 &1399641755
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -6646,6 +6621,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1399641756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399641750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74984b82bfd949544afcff2a1daa7cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadingCanvasGroup: {fileID: 1399641755}
 --- !u!1 &1450007268
 GameObject:
   m_ObjectHideFlags: 0
@@ -8383,8 +8371,8 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0

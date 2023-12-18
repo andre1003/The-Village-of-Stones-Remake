@@ -5,18 +5,24 @@ using UnityEngine;
 
 public class DialogueActionLevel4Choice : DialogueAction
 {
+    // Game objects
     public GameObject endChoiceCanvas;
     public GameObject optionsCanvas;
-    public Animation fadeAnimation;
-    public Animation optionsFadeAnimation;
-    public Animation longFadeAnimation;
+
+    // Faders
+    public Fader endChoicesFader;
+    public Fader backgroundFader;
+    public Fader optionsFader;
+
+    // UI
     public TextMeshProUGUI infoText;
+
 
     // Execute method override
     public override void Execute()
     {
         endChoiceCanvas.SetActive(true);
-        fadeAnimation.Play();
+        endChoicesFader.FadeIn();
         DialogueManager.instance.StopDialogue(false);
     }
 
@@ -36,8 +42,8 @@ public class DialogueActionLevel4Choice : DialogueAction
 
     private void ClearScreenAndSetInfo(string info)
     {
-        optionsFadeAnimation.Play();
-        longFadeAnimation.Play();
+        optionsFader.FadeOut(0.5f);
+        backgroundFader.FadeIn(14f);
         infoText.text = info;
         StartCoroutine(WaitForFinishLevel());
     }

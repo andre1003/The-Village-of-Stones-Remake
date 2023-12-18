@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Runtime.InteropServices;
 
 public class HUD : MonoBehaviour
 {
@@ -21,13 +22,18 @@ public class HUD : MonoBehaviour
     // HUD canvas
     [Header("HUD")]
     public GameObject hudCanvas;
+    public Fader hudFader;
 
     // Fight end canvases
     [Header("Fight outcomes")]
     public GameObject gameOver;
-    public Animation gameOverAnimation;
-    public GameObject getStone;
+    public Fader gameOverFader;
 
+    // Get stone
+    [Header("Get stone")]
+    public GameObject getStone;
+    public Fader getStoneFader;
+    
     // Turn info
     [Header("Turn info")]
     public TextMeshProUGUI turnText;
@@ -48,12 +54,6 @@ public class HUD : MonoBehaviour
     public RectTransform stoneButtonRectTrasform;
     public GameObject stoneSelectionPrefab;
 
-    // Animation
-    [Header("Get stone")]
-    public Animation getStoneAnimation;
-    public AnimationClip getStoneFadeIn;
-    public AnimationClip getStoneFadeOut;
-
 
     // Private attributes
     private float basePlayerHealth;
@@ -61,6 +61,7 @@ public class HUD : MonoBehaviour
     private bool isPlayerTurn;
     private int stonesNumber = 0;
     private List<GameObject> stoneSelections = new List<GameObject>();
+    private List<Fader> healthFaders = new List<Fader>();
     
 
     // Start method
@@ -129,8 +130,7 @@ public class HUD : MonoBehaviour
     IEnumerator GetStoneAnimation()
     {
         getStone.SetActive(true);
-        getStoneAnimation.clip = getStoneFadeIn;
-        getStoneAnimation.Play();
+        getStoneFader.FadeIn();
 
         yield return new WaitForSeconds(13f);
 
@@ -140,10 +140,8 @@ public class HUD : MonoBehaviour
         }
         else
         {
-            getStoneAnimation.clip = getStoneFadeOut;
-            getStoneAnimation.Play();
-
-            yield return new WaitForSeconds(getStoneFadeOut.length);
+            getStoneFader.FadeOut();
+            yield return new WaitForSeconds(1.1f);
             DialogueManager.instance.SetCanNextSentence(true);
             getStone.SetActive(false);
         }
@@ -153,7 +151,7 @@ public class HUD : MonoBehaviour
     public void GameOver()
     {
         gameOver.SetActive(true);
-        gameOverAnimation.Play();
+        gameOverFader.FadeIn();
     }
 
     // Set turn info text
@@ -169,13 +167,86 @@ public class HUD : MonoBehaviour
     }
 
     // Set HUD visibility
-    public void SetHUDVisibility(bool visibility)
+    public void SetHUDVisibility(bool visibility, bool hardSet = false)
     {
-        hudCanvas.SetActive(visibility);
+        // If is hard set, just set HUD canvas active and set alpha to visibility
+        if(hardSet)
+        {
+            hudCanvas.SetActive(visibility);
+            hudFader.fadingCanvasGroup.alpha = visibility ? 1f : 0f;
+        }
+
+        // If it's not a hard set, fade HUD
+        else
+        {
+            if(visibility)
+            {
+                hudCanvas.SetActive(true);
+                hudFader.FadeIn();
+            }
+            else
+            {
+                hudFader.FadeOut(0.5f);
+                StartCoroutine(WaitForDisableHUD());
+            }
+        }
+
+        // If the health fader list is empty, try to get it
+        if(healthFaders.Count == 0)
+            healthFaders = TryGetHealthFaders();
+
+        // If the list remains empty, set health object active
+        if(healthFaders.Count == 0)
+        {
+            foreach(GameObject healthObject in healthObjects)
+            {
+                healthObject.SetActive(visibility);
+            }
+        }
+
+        // If there are faders, loop them
+        else
+        {
+            foreach(Fader healthFader in healthFaders)
+            {
+                // If it's a hard set, set the fading canvas alpha value
+                if(hardSet)
+                {
+                    healthFader.fadingCanvasGroup.alpha = visibility ? 1f : 0f;
+                }
+
+                // Else, fade it
+                if(visibility)
+                {
+                    healthFader.FadeIn();
+                }
+                else
+                {
+                    healthFader.FadeOut(0.5f);
+                }
+            }
+        }
+    }
+
+    // Try to get the faders of health bars
+    private List<Fader> TryGetHealthFaders()
+    {
+        List<Fader> _healhtFaders = new List<Fader>();
         foreach(GameObject healthObject in healthObjects)
         {
-            healthObject.SetActive(visibility);
+            Fader healthFader;
+            bool found = healthObject.TryGetComponent<Fader>(out healthFader);
+            if(found)
+                _healhtFaders.Add(healthFader);
         }
+        return _healhtFaders;
+    } 
+
+    // Wait for disable HUD
+    IEnumerator WaitForDisableHUD()
+    {
+        yield return new WaitForSeconds(0.6f);
+        hudCanvas.SetActive(false);
     }
 
     // Disable all player actions

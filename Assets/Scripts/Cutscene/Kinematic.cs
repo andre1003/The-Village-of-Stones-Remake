@@ -10,9 +10,8 @@ public class Kinematic : MonoBehaviour
     // Sentence text
     public TextMeshProUGUI sentenceText;
 
-    // Fade
-    public Image fadeImage;
-    public Animation fadeAnimation;
+    // Fader
+    public Fader fader;
 
     // Cutscene screens and timers
     public List<GameObject> screens;
@@ -36,10 +35,10 @@ public class Kinematic : MonoBehaviour
     // Start cutscene
     public void StartKinematic()
     {
-        fadeAnimation.Play(AnimationHelper.GetAnimationClipNameByIndex(fadeAnimation, 0));
         sentenceText.text = sentences[screenIndex];
         StartCoroutine(WaitForNextScreen());
         StartCoroutine(FullFade());
+        fader.FadeOut(1.5f);
     }
 
     // Wait for next cutscene screen
@@ -73,7 +72,7 @@ public class Kinematic : MonoBehaviour
         yield return new WaitForSeconds(fadeTime);
 
         // Play full fade animation
-        fadeAnimation.Play(AnimationHelper.GetAnimationClipNameByIndex(fadeAnimation, 1));
+        fader.FullFade(0.9f, 0.2f);
 
         // If there are screens left, prepare for next full fade
         if(screenIndex < screens.Count)
