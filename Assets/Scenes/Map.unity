@@ -5528,8 +5528,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeCanvas: {fileID: 860099662}
   fader: {fileID: 860099669}
-  fadeInIndex: 0
-  fadeOutIndex: 1
   levelPostionsX:
   - -250
   - -85
@@ -8372,7 +8370,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0

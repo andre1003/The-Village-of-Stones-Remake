@@ -6079,7 +6079,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 604780666}
         m_TargetAssemblyTypeName: HUD, Assembly-CSharp
         m_MethodName: StoneSelectionHandler
         m_Mode: 1

@@ -1586,6 +1586,7 @@ GameObject:
   m_Component:
   - component: {fileID: 482556405}
   - component: {fileID: 482556406}
+  - component: {fileID: 482556407}
   m_Layer: 0
   m_Name: Post1_Dialogue
   m_TagString: Untagged
@@ -1650,7 +1651,21 @@ MonoBehaviour:
   - I don't think so, I need to go.
   - Is this kind of attitude to be expected from HumanTown's most righteous hero?
   - Alright... Alright... You can tell it.
-  action: {fileID: 0}
+  action: {fileID: 482556407}
+--- !u!114 &482556407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482556404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71851c0099390fc41a36ba575a7cd322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackScreen: {fileID: 799035839}
+  blackScreenFader: {fileID: 799035840}
 --- !u!1 &487415912
 GameObject:
   m_ObjectHideFlags: 0
@@ -2786,6 +2801,22 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8635008444522980689, guid: e12a1ec11eefbdd41a6ccccb50bb3891, type: 3}
   m_PrefabInstance: {fileID: 799035837}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &799035839 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1589566292582976846, guid: e12a1ec11eefbdd41a6ccccb50bb3891, type: 3}
+  m_PrefabInstance: {fileID: 799035837}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &799035840 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 292586548894502442, guid: e12a1ec11eefbdd41a6ccccb50bb3891, type: 3}
+  m_PrefabInstance: {fileID: 799035837}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799035839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74984b82bfd949544afcff2a1daa7cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &822646150
 GameObject:
   m_ObjectHideFlags: 0
@@ -7366,7 +7397,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1606684547}
         m_TargetAssemblyTypeName: HUD, Assembly-CSharp
         m_MethodName: StoneSelectionHandler
         m_Mode: 1

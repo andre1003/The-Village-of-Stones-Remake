@@ -9,6 +9,9 @@ public class Kinematic : MonoBehaviour
 {
     // Sentence text
     public TextMeshProUGUI sentenceText;
+    public string nextScene = "Map";
+    public bool shouldUnloadScene;
+    public AudioSource audioSource;
 
     // Fader
     public Fader fader;
@@ -60,6 +63,8 @@ public class Kinematic : MonoBehaviour
         // Else, load next scene
         else
         {
+            sentenceText.text = "";
+            yield return new WaitForSeconds(1.1f);
             LoadNextLevel();
         }
     }
@@ -91,8 +96,22 @@ public class Kinematic : MonoBehaviour
     // Load next level async
     IEnumerator LoadLevel()
     {
-        // Load map
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Map");
+        AsyncOperation asyncLoad;
+
+        // Unload scene
+        if(shouldUnloadScene)
+        {
+            if(audioSource)
+                audioSource.Stop();
+            GameFlow.instance.UnPauseAmbienceAudio();
+            DialogueManager.instance.SetCanNextSentence(true);
+            DialogueManager.instance.NextSentence();
+            asyncLoad = SceneManager.UnloadSceneAsync(nextScene, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+        }
+        // Load next scence
+        else
+            asyncLoad = SceneManager.LoadSceneAsync(nextScene);
+
         while(!asyncLoad.isDone)
         {
             yield return null;
