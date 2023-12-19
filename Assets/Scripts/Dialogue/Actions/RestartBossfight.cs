@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueActionEndLevel4 : DialogueAction
+public class RestartBossfight : DialogueAction
 {
+    // Boss damage multiplier
     public float bossDamageMultiplier = 0.2f;
     public float bossArmorMultiplier = 0.2f;
-    public AudioClip finalDialogAudio;
 
     // Execute method override
     public override void Execute()
@@ -25,7 +25,6 @@ public class DialogueActionEndLevel4 : DialogueAction
 
         // Stop dialogue and start bossfight
         DialogueManager.instance.StopDialogue();
-        GameFlow.instance.dialogue = finalDialogAudio;
         HUD.instance.ResetForNewFight();
         GameFlow.instance.StartBossfight();
     }

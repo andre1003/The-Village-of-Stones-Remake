@@ -785,6 +785,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149391516}
   m_CullTransparentMesh: 1
+--- !u!1001 &156913818
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1294530965}
+    m_Modifications:
+    - target: {fileID: 1341929023606952027, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: m_Name
+      value: MusicAudio
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019717617356489323, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: defaultClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d262723a14281224696286ec10a5fdd9, type: 3}
+    - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+--- !u!4 &156913819 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+  m_PrefabInstance: {fileID: 156913818}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &176960767
 GameObject:
   m_ObjectHideFlags: 0
@@ -4023,6 +4089,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingCanvasGroup: {fileID: 859635863}
+  hasFaded: 0
+  hasFullFaded: 0
+  hasHalfFullFaded: 0
 --- !u!1 &860099662
 GameObject:
   m_ObjectHideFlags: 0
@@ -4152,6 +4221,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingCanvasGroup: {fileID: 860099664}
+  hasFaded: 0
+  hasFullFaded: 0
+  hasHalfFullFaded: 0
 --- !u!1 &867191757
 GameObject:
   m_ObjectHideFlags: 0
@@ -5526,6 +5598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e037e41e053e9c46b2e1acd8cbdd28b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapClip: {fileID: 8300000, guid: d262723a14281224696286ec10a5fdd9, type: 3}
   fadeCanvas: {fileID: 860099662}
   fader: {fileID: 860099669}
   levelPostionsX:
@@ -6183,6 +6256,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 156913819}
   - {fileID: 1616051056}
   - {fileID: 480285756}
   m_Father: {fileID: 0}
@@ -6632,6 +6706,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingCanvasGroup: {fileID: 1399641755}
+  hasFaded: 0
+  hasFullFaded: 0
+  hasHalfFullFaded: 0
 --- !u!1 &1450007268
 GameObject:
   m_ObjectHideFlags: 0
@@ -7216,7 +7293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1616051055
 AudioSource:
   m_ObjectHideFlags: 0

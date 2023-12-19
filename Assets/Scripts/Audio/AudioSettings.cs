@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class Settings : MonoBehaviour
+public class AudioSettings : MonoBehaviour
 {
     // Audio mixer
     public AudioMixer audioMixer;
@@ -25,8 +25,13 @@ public class Settings : MonoBehaviour
 
 
     // Start method
-    void Start()
+    public void Start()
     {
+        // Update audio volumes
+        SetMasterVolume(masterSlider.value);
+        SetMusicAndFXVolume(musicSlider.value);
+        SetUIVolume(uiSlider.value);
+
         // Set all volume percent texts to current value
         masterText.text = Mathf.RoundToInt(masterSlider.normalizedValue * 100f) + "%";
         musicText.text = Mathf.RoundToInt(musicSlider.normalizedValue * 100f) + "%";

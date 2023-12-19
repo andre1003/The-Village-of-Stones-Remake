@@ -11,7 +11,7 @@ public class Kinematic : MonoBehaviour
     public TextMeshProUGUI sentenceText;
     public string nextScene = "Map";
     public bool shouldUnloadScene;
-    public AudioSource audioSource;
+    public AudioClip kinematicClip;
 
     // Fader
     public Fader fader;
@@ -27,63 +27,101 @@ public class Kinematic : MonoBehaviour
 
     // Current screen index
     private int screenIndex = 0;
+    private bool skipped = false;
+    private bool canSkip = false;
 
 
     // Start method
     void Start()
     {
+        AudioManager.instance.SwapTrack(kinematicClip, false);
         StartKinematic();
+    }
+
+    // Update method
+    void Update()
+    {
+        if(skipped || !canSkip)
+            return;
+        CheckSkipKinematic();
+    }
+
+    // Check for skip kinematic input
+    private void CheckSkipKinematic()
+    {
+        if(Input.anyKeyDown)
+        {
+            skipped = true;
+            canSkip = false;
+            StopAllCoroutines();
+            StartCoroutine(SkipKinematic());
+        }
+    }
+
+    // Skip kinematic
+    IEnumerator SkipKinematic()
+    {
+        fader.FadeIn();
+        yield return new WaitForFade(fader);
+        LoadNextLevel();
     }
 
     // Start cutscene
     public void StartKinematic()
     {
         sentenceText.text = sentences[screenIndex];
-        StartCoroutine(WaitForNextScreen());
-        StartCoroutine(FullFade());
+        StartCoroutine(WaitForNextStep());
         fader.FadeOut(1.5f);
+        StartCoroutine(WaitForAllowSkip());
     }
 
-    // Wait for next cutscene screen
-    IEnumerator WaitForNextScreen()
+    // Wait for initial fade to allow skip
+    IEnumerator WaitForAllowSkip()
     {
-        // Wait for next screen
+        yield return new WaitForFade(fader);
+        canSkip = true;
+    }
+
+    // Screen navigation handler
+    IEnumerator WaitForNextStep()
+    {
+        if(skipped)
+            yield break;
+
+        // Wait for timer
         yield return new WaitForSeconds(timers[screenIndex]);
-        screens[screenIndex].SetActive(false);
-        screenIndex++;
-        
-        // If there are screens left, get next screen
-        if(screenIndex < screens.Count)
+
+        // If the screen index is not the last
+        if(screenIndex < screens.Count - 1)
         {
+            // Full fade black screen (2 seconds for full fade)
+            fader.FullFade(0.9f, 0.2f);
+            canSkip = false;
+
+            // Wait for half full fade, disable current screen and increment index
+            yield return new WaitForHalfFade(fader);
+            screens[screenIndex].SetActive(false);
+            screenIndex++;
+
+            // Set new text and screen
             sentenceText.text = sentences[screenIndex];
             screens[screenIndex].SetActive(true);
-            StartCoroutine(WaitForNextScreen());
-        }
 
-        // Else, load next scene
+            // Wait for full fade to end and call WaitForNextStep
+            yield return new WaitForFullFade(fader);
+            canSkip = true;
+            StartCoroutine(WaitForNextStep());
+            
+        }
+        // If it's the last screen
         else
         {
-            sentenceText.text = "";
-            yield return new WaitForSeconds(1.1f);
+            // Fade in black screen
+            fader.FadeIn(0.9f);
+
+            // Wait for fade end and load next level
+            yield return new WaitForFade(fader);
             LoadNextLevel();
-        }
-    }
-
-    // Perform full screen fade
-    IEnumerator FullFade()
-    {
-        // Get fade timer
-        float fadeTime = screenIndex < screens.Count ? (timers[screenIndex] - 1f) : 0f;
-        yield return new WaitForSeconds(fadeTime);
-
-        // Play full fade animation
-        fader.FullFade(0.9f, 0.2f);
-
-        // If there are screens left, prepare for next full fade
-        if(screenIndex < screens.Count)
-        {
-            yield return new WaitForSeconds(1f);
-            StartCoroutine(FullFade());
         }
     }
 
@@ -101,9 +139,7 @@ public class Kinematic : MonoBehaviour
         // Unload scene
         if(shouldUnloadScene)
         {
-            if(audioSource)
-                audioSource.Stop();
-            GameFlow.instance.UnPauseAmbienceAudio();
+            AudioManager.instance.ReturnToDefault();
             DialogueManager.instance.SetCanNextSentence(true);
             DialogueManager.instance.NextSentence();
             asyncLoad = SceneManager.UnloadSceneAsync(nextScene, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);

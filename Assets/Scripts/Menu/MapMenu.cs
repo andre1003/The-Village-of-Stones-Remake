@@ -24,6 +24,9 @@ public class MapMenu : MonoBehaviour
     }
     #endregion
 
+    // Audio
+    public AudioClip mapClip;
+
     // Fade
     public GameObject fadeCanvas;
     public Fader fader;
@@ -76,6 +79,14 @@ public class MapMenu : MonoBehaviour
         // Fade screen
         fadeCanvas.SetActive(true);
         StartCoroutine(FadeOutBlackScreen());
+
+        // If the current level is the Map, play map clip, else, play game flow dialogue clip
+        if(scene.name == "Map")
+            AudioManager.instance.SwapTrack(mapClip);
+        else if(scene.name == "MainMenu")
+            AudioManager.instance.ReturnToDefault();
+        else if(scene.name != "Credits")
+            AudioManager.instance.SwapTrack(GameFlow.instance.dialogue);
 
         // Try to find map player and start level button
         FindPlayerRectTransform();

@@ -51,6 +51,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         canNextSentence = false;
+        dialogueFader.fadingCanvasGroup.alpha = 0f;
         StartCoroutine(WaitForFadeIn());
     }
 
@@ -64,7 +65,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Call next sentence when player press space key
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.anyKeyDown)
         {
             NextSentence();
         }
@@ -73,11 +74,13 @@ public class DialogueManager : MonoBehaviour
     // Wait for first fade in
     IEnumerator WaitForFadeIn()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         dialogueCanvas.SetActive(true);
-        dialogueFader.FadeIn(0.5f);
-        canNextSentence = true;
         NextSentence();
+        dialogueFader.FadeIn(0.5f);
+        yield return new WaitForFade(dialogueFader);
+        canNextSentence = true;
+        
     }
 
     // Get next dialogue sentence
@@ -186,7 +189,7 @@ public class DialogueManager : MonoBehaviour
     IEnumerator FadeOut()
     {
         dialogueFader.FadeOut(0.5f);
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForFade(dialogueFader);
         dialogueCanvas.SetActive(false);
     }
 }

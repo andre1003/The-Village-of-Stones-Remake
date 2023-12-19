@@ -14,9 +14,22 @@ public class Dialogue : MonoBehaviour
     [TextArea(3, 10)]
     public List<string> sentences = new List<string>();
 
-    // Dialogue end action
-    public DialogueAction action;
+    // Action execution delegate
+    public delegate void Execute();
+    public Execute executeAction;
 
+
+    // Awake method
+    void Awake()
+    {
+        executeAction = new Execute(ExecuteActionCallback);
+    }
+
+    // Default dialogue action execution
+    public static void ExecuteActionCallback()
+    {
+        DialogueManager.instance.EndDialogue();
+    }
 
     // Get dialogue next sentence
     public void NextSentence()
@@ -35,13 +48,6 @@ public class Dialogue : MonoBehaviour
     // Execute dialogue action if any, or end dialogue
     public void ExecuteAction()
     {
-        if(action != null)
-        {
-            action.Execute();
-        }
-        else
-        {
-            DialogueManager.instance.EndDialogue();
-        }
+        executeAction.Invoke();
     }
 }

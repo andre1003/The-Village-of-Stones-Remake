@@ -7,6 +7,9 @@ public class Fader : MonoBehaviour
 {
     // Fading CanvasGroup
     public CanvasGroup fadingCanvasGroup;
+    public bool hasFaded = false;
+    public bool hasFullFaded = false;
+    public bool hasHalfFullFaded = false;
 
     /// <summary>
     /// Perform a fade in on canvas group. The fade in updates alpha from 0 to 1.
@@ -36,6 +39,8 @@ public class Fader : MonoBehaviour
     /// <param name="delay">Black screen duration.</param>
     public void FullFade(float duration = 1f, float delay = 0.5f)
     {
+        hasFullFaded = false;
+        hasHalfFullFaded = false;
         DoFade(1f, duration);
         StartCoroutine(FullFadeDelay(duration, delay));
     }
@@ -44,13 +49,79 @@ public class Fader : MonoBehaviour
     IEnumerator FullFadeDelay(float duration, float delay)
     {
         yield return new WaitForSeconds(duration);
+        hasHalfFullFaded = true;
         yield return new WaitForSeconds(delay);
         DoFade(0f, duration);
+        yield return new WaitForSeconds(duration);
+        hasFullFaded = true;
     }
 
     // Do a fade
     private void DoFade(float value, float duration)
     {
-        fadingCanvasGroup.DOFade(value, duration);
+        hasFaded = false;
+        var something = fadingCanvasGroup.DOFade(value, duration);
+        something.onComplete += delegate { FinishFade(); };
+    }
+
+    // Flag that the fade has finished
+    private void FinishFade()
+    {
+        hasFaded = true;
     }
 }
+
+public class WaitForFade : CustomYieldInstruction 
+{
+    public Fader fader;
+
+    public WaitForFade(Fader fader)
+    {
+        this.fader = fader;
+    }
+
+    public override bool keepWaiting
+    {
+        get
+        {
+            return !fader.hasFaded;
+        }
+    }
+}
+
+public class WaitForFullFade : CustomYieldInstruction
+{
+    public Fader fader;
+
+    public WaitForFullFade(Fader fader)
+    {
+        this.fader = fader;
+    }
+
+    public override bool keepWaiting
+    {
+        get
+        {
+            return !fader.hasFullFaded;
+        }
+    }
+}
+
+public class WaitForHalfFade : CustomYieldInstruction
+{
+    public Fader fader;
+
+    public WaitForHalfFade(Fader fader)
+    {
+        this.fader = fader;
+    }
+
+    public override bool keepWaiting
+    {
+        get
+        {
+            return !fader.hasHalfFullFaded;
+        }
+    }
+}
+

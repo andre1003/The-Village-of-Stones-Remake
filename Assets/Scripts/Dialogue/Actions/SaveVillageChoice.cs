@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DialogueActionLevel4Choice : DialogueAction
+public class SaveVillageChoice : DialogueAction
 {
     // Game objects
     public GameObject endChoiceCanvas;
@@ -17,15 +17,21 @@ public class DialogueActionLevel4Choice : DialogueAction
     // UI
     public TextMeshProUGUI infoText;
 
+    // Audio
+    public AudioClip finalClip;
+
 
     // Execute method override
     public override void Execute()
     {
+        GameFlow.instance.dialogue = finalClip;
+        AudioManager.instance.SwapTrack(finalClip);
         endChoiceCanvas.SetActive(true);
         endChoicesFader.FadeIn();
         DialogueManager.instance.StopDialogue(false);
     }
 
+    // Seve HumanTown
     public void SaveHumanTown()
     {
         ClearScreenAndSetInfo(
@@ -33,6 +39,7 @@ public class DialogueActionLevel4Choice : DialogueAction
             "\n\nWas this the righ choice to be made?");
     }
 
+    // Save MonsterTown
     public void SaveMonsterTown()
     {
         ClearScreenAndSetInfo(
@@ -40,6 +47,7 @@ public class DialogueActionLevel4Choice : DialogueAction
             "\n\nWas this the righ choice to be made?");
     }
 
+    // Clear screen and show choice consequence
     private void ClearScreenAndSetInfo(string info)
     {
         optionsFader.FadeOut(0.5f);
@@ -48,11 +56,15 @@ public class DialogueActionLevel4Choice : DialogueAction
         StartCoroutine(WaitForFinishLevel());
     }
 
+    // Wait for finish this level
     IEnumerator WaitForFinishLevel()
     {
-        yield return new WaitForSeconds(1f);
+        // Wait for options to complete fade and disable it
+        yield return new WaitForFade(optionsFader);
         optionsCanvas.SetActive(false);
-        yield return new WaitForSeconds(15f);
+
+        // Wait for background to complete fade in and end dialogue
+        yield return new WaitForFade(backgroundFader);
         DialogueManager.instance.EndDialogue();
     }
 }

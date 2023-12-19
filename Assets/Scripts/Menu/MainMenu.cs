@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     // Play game
     public void Play()
     {
+        AudioManager.instance.TurnOffSound();
         StartCoroutine(StartGameAsync());
     }
 
@@ -21,8 +22,8 @@ public class MainMenu : MonoBehaviour
     {
         // Fade screen
         fadeGameObject.SetActive(true);
-        fader.FadeIn(0.5f);
-        yield return new WaitForSeconds(0.6f);
+        fader.FadeIn();
+        yield return new WaitForFade(fader);
 
         // Load first level async
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Prologue");

@@ -2,28 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueActionLevel1 : DialogueAction
+public class CatBlackScreen : DialogueAction
 {
-    // Index
-    public int index;
-
     // Action required elements
     public AudioSource audioSource;
     public GameObject blackScreen;
     public Fader blackScreenFader;
 
 
-    // Action execute override
+    // Execute action
     public override void Execute()
     {
-        if(index == DialogueManager.instance.dialogueCount)
-        {
-            StartCoroutine(BlackScreen());
-        }
-        else
-        {
-            DialogueManager.instance.EndDialogue();
-        }
+        StartCoroutine(BlackScreen());
     }
 
     // Black screen
@@ -34,8 +24,8 @@ public class DialogueActionLevel1 : DialogueAction
         blackScreen.SetActive(true);
         blackScreenFader.FullFade(0.5f, 1.5f);
 
-        // Wait 0.5 seconds
-        yield return new WaitForSeconds(0.5f);
+        // Wait black screen fade in
+        yield return new WaitForHalfFade(blackScreenFader);
 
         // Play black screen audio, end dialogue and block next sentence
         audioSource.Play();
@@ -43,7 +33,7 @@ public class DialogueActionLevel1 : DialogueAction
         DialogueManager.instance.SetCanNextSentence(false);
 
         // Wait for black screen animation to end
-        yield return new WaitForSeconds(2.1f);
+        yield return new WaitForFullFade(blackScreenFader);
 
         // Disable black screen, allow player to continue dialogue and unpause the ambience audio
         blackScreen.SetActive(false);

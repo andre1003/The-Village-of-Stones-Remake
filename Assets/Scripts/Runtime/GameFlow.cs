@@ -17,7 +17,6 @@ public class GameFlow : MonoBehaviour
     #endregion
 
     // Audio
-    public AudioSource audioSource;
     public AudioClip dialogue;
     public AudioClip fight;
     public AudioClip getStone;
@@ -117,22 +116,19 @@ public class GameFlow : MonoBehaviour
     // Pause ambience music
     public void PauseAmbienceAudio()
     {
-        audioSource.Pause();
+        AudioManager.instance.PauseSound();
     }
 
     // Unpause ambience music
     public void UnPauseAmbienceAudio()
     {
-        audioSource.UnPause();
+        AudioManager.instance.UnPauseSound();
     }
 
     // Change audio clip
     private void ChangeAudio(AudioClip clip, bool loop = true)
     {
-        audioSource.Stop();
-        audioSource.clip = clip;
-        audioSource.loop = loop;
-        audioSource.Play();
+        AudioManager.instance.SwapTrack(clip, loop);
     }
 
     // Give rewards to player
