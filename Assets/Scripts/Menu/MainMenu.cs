@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DontDestroyObjects;
 
 public class MainMenu : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class MainMenu : MonoBehaviour
     public GameObject fadeGameObject;
     public Fader fader;
 
+
+    // Awake method
+    void Awake()
+    {
+        DontDestroyOnLoadManager.DestroyAll();
+    }
 
     // Play game
     public void Play()

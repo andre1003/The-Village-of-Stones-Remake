@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace DontDestroyObjects
 {
-    public class DontDestroy : MonoBehaviour
+    public class DontDestroyException : MonoBehaviour
     {
         // Awake method
         void Awake()
         {
-            gameObject.DontDestroyOnLoad();
+            gameObject.DontDestroyOnLoadExecption();
         }
     }
 }
