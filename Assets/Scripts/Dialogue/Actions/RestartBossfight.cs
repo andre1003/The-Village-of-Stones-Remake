@@ -8,9 +8,15 @@ public class RestartBossfight : DialogueAction
     public float bossDamageMultiplier = 0.2f;
     public float bossArmorMultiplier = 0.2f;
 
+    // New fight clip
+    public AudioClip fightClip2;
+
     // Execute method override
     public override void Execute()
     {
+        // Change fight clip
+        GameFlow.instance.fight = fightClip2;
+
         // Get boss
         Character boss = Bossfight.instance.GetBoss();
         float health = boss.GetBaseHealth() * 2;

@@ -483,7 +483,7 @@ MonoBehaviour:
         m_MethodName: Click
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 240fcfa068908194eb88733af1afdfa8, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 47a74ee6b619d3d4fa9b7eb59e4736ec, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -800,7 +800,7 @@ PrefabInstance:
     - target: {fileID: 2019717617356489323, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
       propertyPath: defaultClip
       value: 
-      objectReference: {fileID: 8300000, guid: d262723a14281224696286ec10a5fdd9, type: 3}
+      objectReference: {fileID: 8300000, guid: 1cfeafc101845984381ce52a21413075, type: 3}
     - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3086,7 +3086,7 @@ MonoBehaviour:
         m_MethodName: Click
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 240fcfa068908194eb88733af1afdfa8, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 47a74ee6b619d3d4fa9b7eb59e4736ec, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -5036,7 +5036,7 @@ MonoBehaviour:
         m_MethodName: Click
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 240fcfa068908194eb88733af1afdfa8, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 47a74ee6b619d3d4fa9b7eb59e4736ec, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -5184,7 +5184,7 @@ MonoBehaviour:
         m_MethodName: Click
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 240fcfa068908194eb88733af1afdfa8, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 47a74ee6b619d3d4fa9b7eb59e4736ec, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -5598,7 +5598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e037e41e053e9c46b2e1acd8cbdd28b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapClip: {fileID: 8300000, guid: d262723a14281224696286ec10a5fdd9, type: 3}
+  mapClip: {fileID: 8300000, guid: 1cfeafc101845984381ce52a21413075, type: 3}
   fadeCanvas: {fileID: 860099662}
   fader: {fileID: 860099669}
   levelPostionsX:
@@ -6257,7 +6257,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 156913819}
-  - {fileID: 1616051056}
   - {fileID: 480285756}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7277,134 +7276,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563313645}
   m_CullTransparentMesh: 1
---- !u!1 &1616051054
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1616051056}
-  - component: {fileID: 1616051055}
-  m_Layer: 0
-  m_Name: AmbienceAudio
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!82 &1616051055
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616051054}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -6943264065278085779, guid: 42c1702a470a52741a7746247eb875ca, type: 2}
-  m_audioClip: {fileID: 8300000, guid: d262723a14281224696286ec10a5fdd9, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!4 &1616051056
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616051054}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1294530965}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1661779923
 GameObject:
   m_ObjectHideFlags: 0
@@ -8186,6 +8057,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 480285758}
+        m_TargetAssemblyTypeName: ButtonClick, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 47a74ee6b619d3d4fa9b7eb59e4736ec, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1339010635}
         m_TargetAssemblyTypeName: Store, Assembly-CSharp
         m_MethodName: CloseStore

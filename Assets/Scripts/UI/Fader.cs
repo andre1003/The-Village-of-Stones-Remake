@@ -7,9 +7,9 @@ public class Fader : MonoBehaviour
 {
     // Fading CanvasGroup
     public CanvasGroup fadingCanvasGroup;
-    public bool hasFaded = false;
-    public bool hasFullFaded = false;
-    public bool hasHalfFullFaded = false;
+    private bool hasFaded = false;
+    private bool hasFullFaded = false;
+    private bool hasHalfFullFaded = false;
 
     /// <summary>
     /// Perform a fade in on canvas group. The fade in updates alpha from 0 to 1.
@@ -69,8 +69,32 @@ public class Fader : MonoBehaviour
     {
         hasFaded = true;
     }
+
+    #region Getters
+    // Get hasFaded value
+    public bool GetHasFaded()
+    {
+        return hasFaded;
+    }
+
+    // Get hasFullFaded value
+    public bool GetHasFullFaded()
+    {
+        return hasFullFaded;
+    }
+
+    // Get hasHalfFullFaded value
+    public bool GetHasHalfFullFaded()
+    {
+        return hasHalfFullFaded;
+    }
+    #endregion
 }
 
+#region Fade Yield Instructions
+/// <summary>
+/// Suspends the the coroutine execution until a fade, in or out, is not finished.
+/// </summary>
 public class WaitForFade : CustomYieldInstruction 
 {
     public Fader fader;
@@ -84,11 +108,14 @@ public class WaitForFade : CustomYieldInstruction
     {
         get
         {
-            return !fader.hasFaded;
+            return !fader.GetHasFaded();
         }
     }
 }
 
+/// <summary>
+/// Suspends the the coroutine execution until a full fade is not finished.
+/// </summary>
 public class WaitForFullFade : CustomYieldInstruction
 {
     public Fader fader;
@@ -102,11 +129,14 @@ public class WaitForFullFade : CustomYieldInstruction
     {
         get
         {
-            return !fader.hasFullFaded;
+            return !fader.GetHasFullFaded();
         }
     }
 }
 
+/// <summary>
+/// Suspends the the coroutine execution until a half of full fade is not finished.
+/// </summary>
 public class WaitForHalfFade : CustomYieldInstruction
 {
     public Fader fader;
@@ -120,8 +150,8 @@ public class WaitForHalfFade : CustomYieldInstruction
     {
         get
         {
-            return !fader.hasHalfFullFaded;
+            return !fader.GetHasHalfFullFaded();
         }
     }
 }
-
+#endregion

@@ -10,6 +10,7 @@ public class Kinematic : MonoBehaviour
     // Sentence text
     public TextMeshProUGUI sentenceText;
     public string nextScene = "Map";
+    public bool changeSceneWhenFinish = true;
     public bool shouldUnloadScene;
     public AudioClip kinematicClip;
 
@@ -34,7 +35,8 @@ public class Kinematic : MonoBehaviour
     // Start method
     void Start()
     {
-        AudioManager.instance.SwapTrack(kinematicClip, false);
+        if(kinematicClip)
+            AudioManager.instance.SwapTrack(kinematicClip, false);
         StartKinematic();
     }
 
@@ -63,13 +65,28 @@ public class Kinematic : MonoBehaviour
     {
         fader.FadeIn();
         yield return new WaitForFade(fader);
-        LoadNextLevel();
+        if(changeSceneWhenFinish)
+        {
+            LoadNextLevel();
+        }
+        else
+        {
+            screens[screenIndex].SetActive(false);
+            screenIndex = screens.Count - 1;
+            if(sentenceText)
+                sentenceText.text = sentences[screenIndex];
+            screens[screenIndex].SetActive(true);
+            fader.FadeOut();
+            yield return new WaitForFade(fader);
+            fader.gameObject.SetActive(false);
+        }
     }
 
     // Start cutscene
     public void StartKinematic()
     {
-        sentenceText.text = sentences[screenIndex];
+        if(sentenceText)
+            sentenceText.text = sentences[screenIndex];
         StartCoroutine(WaitForNextStep());
         fader.FadeOut(1.5f);
         StartCoroutine(WaitForAllowSkip());
@@ -104,7 +121,8 @@ public class Kinematic : MonoBehaviour
             screenIndex++;
 
             // Set new text and screen
-            sentenceText.text = sentences[screenIndex];
+            if(sentenceText)
+                sentenceText.text = sentences[screenIndex];
             screens[screenIndex].SetActive(true);
 
             // Wait for full fade to end and call WaitForNextStep
@@ -116,12 +134,18 @@ public class Kinematic : MonoBehaviour
         // If it's the last screen
         else
         {
-            // Fade in black screen
-            fader.FadeIn(0.9f);
+            canSkip = false;
+            if(changeSceneWhenFinish)
+            {
+                // Fade in black screen
+                fader.FadeIn(0.9f);
 
-            // Wait for fade end and load next level
-            yield return new WaitForFade(fader);
-            LoadNextLevel();
+                // Wait for fade end and load next level
+                yield return new WaitForFade(fader);
+                LoadNextLevel();
+            }                
+            else
+                fader.gameObject.SetActive(false);
         }
     }
 
@@ -139,7 +163,7 @@ public class Kinematic : MonoBehaviour
         // Unload scene
         if(shouldUnloadScene)
         {
-            AudioManager.instance.ReturnToDefault();
+            AudioManager.instance.SwapTrack(GameFlow.instance.dialogue);
             DialogueManager.instance.SetCanNextSentence(true);
             DialogueManager.instance.NextSentence();
             asyncLoad = SceneManager.UnloadSceneAsync(nextScene, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);

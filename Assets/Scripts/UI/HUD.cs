@@ -141,7 +141,7 @@ public class HUD : MonoBehaviour
         else
         {
             getStoneFader.FadeOut();
-            yield return new WaitForSeconds(1.1f);
+            yield return new WaitForFade(getStoneFader);
             DialogueManager.instance.SetCanNextSentence(true);
             getStone.SetActive(false);
         }

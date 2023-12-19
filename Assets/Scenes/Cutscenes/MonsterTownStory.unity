@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 2019717617356489323, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
       propertyPath: defaultClip
       value: 
-      objectReference: {fileID: 8300000, guid: 6829a6ff942f8854d9df049e0a1c6e23, type: 3}
+      objectReference: {fileID: 8300000, guid: e46890e07642f6a40b223d4f204af55b, type: 3}
     - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -529,8 +529,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentenceText: {fileID: 773177559}
   nextScene: MonsterTownStory
+  changeSceneWhenFinish: 1
   shouldUnloadScene: 1
-  kinematicClip: {fileID: 8300000, guid: 6829a6ff942f8854d9df049e0a1c6e23, type: 3}
+  kinematicClip: {fileID: 8300000, guid: e46890e07642f6a40b223d4f204af55b, type: 3}
   fader: {fileID: 1519855050}
   screens:
   - {fileID: 181434165}
@@ -539,11 +540,11 @@ MonoBehaviour:
   - {fileID: 64622685}
   - {fileID: 1889855010}
   timers:
-  - 12.4
-  - 12.4
-  - 12.4
-  - 12.4
-  - 12.4
+  - 11.5
+  - 11.5
+  - 11.5
+  - 11.5
+  - 11.5
   sentences:
   - 'Many, many years ago there was a lifeless hill...
 
@@ -587,6 +588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 415785119}
+  - component: {fileID: 415785120}
   m_Layer: 0
   m_Name: == GLOBAL SETTINGS ==
   m_TagString: Untagged
@@ -610,6 +612,18 @@ Transform:
   - {fileID: 1859596312}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &415785120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415785118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd5b4abf91214c43ac1ab305e5c9fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &534869598
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,6 +805,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 739275702}
+  - component: {fileID: 739275703}
   m_Layer: 0
   m_Name: == AUDIO ==
   m_TagString: Untagged
@@ -814,6 +829,18 @@ Transform:
   - {fileID: 28000717}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &739275703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739275701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd5b4abf91214c43ac1ab305e5c9fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &773177557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,13 +1258,15 @@ GameObject:
   - component: {fileID: 1859596312}
   - component: {fileID: 1859596311}
   - component: {fileID: 1859596313}
+  - component: {fileID: 1859596314}
+  - component: {fileID: 1859596315}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!20 &1859596311
 Camera:
   m_ObjectHideFlags: 0
@@ -1348,6 +1377,26 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!81 &1859596314
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859596309}
+  m_Enabled: 1
+--- !u!114 &1859596315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859596309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 935500e26ef712d459376d789e76ae85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1889855010
 GameObject:
   m_ObjectHideFlags: 0

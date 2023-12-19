@@ -94,11 +94,11 @@ public class AudioManager : MonoBehaviour
         StopAllCoroutines();
         if(isPlayingTrack01)
         {
-            track01.UnPause();
+            StartCoroutine(FadeInUnPauseTrack(track01));
         }
         else
         {
-            track02.UnPause();
+            StartCoroutine(FadeInUnPauseTrack(track02));
         }
     }
 
@@ -169,6 +169,20 @@ public class AudioManager : MonoBehaviour
     {
         float timeElapsed = 0f;
         track.Play();
+        while(timeElapsed < timeToFadeIn)
+        {
+            track.volume = Mathf.Lerp(0f, 1f, timeElapsed / timeToFadeIn);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        track.volume = 1f;
+    }
+
+    // Fade in and unpause a given track
+    IEnumerator FadeInUnPauseTrack(AudioSource track)
+    {
+        float timeElapsed = 0f;
+        track.UnPause();
         while(timeElapsed < timeToFadeIn)
         {
             track.volume = Mathf.Lerp(0f, 1f, timeElapsed / timeToFadeIn);

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class ClearEmptyChildren : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // LateUpdate method
+    void LateUpdate()
     {
         int count = 0;
         foreach(Transform child in transform)
             count++;
         if(count == 0)
             Destroy(gameObject);
+        else
+            Destroy(this);
     }
 }

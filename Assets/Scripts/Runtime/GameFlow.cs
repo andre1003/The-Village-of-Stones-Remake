@@ -62,7 +62,7 @@ public class GameFlow : MonoBehaviour
     // Wait for player to get stone and change ambience audio
     IEnumerator WaitPlayerGetStone()
     {
-        yield return new WaitForSeconds(14f);
+        yield return new WaitForSeconds(13f);
         ChangeAudio(dialogue);
     }
 

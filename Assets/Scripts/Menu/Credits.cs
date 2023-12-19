@@ -5,10 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Credits : MonoBehaviour
 {
-    // Fade
     public GameObject fadeCanvas;
-    public Animation fade;
-
+    public Fader fader;
 
     // Load main menu
     public void LoadMainMenu()
@@ -20,8 +18,8 @@ public class Credits : MonoBehaviour
     // Load main menu async
     IEnumerator LoadMainMenuAsync()
     {
-        fade.Play();
-        yield return new WaitForSeconds(1f);
+        fader.FadeIn();
+        yield return new WaitForFade(fader);
         SceneManager.LoadSceneAsync("MainMenu");
     }
 }

@@ -415,10 +415,10 @@ MonoBehaviour:
   stones: []
   animator: {fileID: 907890177}
   characterAudioSource: {fileID: 117941775}
-  attackClip: {fileID: 8300000, guid: 5d69e28971ac01b44b6ee1f3f587102d, type: 3}
-  healClip: {fileID: 8300000, guid: 9f1a71c3592d25047a16dc8db11b823b, type: 3}
-  missClip: {fileID: 8300000, guid: 2a34e1aca74d74d458061bf7c5326c14, type: 3}
-  deathClip: {fileID: 8300000, guid: 93f18118b83989d4bbffda263a26ae6b, type: 3}
+  attackClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
+  healClip: {fileID: 8300000, guid: 813f8fd84653d9741bf65562c561e37a, type: 3}
+  missClip: {fileID: 8300000, guid: 5d40f4d32780f104dba25c5d69d3ce0b, type: 3}
+  deathClip: {fileID: 8300000, guid: 309d6975ddc980a4a931ba2d38febe0c, type: 3}
   attackSuccessChance: 14
   maxAttackSuccessChance: 12
   minAttackSuccessChance: 6
@@ -1643,7 +1643,7 @@ PrefabInstance:
     - target: {fileID: 2019717617356489323, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
       propertyPath: defaultClip
       value: 
-      objectReference: {fileID: 8300000, guid: 1601fb46636e8754eb84322034163208, type: 3}
+      objectReference: {fileID: 8300000, guid: b2315bd4ef6ebab4399e761a94181bf0, type: 3}
     - target: {fileID: 5628070055106038864, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3735,7 +3735,7 @@ PrefabInstance:
     - target: {fileID: 7525201801452790391, guid: 7dbbee0dc51d29046b6151d190083187, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1426401222}
     - target: {fileID: 7525201801452790391, guid: 7dbbee0dc51d29046b6151d190083187, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Click
@@ -3744,6 +3744,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: Map
       objectReference: {fileID: 0}
+    - target: {fileID: 7525201801452790391, guid: 7dbbee0dc51d29046b6151d190083187, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 47a74ee6b619d3d4fa9b7eb59e4736ec, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4638,10 +4642,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e894dc4c623ab942a843822e07631cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 8300000, guid: 1601fb46636e8754eb84322034163208, type: 3}
-  fight: {fileID: 8300000, guid: 3c45221b6d039fd4dab9f8c01d6465fd, type: 3}
-  getStone: {fileID: 8300000, guid: c5a877a50090d5340b3ee308f6d000ad, type: 3}
-  gameOver: {fileID: 8300000, guid: a5c8a0cc486271a49a3c6a2b1fbb5737, type: 3}
+  dialogue: {fileID: 8300000, guid: b2315bd4ef6ebab4399e761a94181bf0, type: 3}
+  fight: {fileID: 8300000, guid: 7f25929d4754be44f99d1d0baf096fec, type: 3}
+  getStone: {fileID: 8300000, guid: 84234e81007f4f14984404f85a61301b, type: 3}
+  gameOver: {fileID: 8300000, guid: 28fafe1f9453eb042a4aa44adfa58d29, type: 3}
   isFinalLevel: 0
   stone: {fileID: 0}
 --- !u!1 &1435145778
@@ -5364,10 +5368,10 @@ MonoBehaviour:
   - {fileID: 277074583}
   animator: {fileID: 1733076280}
   characterAudioSource: {fileID: 1527837593}
-  attackClip: {fileID: 8300000, guid: 5d69e28971ac01b44b6ee1f3f587102d, type: 3}
-  healClip: {fileID: 8300000, guid: 9f1a71c3592d25047a16dc8db11b823b, type: 3}
-  missClip: {fileID: 8300000, guid: 2a34e1aca74d74d458061bf7c5326c14, type: 3}
-  deathClip: {fileID: 8300000, guid: 93f18118b83989d4bbffda263a26ae6b, type: 3}
+  attackClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
+  healClip: {fileID: 8300000, guid: 813f8fd84653d9741bf65562c561e37a, type: 3}
+  missClip: {fileID: 8300000, guid: 5d40f4d32780f104dba25c5d69d3ce0b, type: 3}
+  deathClip: {fileID: 8300000, guid: 309d6975ddc980a4a931ba2d38febe0c, type: 3}
   attackSuccessChance: 10
   maxAttackSuccessChance: 10
   minAttackSuccessChance: 2
