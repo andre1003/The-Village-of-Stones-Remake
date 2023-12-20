@@ -5,10 +5,10 @@ using UnityEngine;
 public class Stone : MonoBehaviour
 {
     /* The stones are:
+     * - Air Stone: Buff player damage and debuff enemy armor;
      * - Water Stone: Heals the user;
      * - Fire Stone: Damage the enemy;
-     * - Earth Stone: Permanently increase user armor and give invulnerabilty for a moment;
-     * - Air Stone: Buff player damage and debuff enemy armor.
+     * - Earth Stone: Permanently increase user armor and give invulnerabilty for a moment.
      * 
      * When the player get all the stones, a second life will be granted.
      */
@@ -31,8 +31,8 @@ public class Stone : MonoBehaviour
     private int baseUses;
 
 
-    // Awake method
-    void Awake()
+    // Start method
+    void Start()
     {
         baseCooldown = cooldown;
         baseUses = uses;
@@ -86,5 +86,13 @@ public class Stone : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    // Reset stone attributes
+    public void ResetStone()
+    {
+        uses = baseUses;
+        cooldown = baseCooldown;
+        isInCooldown = false;
     }
 }

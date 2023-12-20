@@ -99,7 +99,7 @@ public class EnemyAI : MonoBehaviour
         do
         {
             attackDice = RollD20();
-            stoneDice = character.stones[0].isInCooldown ? 0 : RollD20();
+            stoneDice = character.stones.Count == 0 || character.stones[0].isInCooldown ? 0 : RollD20();
             healDice = RollD20();
         }
         while(!CheckDice(attackDice, stoneDice, healDice));
@@ -152,7 +152,8 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Use stone
-        else if(!character.stones[0].isInCooldown && stoneUseRate > attackRate && stoneUseRate >= healRate)
+        else if(character.stones.Count > 0 && !character.stones[0].isInCooldown
+            && stoneUseRate > attackRate && stoneUseRate >= healRate)
         {
             character.UseStone(0);
         }

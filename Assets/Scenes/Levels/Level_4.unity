@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 117941774}
   - component: {fileID: 117941773}
   - component: {fileID: 117941775}
+  - component: {fileID: 117941776}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -400,7 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Voss
   description: The last monster
-  health: 10
+  health: 100
   isDead: 0
   isPlayer: 0
   isInvencible: 0
@@ -412,16 +413,15 @@ MonoBehaviour:
   magicAttackSuccessDice: 6
   minCriticalValue: 20
   basicHeal: 4
-  stones: []
+  stones:
+  - {fileID: 254970669}
   animator: {fileID: 907890177}
   characterAudioSource: {fileID: 117941775}
   attackClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
   healClip: {fileID: 8300000, guid: 813f8fd84653d9741bf65562c561e37a, type: 3}
   missClip: {fileID: 8300000, guid: 5d40f4d32780f104dba25c5d69d3ce0b, type: 3}
   deathClip: {fileID: 8300000, guid: 309d6975ddc980a4a931ba2d38febe0c, type: 3}
-  attackSuccessChance: 14
-  maxAttackSuccessChance: 12
-  minAttackSuccessChance: 6
+  ai: {fileID: 117941776}
 --- !u!4 &117941774
 Transform:
   m_ObjectHideFlags: 0
@@ -534,6 +534,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &117941776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117941772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec21cc3d7f33614ebb5168f9e854a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRate: 0
+  lowerAttackRate: 12
+  higherAttackRate: 6
+  basicAttackRate: 15
+  magicAttackRate: 0
+  stoneUseRate: 10
+  healRate: 12
 --- !u!1 &157593336
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,10 +918,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 277074582}
-  - {fileID: 1448846472}
-  - {fileID: 409300515}
-  - {fileID: 254970668}
+  - {fileID: 1314089926}
+  - {fileID: 1478796192}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &234799095
@@ -969,9 +986,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingCanvasGroup: {fileID: 234799098}
-  hasFaded: 0
-  hasFullFaded: 0
-  hasHalfFullFaded: 0
 --- !u!1 &254970666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,7 +1016,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 227116326}
+  m_Father: {fileID: 1478796192}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &254970669
 MonoBehaviour:
@@ -1053,7 +1067,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 227116326}
+  m_Father: {fileID: 1314089926}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &277074583
 MonoBehaviour:
@@ -1230,7 +1244,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 227116326}
+  m_Father: {fileID: 1314089926}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &409300516
 MonoBehaviour:
@@ -1381,9 +1395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingCanvasGroup: {fileID: 453684871}
-  hasFaded: 0
-  hasFullFaded: 0
-  hasHalfFullFaded: 0
 --- !u!1 &462931469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,9 +1581,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingCanvasGroup: {fileID: 471441025}
-  hasFaded: 0
-  hasFullFaded: 0
-  hasHalfFullFaded: 0
 --- !u!225 &471441025
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1879,9 +1887,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingCanvasGroup: {fileID: 506414662}
-  hasFaded: 0
-  hasFullFaded: 0
-  hasHalfFullFaded: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3236,9 +3241,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingCanvasGroup: {fileID: 932585580}
-  hasFaded: 0
-  hasFullFaded: 0
-  hasHalfFullFaded: 0
 --- !u!225 &932585580
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4632,6 +4634,40 @@ Transform:
   - {fileID: 453684869}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1314089925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1314089926}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1314089926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314089925}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 277074582}
+  - {fileID: 1448846472}
+  - {fileID: 409300515}
+  m_Father: {fileID: 227116326}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1379834716
 GameObject:
   m_ObjectHideFlags: 0
@@ -5298,7 +5334,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 227116326}
+  m_Father: {fileID: 1314089926}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1448846473
 MonoBehaviour:
@@ -5659,6 +5695,38 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!1 &1478796191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1478796192}
+  m_Layer: 0
+  m_Name: Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1478796192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478796191}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 254970668}
+  m_Father: {fileID: 227116326}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1488562771
 GameObject:
   m_ObjectHideFlags: 0
@@ -5827,9 +5895,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingCanvasGroup: {fileID: 1527454678}
-  hasFaded: 0
-  hasFullFaded: 0
-  hasHalfFullFaded: 0
 --- !u!225 &1527454678
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -5878,7 +5943,7 @@ MonoBehaviour:
   isDead: 0
   isPlayer: 1
   isInvencible: 0
-  basicDamage: 60
+  basicDamage: 10
   magicDamage: 10
   basicArmor: 0
   magicArmor: 0
@@ -5896,9 +5961,7 @@ MonoBehaviour:
   healClip: {fileID: 8300000, guid: 813f8fd84653d9741bf65562c561e37a, type: 3}
   missClip: {fileID: 8300000, guid: 5d40f4d32780f104dba25c5d69d3ce0b, type: 3}
   deathClip: {fileID: 8300000, guid: 309d6975ddc980a4a931ba2d38febe0c, type: 3}
-  attackSuccessChance: 10
-  maxAttackSuccessChance: 10
-  minAttackSuccessChance: 2
+  ai: {fileID: 0}
 --- !u!4 &1527837592
 Transform:
   m_ObjectHideFlags: 0

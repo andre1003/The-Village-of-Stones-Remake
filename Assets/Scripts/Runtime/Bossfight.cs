@@ -47,6 +47,9 @@ public class Bossfight : MonoBehaviour
     // Start bossfight
     public void StartFight()
     {
+        for(int i = 0; i < characters[0].stones.Count; i++)
+            characters[0].stones[i].ResetStone();
+
         // Reset character index, turn and fight controller
         characterIndex = 0;
         turn = 1;
@@ -169,5 +172,12 @@ public class Bossfight : MonoBehaviour
     public bool IsPlayerTurn()
     {
         return characters[characterIndex].isPlayer;
+    }
+
+    // Give the stone to the player
+    public void GiveStoneToPlayer(Stone stone)
+    {
+        characters[0].stones.Add(stone);
+        characters[1].stones.Clear();
     }
 }

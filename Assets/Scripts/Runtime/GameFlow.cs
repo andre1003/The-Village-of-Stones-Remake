@@ -87,7 +87,8 @@ public class GameFlow : MonoBehaviour
     {
         ChangeAudio(getStone);
         HUD.instance.GetStone();
-        Bossfight.instance.GetPlayer().stones.Add(stone);
+        stone.ResetStone();
+        Bossfight.instance.GiveStoneToPlayer(stone);
         stone = null;
     }
 
