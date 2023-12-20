@@ -62,7 +62,8 @@ public class Bossfight : MonoBehaviour
             // If character is not dead, continue
             if(!character.isDead)
             {
-                character.SuccessChanceAdapter();
+                if(character.ai)
+                    character.ai.AttackRateAdapter();
                 continue;
             }
 
@@ -91,7 +92,7 @@ public class Bossfight : MonoBehaviour
         {
             return;
         }
-        character.TakeDecision();
+        character.ai.MakeDecision();
     }
 
     // Go to next round

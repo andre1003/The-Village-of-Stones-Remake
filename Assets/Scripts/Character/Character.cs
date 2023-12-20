@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Character : MonoBehaviour
 {
+    #region Attributes
     // Info
     [Header("Info")]
     public new string name;
@@ -49,15 +51,14 @@ public class Character : MonoBehaviour
     public AudioClip missClip;
     public AudioClip deathClip;
 
-    // Decision
-    [Header("Decision")]
-    [Range(1, 20)] public int attackSuccessChance;
-    [Range(1, 20)] public int maxAttackSuccessChance = 10;
-    [Range(1, 20)] public int minAttackSuccessChance = 2;
+    // AI
+    [Header("AI")]
+    public EnemyAI ai;
 
 
     // Status
     private float baseHealth;
+    #endregion
 
 
     // Start method
@@ -70,13 +71,19 @@ public class Character : MonoBehaviour
     public void InitialSetup()
     {
         baseHealth = health;
-        attackSuccessChance = minAttackSuccessChance;
     }
 
     // Get baseHealth value
     public float GetBaseHealth()
     {
         return baseHealth;
+    }
+
+    // Play new audio clip
+    private void PlayAudioFX(AudioClip clip)
+    {
+        characterAudioSource.clip = clip;
+        characterAudioSource.Play();
     }
 
     #region Take Hit
@@ -254,59 +261,6 @@ public class Character : MonoBehaviour
     }
     #endregion
 
-    #region Decision
-    // Adapt attack success chance for AI, based on character's health
-    public void SuccessChanceAdapter()
-    {
-        if(isPlayer)
-        {
-            return;
-        }
-
-        if(health < 0.2f * baseHealth)
-        {
-            attackSuccessChance = maxAttackSuccessChance;
-        }
-        else
-        {
-            attackSuccessChance = minAttackSuccessChance;
-        }
-    }
-
-    // Take decision
-    public void TakeDecision()
-    {
-        StartCoroutine(WaitForTakeDecision());
-    }
-
-    // Delayed take decision
-    IEnumerator WaitForTakeDecision()
-    {
-        // Wait 1 to 3 seconds before take decision
-        yield return new WaitForSeconds(Random.Range(1f, 3f));
-
-        // For now, let's make the AI just attack back
-        if(Bossfight.instance.isFighting)
-        {
-            DecisionMaker();
-        }
-    }
-
-    // AI round decision maker
-    private void DecisionMaker()
-    {
-        int dice = Random.Range(1, 21);
-        if(dice >= attackSuccessChance)
-        {
-            BasicAttack();
-        }
-        else
-        {
-            Heal();
-        }
-    }
-    #endregion
-
     #region Buffs and Debuffs
     // Buff character damage
     public void BuffDamage(float basicDamageBuff, float magicDamageBuff)
@@ -337,13 +291,7 @@ public class Character : MonoBehaviour
     }
     #endregion
 
-    // Play new audio clip
-    private void PlayAudioFX(AudioClip clip)
-    {
-        characterAudioSource.clip = clip;
-        characterAudioSource.Play();
-    }
-
+    #region Stones
     // Update all stones cooldown
     public void UpdateAllStonesCooldown()
     {
@@ -361,8 +309,11 @@ public class Character : MonoBehaviour
         {
             return;
         }
-        HUD.instance.DisablePlayerActions();
+        if(isPlayer)
+            HUD.instance.DisablePlayerActions();
         stones[stoneIndex].Use(this, Bossfight.instance.GetEnemy());
+        HUD.instance.SetInfo(name + " used the " + stones[stoneIndex].name);
         Bossfight.instance.NextRound();
     }
+    #endregion
 }
