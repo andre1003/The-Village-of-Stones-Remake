@@ -35,20 +35,20 @@ I want to give a special thanks for the original developers of The Village of St
 
 ## 💿 Music Credits
 The following songs was used for The Village of Stones Remake:
-* Castle Theme, Visager - *Main Menu*
-* The Final Road [loop], Visager - *Prologue*
-* Village Dreaming, Visager - *MonsterTown Story*
-* The adventure, Komiku - *Map*
-* Gouglou, Komiku - *Level 1 Dialogue*
-* The White, Rolemusic - *Level 1 Battle*
-* Alamak, Rolemusic - *Level 2 Dialogue*
-* Battle!, Visager - *Level 2 Battle*
-* Chasing The Port Chains, Rolemusic - *Level 3 Dialogue*
-* Miniboss Fight [loop], Visager - *Level 3 Battle*
-* The Little Broth, Rolemusic - *Level 4 Battle 1*
-* Dark Sanctum (Boss Fight) [loop], Visager - *Level 4 Battle 2*
-* Itsumo no yo ni, Rolemusic - *Credits*
-* w1x, Rolemusic - *Get Stone*
+* Castle Theme, Visager - **(CC BY 4.0 DEED)** - *Main Menu*
+* The Final Road [loop], Visager - **(CC BY 4.0 DEED)** - *Prologue*
+* Village Dreaming, Visager - **(CC BY 4.0 DEED)** - *MonsterTown Story*
+* The adventure, Komiku - **(CC0 1.0 DEED)** - *Map*
+* Glouglou, Komiku - **(CC0 1.0 DEED)** - *Level 1 Dialogue*
+* The White, Rolemusic - **(CC BY 4.0 DEED)** - *Level 1 Battle*
+* Alamak, Rolemusic - **(CC BY 4.0 DEED)** - *Level 2 Dialogue*
+* Battle!, Visager - **(CC BY 4.0 DEED)** - *Level 2 Battle*
+* Chasing The Port Chains, Rolemusic - **(CC BY 4.0 DEED)** - *Level 3 Dialogue*
+* Miniboss Fight [loop], Visager - **(CC BY 4.0 DEED)** - *Level 3 Battle*
+* The Little Broth, Rolemusic - **(CC BY 4.0 DEED)** - *Level 4 Battle 1*
+* Dark Sanctum (Boss Fight) [loop], Visager - **(CC BY 4.0 DEED)** - *Level 4 Battle 2*
+* Itsumo no yō ni, Rolemusic - **(CC BY 3.0 DEED)** - *Credits*
+* w1x, Rolemusic - **(CC BY 4.0 DEED)** - *Get Stone*
 
 It is important to notice that all the songs used in this game have free licence and was downloaded from [Free Music Archive](https://freemusicarchive.org).
 
