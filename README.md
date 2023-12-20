@@ -1,7 +1,7 @@
 # The Village of Stones Remake
 
 <p align="center">
-  <img src="Assets/Art/Screens/Prologue/logo.jpeg" alt="The Village of Stones Logo" style="width: 300px;">
+  <img src="Assets/Art/Icons/logo.jpeg" alt="The Village of Stones Logo" style="width: 300px;">
 </p>
 
 The Village of Stones Remake is, as the name suggests, a reimagination of the original game of the same name. Therefore, the original The Village of Stones is a game developed for Probability and Statistics subject of Computer Science undergraduate course of the São Paulo State University. Thus, both concepts of probability and statistics were implemented in its mechanics, so as to bring a practical application of the content that was taught in the discipline. The game used a probabilistic model to calculate critical damage.
@@ -25,5 +25,31 @@ To build The Village of Stones Remake, do the following steps:
 Done! You will run the application on your computer.
 
 *Obs.: The The Village of Stones Remake has not been officially builded by the developer, so building it may not work as desired.*
+
+## 🎉 Special thanks
+I want to give a special thanks for the original developers of The Village of Stones:
+* Leandro Marcos da Silva [Facebook](https://www.facebook.com/silvamleandro) - [LinkedIn](https://www.linkedin.com/in/silvamleandro)
+* Murilo Ignácio Carvalho [Facebook](https://www.facebook.com/murilo.ignaciocarvalho) - [LinkedIn](https://www.linkedin.com/in/murilo-carvalho)
+* Paulo André Pimenta Aragão [Facebook](https://www.facebook.com/paulo.andre.pimenta.aragao) - [LinkedIn](https://www.linkedin.com/in/paulo-andre-pimenta-aragao/)
+* Victor Fernandes Gardini [Facebook](https://www.facebook.com/victorfernandes.gardini) - [LinkedIn](https://www.linkedin.com/in/victorgardini)
+
+## 💿 Music Credits
+The following songs was used for The Village of Stones Remake:
+* Castle Theme, Visager - *Main Menu*
+* The Final Road [loop], Visager - *Prologue*
+* Village Dreaming, Visager - *MonsterTown Story*
+* The adventure, Komiku - *Map*
+* Gouglou, Komiku - *Level 1 Dialogue*
+* The White, Rolemusic - *Level 1 Battle*
+* Alamak, Rolemusic - *Level 2 Dialogue*
+* Battle!, Visager - *Level 2 Battle*
+* Chasing The Port Chains, Rolemusic - *Level 3 Dialogue*
+* Miniboss Fight [loop], Visager - *Level 3 Battle*
+* The Little Broth, Rolemusic - *Level 4 Battle 1*
+* Dark Sanctum (Boss Fight) [loop], Visager - *Level 4 Battle 2*
+* Itsumo no yo ni, Rolemusic - *Credits*
+* w1x, Rolemusic - *Get Stone*
+
+It is important to notice that all the songs used in this game have free licence and was downloaded from [Free Music Archive](https://freemusicarchive.org).
 
 [⬆ Back to top](#the-village-of-stones-remake)<br>
