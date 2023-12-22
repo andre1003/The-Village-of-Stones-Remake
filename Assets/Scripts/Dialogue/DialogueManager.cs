@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -52,7 +53,12 @@ public class DialogueManager : MonoBehaviour
     {
         canNextSentence = false;
         dialogueFader.fadingCanvasGroup.alpha = 0f;
-        StartCoroutine(WaitForFadeIn());
+
+        bool hasDialogue = dialogues?.Any() == true;
+        if(hasDialogue)
+            StartCoroutine(WaitForFadeIn());
+        else
+            dialogueCanvas.SetActive(false);
     }
 
     // Update method

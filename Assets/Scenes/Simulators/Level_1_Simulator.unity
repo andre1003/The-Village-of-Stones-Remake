@@ -553,6 +553,8 @@ MonoBehaviour:
   magicAttackRate: 0
   stoneUseRate: 10
   healRate: 12
+  minActionDelay: 0
+  maxActionDelay: 0
 --- !u!1 &129755145 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1589566292582976846, guid: e12a1ec11eefbdd41a6ccccb50bb3891, type: 3}
@@ -792,7 +794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &186197605
 Transform:
   m_ObjectHideFlags: 0
@@ -1317,7 +1319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &471441023
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2069,7 +2071,7 @@ RectTransform:
   m_Father: {fileID: 943213782}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.66, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2451,7 +2453,7 @@ RectTransform:
   m_Father: {fileID: 1025420993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2623,7 +2625,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &932585578
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2791,11 +2793,13 @@ MonoBehaviour:
   - {fileID: 117941773}
   characterIndex: 0
   turn: 1
-  isFighting: 0
+  isFighting: 1
   winXp: 5
   winCoins: 50
   loseXp: 1
   loseCoins: 20
+  isSimulator: 1
+  numberOfFights: 10
 --- !u!1 &1087245036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3216,7 +3220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1147568446
 Transform:
   m_ObjectHideFlags: 0
@@ -4102,10 +4106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df65ed7363bec44fbf690728a724af9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogues:
-  - {fileID: 1444868464}
-  - {fileID: 1541489332}
-  - {fileID: 1481938640}
+  dialogues: []
   dialogueCanvas: {fileID: 1457534516}
   dialogueFader: {fileID: 1457534519}
   sentenceText: {fileID: 1457534518}
@@ -4697,7 +4698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1527454673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4818,6 +4819,7 @@ GameObject:
   - component: {fileID: 1527837592}
   - component: {fileID: 1527837591}
   - component: {fileID: 1527837593}
+  - component: {fileID: 1527837594}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4858,7 +4860,7 @@ MonoBehaviour:
   healClip: {fileID: 8300000, guid: 813f8fd84653d9741bf65562c561e37a, type: 3}
   missClip: {fileID: 8300000, guid: 5d40f4d32780f104dba25c5d69d3ce0b, type: 3}
   deathClip: {fileID: 8300000, guid: 309d6975ddc980a4a931ba2d38febe0c, type: 3}
-  ai: {fileID: 0}
+  ai: {fileID: 1527837594}
 --- !u!4 &1527837592
 Transform:
   m_ObjectHideFlags: 0
@@ -4971,6 +4973,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1527837594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527837590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec21cc3d7f33614ebb5168f9e854a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRate: 0
+  lowerAttackRate: 8
+  higherAttackRate: 4
+  basicAttackRate: 12
+  magicAttackRate: 0
+  stoneUseRate: 10
+  healRate: 5
+  minActionDelay: 0
+  maxActionDelay: 0
 --- !u!1 &1541489331
 GameObject:
   m_ObjectHideFlags: 0

@@ -56,8 +56,12 @@ public class Character : MonoBehaviour
     public EnemyAI ai;
 
 
-    // Status
+    // Stats
     private float baseHealth;
+    private float baseBasicDamage;
+    private float baseMagicDamage;
+    private float baseBasicArmor;
+    private float baseMagicArmor;
     #endregion
 
 
@@ -71,6 +75,31 @@ public class Character : MonoBehaviour
     public void InitialSetup()
     {
         baseHealth = health;
+        baseBasicDamage = basicDamage;
+        baseMagicDamage = magicDamage;
+        baseBasicArmor = basicArmor;
+        baseMagicArmor = magicArmor;
+    }
+
+    // Reset all characters stats
+    public void ResetStats()
+    {
+        // Reset character stats
+        health = baseHealth;
+        basicDamage = baseBasicDamage;
+        magicDamage = baseMagicDamage;
+        basicArmor = baseBasicArmor;
+        magicArmor = baseMagicArmor;
+        isDead = false;
+        isInvencible = false;
+
+        // Reset AI stats
+        if(ai)
+            ai.ResetAIStats();
+
+        // Reset stones stats
+        foreach(Stone stone in stones)
+            stone.ResetStone();
     }
 
     // Get baseHealth value
@@ -139,14 +168,14 @@ public class Character : MonoBehaviour
         // Critical success
         if(dice >= minCriticalValue)
         {
-            HUD.instance.SetInfo(name + "'s critical hit! Total damage: " + 2 * damage);
+            HUD.instance?.SetInfo(name + "'s critical hit! Total damage: " + 2 * damage);
             return 2 * damage;
         }
 
         // Success
         else if(dice >= attackSuccessDice)
         {
-            HUD.instance.SetInfo(name + "'s successfull hit. Total damage: " + damage);
+            HUD.instance?.SetInfo(name + "'s successfull hit. Total damage: " + damage);
             return damage;
         }
 
@@ -154,7 +183,7 @@ public class Character : MonoBehaviour
         else
         {
             PlayAudioFX(missClip);
-            HUD.instance.SetInfo(name + " missed!");
+            HUD.instance?.SetInfo(name + " missed!");
             return 0;
         }
     }
@@ -164,13 +193,13 @@ public class Character : MonoBehaviour
     {
         // Play attack audio and disable player actions
         PlayAudioFX(attackClip);
-        HUD.instance.DisablePlayerActions();
+        HUD.instance?.DisablePlayerActions();
 
         // Check if enemy is invencible and if it is, exit
         Character enemy = Bossfight.instance.GetEnemy();
         if(enemy.isInvencible)
         {
-            HUD.instance.SetInfo(enemy.name + " is invencible! No damage caused.");
+            HUD.instance?.SetInfo(enemy.name + " is invencible! No damage caused.");
             Bossfight.instance.NextRound();
             return;
         }
@@ -185,13 +214,13 @@ public class Character : MonoBehaviour
     {
         // Play attack audio and disable player actions
         PlayAudioFX(attackClip);
-        HUD.instance.DisablePlayerActions();
+        HUD.instance?.DisablePlayerActions();
 
         // Check if enemy is invencible and if it is, exit
         Character enemy = Bossfight.instance.GetEnemy();
         if(enemy.isInvencible)
         {
-            HUD.instance.SetInfo(enemy.name + " is invencible! No damage caused.");
+            HUD.instance?.SetInfo(enemy.name + " is invencible! No damage caused.");
             Bossfight.instance.NextRound();
             return;
         }
@@ -228,7 +257,7 @@ public class Character : MonoBehaviour
         PlayAudioFX(healClip);
         health = Mathf.Clamp(health + basicHeal, 0, baseHealth);
         Bossfight.instance.NextRound();
-        HUD.instance.SetInfo(name + " healed!");
+        HUD.instance?.SetInfo(name + " healed!");
         StartCoroutine(HealAnimation());
     }
 
@@ -238,7 +267,7 @@ public class Character : MonoBehaviour
         PlayAudioFX(healClip);
         health = Mathf.Clamp(health + heal, 0, baseHealth);
         Bossfight.instance.NextRound();
-        HUD.instance.SetInfo(name + " healed!");
+        HUD.instance?.SetInfo(name + " healed!");
         StartCoroutine(HealAnimation());
     }
 
@@ -247,7 +276,7 @@ public class Character : MonoBehaviour
         PlayAudioFX(healClip);
         health = baseHealth;
         Bossfight.instance.NextRound();
-        HUD.instance.SetInfo(name + " fully healed!");
+        HUD.instance?.SetInfo(name + " fully healed!");
         StartCoroutine(HealAnimation());
     }
 
@@ -309,10 +338,10 @@ public class Character : MonoBehaviour
         {
             return;
         }
-        if(isPlayer)
-            HUD.instance.DisablePlayerActions();
+        if(isPlayer && !Bossfight.instance.isSimulator)
+            HUD.instance?.DisablePlayerActions();
         stones[stoneIndex].Use(this, Bossfight.instance.GetEnemy());
-        HUD.instance.SetInfo(name + " used the " + stones[stoneIndex].name);
+        HUD.instance?.SetInfo(name + " used the " + stones[stoneIndex].name);
         Bossfight.instance.NextRound();
     }
     #endregion

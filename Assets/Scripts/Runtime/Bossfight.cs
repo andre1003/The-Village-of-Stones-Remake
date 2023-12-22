@@ -30,6 +30,22 @@ public class Bossfight : MonoBehaviour
     public int loseXp;
     public int loseCoins;
 
+    // Simulator
+    [Header("Simulator")]
+    public bool isSimulator = false;
+    public int numberOfFights = 100;
+
+
+    // Simulator
+    private int playerWins = 0;
+    private int enemyWins = 0;
+
+
+    void Start()
+    {
+        if(isSimulator)
+            StartFight();
+    }
 
     // Update method
     void Update()
@@ -47,13 +63,18 @@ public class Bossfight : MonoBehaviour
     // Start bossfight
     public void StartFight()
     {
+        Debug.Log(">> Starting fight <<");
+
         for(int i = 0; i < characters[0].stones.Count; i++)
             characters[0].stones[i].ResetStone();
 
         // Reset character index, turn and fight controller
-        characterIndex = 0;
+        characterIndex = isSimulator ? 1 : 0;
         turn = 1;
         isFighting = true;
+
+        if(isSimulator)
+            NextRound();
     }
 
     // Check if the fight must end
@@ -73,25 +94,59 @@ public class Bossfight : MonoBehaviour
             // Game over
             if(character.isPlayer)
             {
-                GameFlow.instance.GameOver();
                 isFighting = false;
+                if(isSimulator)
+                {
+                    enemyWins++;
+                    RestartFight();
+                }
+                    
+                else
+                    GameFlow.instance.EndBossfight();
             }
 
             // Next step
             else
             {
-                GameFlow.instance.EndBossfight();
                 isFighting = false;
+                if(isSimulator)
+                {
+                    playerWins++;
+                    RestartFight();
+                }
+                    
+                else
+                    GameFlow.instance.EndBossfight();
             }
         }
     }
 
+    // Restart fight
+    private void RestartFight()
+    {
+        string winner = characters[0].isDead ? characters[1].name : characters[0].name;
+        Debug.Log(">> Fight results: " + turn + " rounds. Winner: " + winner);
+
+        numberOfFights--;
+        if(numberOfFights <= 0)
+        {
+            Debug.Log("End of fights. Player won: " + playerWins + " times. Enemy won: " + enemyWins + " times.");
+            return;
+        }
+        
+        characters[0].ResetStats();
+        characters[1].ResetStats();
+        characterIndex = 0;
+        turn = 1;
+        isFighting = true;
+    }
+
     // Enemy decision
-    private void EnemyDecision()
+    private void CharacterDecision()
     {
         // Check if current turn character is not player and call TakeDecision method
         Character character = GetCurrentTurnCharacter();
-        if(character.isPlayer)
+        if(character.isPlayer && !isSimulator)
         {
             return;
         }
@@ -114,15 +169,15 @@ public class Bossfight : MonoBehaviour
         {
             characterIndex = 0;
         }
-        else
-        {
-            EnemyDecision();
-        }
+
+        // Make decision
+        CharacterDecision();
 
         // Update stone cooldowns and update turn text
         characters[0].UpdateAllStonesCooldown();  // Player stones
         characters[1].UpdateAllStonesCooldown();  // Enemy stones
-        HUD.instance.SetTurnText(turn.ToString());
+        if(!isSimulator)
+            HUD.instance.SetTurnText(turn.ToString());
     }
 
     // Get the current turn character

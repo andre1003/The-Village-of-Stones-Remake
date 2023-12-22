@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -30,10 +31,21 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("Higher: higher chance to heal.\nLower: lower chance to heal.")]
     [Range(1, 20)] public int healRate;  // Higher: higher chance to heal - Lower: lower chance to heal
 
+    // Action delay
+    [Header("Action delay")]
+    public float minActionDelay = 1f;
+    public float maxActionDelay = 3f;
+
 
     // Character reference
     private Character character;
 
+    // Base stats
+    private int baseAttackRate;
+    private int baseBasicAttackRate;
+    private int baseMagicAttackRate;
+    private int baseStoneUseRate;
+    private int baseHealRate;
 
     // Awake method
     void Awake()
@@ -48,15 +60,29 @@ public class EnemyAI : MonoBehaviour
         magicAttackRate = 20 - basicAttackRate;
     }
 
+    // Start method
+    void Start()
+    {
+        baseAttackRate = attackRate;
+        baseBasicAttackRate = basicAttackRate;
+        baseMagicAttackRate = magicAttackRate;
+        baseStoneUseRate = stoneUseRate;
+        baseHealRate = healRate;
+    }
+
+    // Reset all AI stats
+    public void ResetAIStats()
+    {
+        attackRate = baseAttackRate;
+        basicAttackRate = baseBasicAttackRate;
+        magicAttackRate = baseMagicAttackRate;
+        stoneUseRate = baseStoneUseRate;
+        healRate = baseHealRate;
+    }
+
     // Adapt attack rate for AI, based on character's health
     public void AttackRateAdapter()
     {
-        // If character is player, exit
-        if(character.isPlayer)
-        {
-            return;
-        }
-
         // If character's healht is lower than 20%, decrease the attack rate. Otherwise, increase it
         if(character.health < 0.2f * character.GetBaseHealth())
         {
@@ -78,7 +104,7 @@ public class EnemyAI : MonoBehaviour
     IEnumerator WaitForMakeDecision()
     {
         // Wait 1 to 3 seconds before take decision
-        yield return new WaitForSeconds(Random.Range(1f, 3f));
+        yield return new WaitForSeconds(Random.Range(minActionDelay, maxActionDelay));
 
         // If there is a fight going on, make a decision
         if(Bossfight.instance.isFighting)
@@ -95,11 +121,14 @@ public class EnemyAI : MonoBehaviour
         int stoneDice = 0;
         int healDice = 0;
 
+        bool noStone = character.stones?.Any() != true;
+        int stoneIndex = noStone ? -1 : Random.Range(0, character.stones.Count);
+
         // Roll dice while all of them are invalid
         do
         {
             attackDice = RollD20();
-            stoneDice = character.stones.Count == 0 || character.stones[0].isInCooldown ? 0 : RollD20();
+            stoneDice = noStone || character.stones[stoneIndex].isInCooldown ? 0 : RollD20();
             healDice = RollD20();
         }
         while(!CheckDice(attackDice, stoneDice, healDice));
@@ -117,7 +146,7 @@ public class EnemyAI : MonoBehaviour
         // Stone dice is higher
         else if(stoneDice >= stoneUseRate && stoneDice > attackDice && stoneDice >= healDice)
         {
-            character.UseStone(0);
+            character.UseStone(stoneIndex);
         }
 
         // Heal dice is higher

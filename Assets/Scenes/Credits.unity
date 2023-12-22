@@ -5402,7 +5402,7 @@ MonoBehaviour:
         m_MethodName: Click
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 240fcfa068908194eb88733af1afdfa8, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 47a74ee6b619d3d4fa9b7eb59e4736ec, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
