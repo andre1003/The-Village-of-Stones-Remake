@@ -22,5 +22,8 @@ public class FireStone : Stone
 
         // Damage enemy
         enemy.TakeHit(damage, 0f);
+
+        // Call next round
+        Bossfight.instance.NextRound();
     }
 }

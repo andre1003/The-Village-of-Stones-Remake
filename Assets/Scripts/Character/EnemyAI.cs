@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -134,17 +135,16 @@ public class EnemyAI : MonoBehaviour
         while(!CheckDice(attackDice, stoneDice, healDice));
 
         // Attack dice is higher
-        if(attackDice >= attackRate && attackDice >= stoneDice && attackDice >= healDice)
+        if(attackDice >= attackRate && attackDice > stoneDice && attackDice > healDice)
         {
-            attackDice = RollD20();
-            if(attackDice >= basicAttackRate)
+            if(RollD20() >= basicAttackRate)
                 character.BasicAttack();
             else
                 character.MagicAttack();
         }
 
         // Stone dice is higher
-        else if(stoneDice >= stoneUseRate && stoneDice > attackDice && stoneDice >= healDice)
+        else if(stoneDice >= stoneUseRate && stoneDice > attackDice && stoneDice > healDice)
         {
             character.UseStone(stoneIndex);
         }
@@ -158,7 +158,7 @@ public class EnemyAI : MonoBehaviour
         // If none of the above conditions are met, perform the action with higher rate
         else
         {
-            PerformHigherRateAction();
+            PerformHigherRateAction(stoneIndex);
         }
     }
 
@@ -169,8 +169,10 @@ public class EnemyAI : MonoBehaviour
     }
 
     // Perform the action with higher rate
-    private void PerformHigherRateAction()
+    private void PerformHigherRateAction(int stoneIndex)
     {
+        bool hasStone = character.stones?.Any() == true;
+
         // Attack
         if(attackRate >= stoneUseRate && attackRate >= healRate)
         {
@@ -181,10 +183,10 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Use stone
-        else if(character.stones.Count > 0 && !character.stones[0].isInCooldown
+        else if(hasStone && !character.stones[stoneIndex].isInCooldown
             && stoneUseRate > attackRate && stoneUseRate >= healRate)
         {
-            character.UseStone(0);
+            character.UseStone(stoneIndex);
         }
 
         // Heal

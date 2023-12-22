@@ -30,6 +30,9 @@ public class AirStone : Stone
         // Apply Air Stone effects
         user.BuffDamage(basicDamageBuff, magicDamageBuff);
         enemy.DebuffArmor(basicArmorDebuff, magicArmorDebuff);
+
+        // Call next round
+        Bossfight.instance.NextRound();
     }
 
     // Remove effect overriden for Air Stone

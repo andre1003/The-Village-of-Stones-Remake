@@ -31,6 +31,9 @@ public class EarthStone : Stone
         // Set user invencible and buff armor
         user.isInvencible = true;
         user.BuffArmor(basicArmorBuff, magicArmorBuff);
+
+        // Call next round
+        Bossfight.instance.NextRound();
     }
 
     // Remove effect overriden for Earth Stone

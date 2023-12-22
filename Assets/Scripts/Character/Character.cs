@@ -256,7 +256,6 @@ public class Character : MonoBehaviour
     {
         PlayAudioFX(healClip);
         health = Mathf.Clamp(health + basicHeal, 0, baseHealth);
-        Bossfight.instance.NextRound();
         HUD.instance?.SetInfo(name + " healed!");
         StartCoroutine(HealAnimation());
     }
@@ -266,7 +265,6 @@ public class Character : MonoBehaviour
     {
         PlayAudioFX(healClip);
         health = Mathf.Clamp(health + heal, 0, baseHealth);
-        Bossfight.instance.NextRound();
         HUD.instance?.SetInfo(name + " healed!");
         StartCoroutine(HealAnimation());
     }
@@ -275,7 +273,6 @@ public class Character : MonoBehaviour
     {
         PlayAudioFX(healClip);
         health = baseHealth;
-        Bossfight.instance.NextRound();
         HUD.instance?.SetInfo(name + " fully healed!");
         StartCoroutine(HealAnimation());
     }
@@ -287,6 +284,7 @@ public class Character : MonoBehaviour
         float length = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
         yield return new WaitForSeconds(length);
         animator.SetBool("healed", false);
+        Bossfight.instance.NextRound();
     }
     #endregion
 
@@ -301,8 +299,8 @@ public class Character : MonoBehaviour
     // Debuff character damage
     public void DebuffDamage(float basicDamageBuff, float magicDamageBuff)
     {
-        basicDamage -= basicDamageBuff;
-        magicDamage -= magicDamageBuff;
+        basicDamage = Mathf.Clamp(basicDamage - basicDamageBuff, 0, basicDamage);
+        magicDamage = Mathf.Clamp(magicDamage - magicDamageBuff, 0, magicDamage);
     }
 
     // Buff character armor
@@ -315,8 +313,8 @@ public class Character : MonoBehaviour
     // Debuff character armor
     public void DebuffArmor(float basicArmorBuff, float magicArmorBuff)
     {
-        basicArmor -= basicArmorBuff;
-        magicArmor -= magicArmorBuff;
+        basicArmor = Mathf.Clamp(basicArmor - basicArmorBuff, 0, basicArmor);
+        magicArmor = Mathf.Clamp(magicArmor - magicArmorBuff, 0, magicArmor);
     }
     #endregion
 
@@ -342,7 +340,6 @@ public class Character : MonoBehaviour
             HUD.instance?.DisablePlayerActions();
         stones[stoneIndex].Use(this, Bossfight.instance.GetEnemy());
         HUD.instance?.SetInfo(name + " used the " + stones[stoneIndex].name);
-        Bossfight.instance.NextRound();
     }
     #endregion
 }

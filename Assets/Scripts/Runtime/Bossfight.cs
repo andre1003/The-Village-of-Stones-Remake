@@ -63,8 +63,6 @@ public class Bossfight : MonoBehaviour
     // Start bossfight
     public void StartFight()
     {
-        Debug.Log(">> Starting fight <<");
-
         for(int i = 0; i < characters[0].stones.Count; i++)
             characters[0].stones[i].ResetStone();
 
@@ -85,11 +83,7 @@ public class Bossfight : MonoBehaviour
         {
             // If character is not dead, continue
             if(!character.isDead)
-            {
-                if(character.ai)
-                    character.ai.AttackRateAdapter();
                 continue;
-            }
 
             // Game over
             if(character.isPlayer)
@@ -162,6 +156,8 @@ public class Bossfight : MonoBehaviour
             return;
         }
 
+        isFighting = false;
+
         // Increase turn and character index
         turn++;
         characterIndex++;
@@ -169,6 +165,10 @@ public class Bossfight : MonoBehaviour
         {
             characterIndex = 0;
         }
+
+        // Adapt AI attack rate
+        foreach(Character character in characters)
+            character.ai?.AttackRateAdapter();
 
         // Make decision
         CharacterDecision();
@@ -178,6 +178,8 @@ public class Bossfight : MonoBehaviour
         characters[1].UpdateAllStonesCooldown();  // Enemy stones
         if(!isSimulator)
             HUD.instance.SetTurnText(turn.ToString());
+
+        isFighting = true;
     }
 
     // Get the current turn character
