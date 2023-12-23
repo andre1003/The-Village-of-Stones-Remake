@@ -15,6 +15,7 @@ public class Stone : MonoBehaviour
 
     // Stone stats
     public new string name;
+    [TextArea(5, 10)]
     public string description;
     public int cooldown = 2;
     public bool isInCooldown = false;

@@ -414,7 +414,7 @@ MonoBehaviour:
   minCriticalValue: 20
   basicHeal: 4
   stones:
-  - {fileID: 409300516}
+  - {fileID: 2076648015}
   animator: {fileID: 907890177}
   characterAudioSource: {fileID: 117941775}
   attackClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
@@ -553,6 +553,8 @@ MonoBehaviour:
   magicAttackRate: 0
   stoneUseRate: 10
   healRate: 12
+  minActionDelay: 1
+  maxActionDelay: 3
 --- !u!1 &157593336
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,6 +739,8 @@ MonoBehaviour:
   gameOverFader: {fileID: 594265000}
   getStone: {fileID: 1886618663}
   getStoneFader: {fileID: 1886618664}
+  recoveredStone: {fileID: 2076648015}
+  stoneDescriptionText: {fileID: 1886618665}
   turnText: {fileID: 744176214}
   currentCharacterText: {fileID: 1088999681}
   turnInfoText: {fileID: 157593338}
@@ -956,91 +960,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200563071}
   m_CullTransparentMesh: 1
---- !u!1 &227116325
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 227116326}
-  m_Layer: 0
-  m_Name: == STONES ==
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &227116326
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227116325}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1075640585}
-  - {fileID: 450116224}
-  - {fileID: 254970668}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &254970666
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 254970668}
-  - component: {fileID: 254970669}
-  m_Layer: 0
-  m_Name: EarthStone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &254970668
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254970666}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 227116326}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &254970669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254970666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6118081c6b513544be2c51f8debf492, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Earth Stone
-  description: The Earth Elemental Stone
-  cooldown: 6
-  isInCooldown: 0
-  uses: 1
-  basicArmorBuff: 10
-  magicArmorBuff: 10
 --- !u!1 &263816382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,59 +994,6 @@ Transform:
   - {fileID: 348214069}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &277074581
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 277074582}
-  - component: {fileID: 277074583}
-  m_Layer: 0
-  m_Name: AirStone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &277074582
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277074581}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1075640585}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &277074583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277074581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc336d5bda582b6408a0a8ef293b7a12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Air Stone
-  description: The Air Elemental Stone
-  cooldown: 4
-  isInCooldown: 0
-  uses: 2
-  basicDamageBuff: 5
-  magicDamageBuff: 5
-  basicArmorDebuff: 5
-  magicArmorDebuff: 5
 --- !u!1 &348214065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,88 +1118,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &409300513
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 409300515}
-  - component: {fileID: 409300516}
-  m_Layer: 0
-  m_Name: FireStone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &409300515
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409300513}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 450116224}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &409300516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409300513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f41962a4c2b906a4caaf01e3df7b339e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Fire Stone
-  description: The Fire Elemental Stone
-  cooldown: 6
-  isInCooldown: 0
-  uses: 2
-  damage: 20
---- !u!1 &450116223
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 450116224}
-  m_Layer: 0
-  m_Name: Enemy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &450116224
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450116223}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 409300515}
-  m_Father: {fileID: 227116326}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &462931469
 GameObject:
   m_ObjectHideFlags: 0
@@ -2141,6 +1925,8 @@ MonoBehaviour:
   winCoins: 50
   loseXp: 1
   loseCoins: 20
+  isSimulator: 0
+  numberOfFights: 100
 --- !u!1 &633780287
 GameObject:
   m_ObjectHideFlags: 0
@@ -3300,39 +3086,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052456619}
   m_CullTransparentMesh: 1
---- !u!1 &1075640584
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1075640585}
-  m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1075640585
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075640584}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 277074582}
-  - {fileID: 1448846472}
-  m_Father: {fileID: 227116326}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1087245036
 GameObject:
   m_ObjectHideFlags: 0
@@ -4674,57 +4427,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 708632792}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1448846470
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1448846472}
-  - component: {fileID: 1448846473}
-  m_Layer: 0
-  m_Name: WaterStone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1448846472
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448846470}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1075640585}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1448846473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448846470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 616def2ef06621d4fb87cec0bba4c563, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Water Stone
-  description: The Water Elemental Stone
-  cooldown: 2
-  isInCooldown: 0
-  uses: 8
-  heal: 25
-  diceForFullHeal: 10
 --- !u!1001 &1457534515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5240,8 +4942,8 @@ MonoBehaviour:
   minCriticalValue: 15
   basicHeal: 2
   stones:
-  - {fileID: 277074583}
-  - {fileID: 1448846473}
+  - {fileID: 2076648017}
+  - {fileID: 2076648016}
   animator: {fileID: 1733076280}
   characterAudioSource: {fileID: 1527837593}
   attackClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
@@ -5886,6 +5588,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74984b82bfd949544afcff2a1daa7cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1886618665 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2866036951562415008, guid: aa611fa6e077ef94ab21fc6b0a6d8a7c, type: 3}
+  m_PrefabInstance: {fileID: 1886618661}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1908976955
 GameObject:
   m_ObjectHideFlags: 0
@@ -6157,6 +5870,96 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004278885}
   m_CullTransparentMesh: 1
+--- !u!1001 &2076648014
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2623965773645584998, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+      propertyPath: m_Name
+      value: == STONES ==
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089588613698980773, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089588613698980773, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089588613698980773, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089588613698980773, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089588613698980773, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089588613698980773, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089588613698980773, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089588613698980773, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089588613698980773, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089588613698980773, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+--- !u!114 &2076648015 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5574866029047932000, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+  m_PrefabInstance: {fileID: 2076648014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f41962a4c2b906a4caaf01e3df7b339e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2076648016 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3137407450314091946, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+  m_PrefabInstance: {fileID: 2076648014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 616def2ef06621d4fb87cec0bba4c563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2076648017 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2900618272015885735, guid: 292a8661e0090204e9b0cec0c39047d6, type: 3}
+  m_PrefabInstance: {fileID: 2076648014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc336d5bda582b6408a0a8ef293b7a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -6167,5 +5970,5 @@ SceneRoots:
   - {fileID: 633780288}
   - {fileID: 1285463947}
   - {fileID: 708632792}
-  - {fileID: 227116326}
+  - {fileID: 2076648014}
   - {fileID: 162730763}

@@ -20,6 +20,10 @@ public class PlayerStats : MonoBehaviour
     }
     #endregion
 
+    // Store
+    [Header("Store")]
+    public bool isStoreFirstTime = true;
+
     // Non-combat info
     [Header("Non-Combat info")]
     public float coins;
@@ -68,6 +72,7 @@ public class PlayerStats : MonoBehaviour
         GameObject playerGameObject = GameObject.FindGameObjectWithTag("Player");
         if(playerGameObject == null)
         {
+            Store.instance?.SetIsFirstTime(isStoreFirstTime);
             return;
         }
 

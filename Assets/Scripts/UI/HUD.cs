@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System.Runtime.InteropServices;
 
 public class HUD : MonoBehaviour
 {
@@ -33,6 +32,8 @@ public class HUD : MonoBehaviour
     [Header("Get stone")]
     public GameObject getStone;
     public Fader getStoneFader;
+    public Stone recoveredStone;
+    public TextMeshProUGUI stoneDescriptionText;
     
     // Turn info
     [Header("Turn info")]
@@ -129,6 +130,7 @@ public class HUD : MonoBehaviour
     // Give stone to player animation
     IEnumerator GetStoneAnimation()
     {
+        stoneDescriptionText.text = recoveredStone.description;
         getStone.SetActive(true);
         getStoneFader.FadeIn();
 

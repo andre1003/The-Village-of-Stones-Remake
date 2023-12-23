@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireStone : Stone
 {
     // Damage
-    public float damage;
+    [Range(0f, 1f)] public float damagePercent = 0.3f;
 
 
     // Stone use overridden for Fire Stone
@@ -21,6 +21,7 @@ public class FireStone : Stone
         base.Use(user, enemy);
 
         // Damage enemy
+        float damage = enemy.GetBaseHealth() * damagePercent; 
         enemy.TakeHit(damage, 0f);
 
         // Call next round

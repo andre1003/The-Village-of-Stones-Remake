@@ -5,8 +5,8 @@ using UnityEngine;
 public class WaterStone : Stone
 {
     // Heal
-    public float heal;
-    [Range(0, 20)] public int diceForFullHeal = 10;
+    [Range(0f, 1f)] public float healPercent = 0.2f;
+    [Range(0, 20)] public int diceForFullHeal = 5;
 
 
     // Stone use overridden for Water Stone
@@ -31,6 +31,7 @@ public class WaterStone : Stone
         // Otherwise, just heal the heal points defined above
         else
         {
+            float heal = user.GetBaseHealth() * healPercent;
             user.Heal(heal);
         }
     }

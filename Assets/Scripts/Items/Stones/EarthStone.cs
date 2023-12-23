@@ -5,8 +5,8 @@ using UnityEngine;
 public class EarthStone : Stone
 {
     // Armor buff
-    public float basicArmorBuff;
-    public float magicArmorBuff;
+    [Range(0f, 1f)] public float basicArmorBuffPercent = 0.25f;
+    [Range(0f, 1f)] public float magicArmorBuffPercent = 0.25f;
 
 
     // Awake method
@@ -30,6 +30,8 @@ public class EarthStone : Stone
 
         // Set user invencible and buff armor
         user.isInvencible = true;
+        float basicArmorBuff = user.basicArmor * basicArmorBuffPercent;
+        float magicArmorBuff = user.magicArmor * magicArmorBuffPercent;
         user.BuffArmor(basicArmorBuff, magicArmorBuff);
 
         // Call next round

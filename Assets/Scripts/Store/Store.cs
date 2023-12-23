@@ -5,13 +5,23 @@ using UnityEngine;
 
 public class Store : MonoBehaviour
 {
+    #region Singleton
+    public static Store instance;
+
+    void Awake()
+    {
+        if(instance == null)
+            instance = this;
+        else
+            Destroy(this);
+    }
+    #endregion
+
     // Is first time
     [Header("First time")]
-    public bool isFirstTime = true;
+    [SerializeField] private bool isFirstTime = true;
     public GameObject firstTimeCanvas;
     public Fader firstTimeFader;
-    public int fadeInIndex;
-    public int fadeOutIndex;
 
     // Buffs per level
     [Header("Buffs per level")]
@@ -175,6 +185,7 @@ public class Store : MonoBehaviour
         firstTimeCanvas.SetActive(true);
         firstTimeFader.FadeIn(0.5f);
         isFirstTime = false;
+        PlayerStats.instance.isStoreFirstTime = false;
     }
 
     // Reset all info
@@ -202,6 +213,12 @@ public class Store : MonoBehaviour
         storeFader.FadeOut(0.5f);
         yield return new WaitForSeconds(0.6f);
         storeCanvas.SetActive(false);
+    }
+
+    // Setter for isFirstTime
+    public void SetIsFirstTime(bool isFirstTime)
+    {
+        this.isFirstTime = isFirstTime;
     }
 
     // Calculate the cost for a given level
