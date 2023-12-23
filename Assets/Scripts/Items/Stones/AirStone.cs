@@ -5,7 +5,7 @@ using UnityEngine;
 public class AirStone : Stone
 {
     // Player buff
-    [Header("Player buff")]
+    [Header("User buff")]
     public float basicDamageBuff;
     public float magicDamageBuff;
 

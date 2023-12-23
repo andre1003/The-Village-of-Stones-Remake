@@ -9,8 +9,8 @@ public class EnemyAI : MonoBehaviour
 {
     // Attack
     [Header("Attack")]
-    [Tooltip("Higher: higher chance to attack.\nLower: lower chance to attack.")]
-    [Range(1, 20)] public int attackRate;  // Higher: higher chance to attack - Lower: lower chance to attack
+    [Tooltip("Higher: lower chance to attack.\nLower: higher chance to attack.")]
+    [Range(1, 20)] public int attackRate;  // Higher: lower chance to attack - Lower: higher chance to attack
 
     [Tooltip("Lower chance to attack.\nYou might want to use a value bigger than 10.")]
     [Range(1, 20)] public int lowerAttackRate = 10;  // Lower chance to attack. You might want to use a value bigger than 10
@@ -19,18 +19,18 @@ public class EnemyAI : MonoBehaviour
     [Range(1, 20)] public int higherAttackRate = 2;  // Higher chance to attack. You might want to use a value lower than 10
 
     // Basic and magic attack rate
-    [Tooltip("Higher: higher chance to perform a basic attack.\nLower: lower chance to perform a basic attack.")]
+    [Tooltip("Higher: lower chance to perform a basic attack.\nLower: higher chance to perform a basic attack.")]
     [Range(1, 20)] public int basicAttackRate;
-    [Tooltip("Higher: higher chance to perform a magic attack.\nLower: lower chance to perform a magic attack.\nTHIS WILL BE AUTOMATICALLY CALCULATED!")]
+    [Tooltip("Higher: lower chance to perform a magic attack.\nLower: higher chance to perform a magic attack.\nTHIS WILL BE AUTOMATICALLY CALCULATED!")]
     [Range(1, 20)] public int magicAttackRate;
 
     [Header("Stone use")]
-    [Tooltip("Higher: higher chance to use the stone.\nLower: lower chance to use the stone.")]
-    [Range(1, 20)] public int stoneUseRate;  // Higher: higher chance to use the stone - Lower: lower chance to use the stone
+    [Tooltip("Higher: lower chance to use the stone.\nLower: higher chance to use the stone.")]
+    [Range(1, 20)] public int stoneUseRate;  // Higher: lower chance to use the stone - Lower: higher chance to use the stone
 
     [Header("Heal")]
-    [Tooltip("Higher: higher chance to heal.\nLower: lower chance to heal.")]
-    [Range(1, 20)] public int healRate;  // Higher: higher chance to heal - Lower: lower chance to heal
+    [Tooltip("Higher: lower chance to heal.\nLower: higher chance to heal.")]
+    [Range(1, 20)] public int healRate;  // Higher: lower chance to heal - Lower: higher chance to heal
 
     // Action delay
     [Header("Action delay")]
@@ -122,6 +122,7 @@ public class EnemyAI : MonoBehaviour
         int stoneDice = 0;
         int healDice = 0;
 
+        // Stone index
         bool noStone = character.stones?.Any() != true;
         int stoneIndex = noStone ? -1 : Random.Range(0, character.stones.Count);
 
@@ -129,7 +130,7 @@ public class EnemyAI : MonoBehaviour
         do
         {
             attackDice = RollD20();
-            stoneDice = noStone || character.stones[stoneIndex].isInCooldown ? 0 : RollD20();
+            stoneDice = CanUseStone(stoneIndex) ? 0 : RollD20();
             healDice = RollD20();
         }
         while(!CheckDice(attackDice, stoneDice, healDice));
@@ -144,8 +145,10 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Stone dice is higher
-        else if(stoneDice >= stoneUseRate && stoneDice > attackDice && stoneDice > healDice)
+        else if(CanUseStone(stoneIndex) && stoneDice >= stoneUseRate && stoneDice > attackDice && stoneDice > healDice)
         {
+            Debug.ClearDeveloperConsole();
+            Debug.Log(character.name + " using stone!");
             character.UseStone(stoneIndex);
         }
 
@@ -162,19 +165,13 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // Check if any dice is valid
-    private bool CheckDice(int attackDice, int stoneDice, int healDice)
-    {
-        return attackDice >= attackRate || stoneDice >= stoneUseRate || healDice >= healRate;
-    }
-
     // Perform the action with higher rate
     private void PerformHigherRateAction(int stoneIndex)
     {
         bool hasStone = character.stones?.Any() == true;
 
         // Attack
-        if(attackRate >= stoneUseRate && attackRate >= healRate)
+        if(attackRate <= stoneUseRate && attackRate <= healRate)
         {
             if(basicAttackRate >= magicAttackRate)
                 character.BasicAttack();
@@ -183,8 +180,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Use stone
-        else if(hasStone && !character.stones[stoneIndex].isInCooldown
-            && stoneUseRate > attackRate && stoneUseRate >= healRate)
+        else if(CanUseStone(stoneIndex) && stoneUseRate < attackRate && stoneUseRate <= healRate)
         {
             character.UseStone(stoneIndex);
         }
@@ -194,6 +190,19 @@ public class EnemyAI : MonoBehaviour
         {
             character.Heal();
         }
+    }
+
+    // Check if any dice is valid
+    private bool CheckDice(int attackDice, int stoneDice, int healDice)
+    {
+        return attackDice >= attackRate || stoneDice >= stoneUseRate || healDice >= healRate;
+    }
+
+    // Check if the stone can be used
+    private bool CanUseStone(int index)
+    {
+        bool hasStone = character.stones?.Any() == true;
+        return hasStone && character.stones[index].CanUseStone();
     }
 
     // Roll a 1d20 dice

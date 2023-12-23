@@ -1111,7 +1111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Air Stone
   description: The Air Elemental Stone
-  cooldown: 4
+  cooldown: 6
   isInCooldown: 0
   uses: 2
   basicDamageBuff: 5
