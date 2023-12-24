@@ -151,6 +151,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 904132221}
   - {fileID: 744176213}
   - {fileID: 1088999680}
   - {fileID: 157593337}
@@ -417,7 +418,10 @@ MonoBehaviour:
   - {fileID: 474611038}
   animator: {fileID: 907890177}
   characterAudioSource: {fileID: 117941775}
-  attackClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
+  basicAttackClip: {fileID: 0}
+  magicAttackClip: {fileID: 0}
+  basicHitClip: {fileID: 0}
+  magicHitClip: {fileID: 0}
   healClip: {fileID: 8300000, guid: 813f8fd84653d9741bf65562c561e37a, type: 3}
   missClip: {fileID: 8300000, guid: 5d40f4d32780f104dba25c5d69d3ce0b, type: 3}
   deathClip: {fileID: 8300000, guid: 309d6975ddc980a4a931ba2d38febe0c, type: 3}
@@ -612,7 +616,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Info
+  m_text: 'Current character''s action goes here!
+
+    <color=#CFCFCF>Other character
+    info goes here.</color>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c209fd7819bb68c4ab8cbdcd534e7e49, type: 2}
   m_sharedMaterial: {fileID: -3627453193131058725, guid: c209fd7819bb68c4ab8cbdcd534e7e49, type: 2}
@@ -2412,7 +2419,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -20}
-  m_SizeDelta: {x: 150, y: 10}
+  m_SizeDelta: {x: 150, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &771914209
 MonoBehaviour:
@@ -2991,6 +2998,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875100546}
+  m_CullTransparentMesh: 1
+--- !u!1 &904132220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 904132221}
+  - component: {fileID: 904132223}
+  - component: {fileID: 904132222}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &904132221
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904132220}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6676176}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.000061035156, y: -0.000015258789}
+  m_SizeDelta: {x: 0, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &904132222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904132220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.6392157, g: 0.49411768, b: 0.34901962, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &904132223
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904132220}
   m_CullTransparentMesh: 1
 --- !u!1 &907890172
 GameObject:
@@ -3949,7 +4031,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -20}
-  m_SizeDelta: {x: 150, y: 10}
+  m_SizeDelta: {x: 150, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1155921844
 MonoBehaviour:
@@ -5769,7 +5851,10 @@ MonoBehaviour:
   - {fileID: 474611039}
   animator: {fileID: 1733076280}
   characterAudioSource: {fileID: 1527837593}
-  attackClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
+  basicAttackClip: {fileID: 0}
+  magicAttackClip: {fileID: 0}
+  basicHitClip: {fileID: 0}
+  magicHitClip: {fileID: 0}
   healClip: {fileID: 8300000, guid: 813f8fd84653d9741bf65562c561e37a, type: 3}
   missClip: {fileID: 8300000, guid: 5d40f4d32780f104dba25c5d69d3ce0b, type: 3}
   deathClip: {fileID: 8300000, guid: 309d6975ddc980a4a931ba2d38febe0c, type: 3}

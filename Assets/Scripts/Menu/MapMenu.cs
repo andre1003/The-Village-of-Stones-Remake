@@ -33,7 +33,7 @@ public class MapMenu : MonoBehaviour
 
     // Map player
     public List<float> levelPostionsX;
-    public RectTransform playerRectTransform;
+    public Transform playerTransform;
 
     // Level index
     public int index = 0;
@@ -56,14 +56,14 @@ public class MapMenu : MonoBehaviour
     void Update()
     {
         // If there is no player or player is already in place, exit
-        if(playerRectTransform == null || playerRectTransform.localPosition == target)
+        if(playerTransform == null || playerTransform.position == target)
         {
             return;
         }
 
         // Update map player position
         time += Time.deltaTime / timeToReachTarget;
-        playerRectTransform.localPosition = Vector3.Lerp(origin, target, time);
+        playerTransform.position = Vector3.Lerp(origin, target, time);
     }
     // Increment level index
     public void IncrementLevelIndex()
@@ -89,7 +89,7 @@ public class MapMenu : MonoBehaviour
             AudioManager.instance.SwapTrack(GameFlow.instance.dialogue);
 
         // Try to find map player and start level button
-        FindPlayerRectTransform();
+        FindPlayerTransform();
         FindStartButton();
 
         // Call PlayerStats.OnSceneLoaded method
@@ -97,22 +97,22 @@ public class MapMenu : MonoBehaviour
     }
 
     // Try to find map player
-    private void FindPlayerRectTransform()
+    private void FindPlayerTransform()
     {
-        // Try to find map player by tag and get the RectTransform component
+        // Try to find map player by tag and get the Transform component
         GameObject mapPlayer = GameObject.FindGameObjectWithTag("MapPlayer");
-        playerRectTransform = !mapPlayer ? null : mapPlayer.GetComponent<RectTransform>();
+        playerTransform = !mapPlayer ? null : mapPlayer.GetComponent<Transform>();
 
-        // If the RectTransform does not exist, exit
-        if(!playerRectTransform)
+        // If the Transform does not exist, exit
+        if(!playerTransform)
         {
             return;
         }
 
         // Set map player origin
         float x = levelPostionsX[previousIndex];
-        float y = playerRectTransform.localPosition.y;
-        float z = playerRectTransform.localPosition.z;
+        float y = playerTransform.localPosition.y;
+        float z = playerTransform.localPosition.z;
         origin = new Vector3(x, y, z);
 
         // Set map player target

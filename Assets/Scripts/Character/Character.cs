@@ -131,9 +131,9 @@ public class Character : MonoBehaviour
         // Add armor info
         string enemyName = Bossfight.instance.GetEnemy().name + " ";
         if(armor > 0f)
-            HUD.instance?.AddInfo("<color=#A90061>" + enemyName + damageType + " armor is " + armor + "</color>");
+            HUD.instance?.AddInfo("<color=#CFCFCF>" + enemyName + damageType + " armor is " + armor + "</color>");
         else
-            HUD.instance?.AddInfo("<color=#A90061>" + enemyName + "does not have " + damageType + " armor!</color>");
+            HUD.instance?.AddInfo("<color=#CFCFCF>" + enemyName + "does not have " + damageType + " armor!</color>");
 
         // Decrease health and check death
         health -= Mathf.Clamp(damage - armor, 0f, damage);
