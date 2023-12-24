@@ -401,7 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Zayin
   description: The robber of Water Stone
-  health: 50
+  health: 100
   isDead: 0
   isPlayer: 0
   isInvencible: 0
@@ -417,7 +417,10 @@ MonoBehaviour:
   - {fileID: 1712557591}
   animator: {fileID: 907890177}
   characterAudioSource: {fileID: 117941775}
-  attackClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
+  basicAttackClip: {fileID: 8300000, guid: 75997cbf3640d4241a0b0f3e636db287, type: 3}
+  magicAttackClip: {fileID: 8300000, guid: cc285da131049b74fafc66bc09ac282e, type: 3}
+  basicHitClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
+  magicHitClip: {fileID: 8300000, guid: 1e1120842518b6648824221f1255bee6, type: 3}
   healClip: {fileID: 8300000, guid: 813f8fd84653d9741bf65562c561e37a, type: 3}
   missClip: {fileID: 8300000, guid: 5d40f4d32780f104dba25c5d69d3ce0b, type: 3}
   deathClip: {fileID: 8300000, guid: 309d6975ddc980a4a931ba2d38febe0c, type: 3}
@@ -447,7 +450,7 @@ AudioSource:
   m_GameObject: {fileID: 117941772}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -6943264065278085779, guid: 42c1702a470a52741a7746247eb875ca, type: 2}
+  OutputAudioMixerGroup: {fileID: 1961093072170679054, guid: 42c1702a470a52741a7746247eb875ca, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -548,11 +551,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRate: 0
   lowerAttackRate: 12
-  higherAttackRate: 6
+  higherAttackRate: 4
   basicAttackRate: 15
   magicAttackRate: 0
   stoneUseRate: 10
-  healRate: 12
+  healRate: 15
   minActionDelay: 1
   maxActionDelay: 3
 --- !u!1 &157593336
@@ -5153,7 +5156,10 @@ MonoBehaviour:
   - {fileID: 1712557592}
   animator: {fileID: 1733076280}
   characterAudioSource: {fileID: 1527837593}
-  attackClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
+  basicAttackClip: {fileID: 8300000, guid: 75997cbf3640d4241a0b0f3e636db287, type: 3}
+  magicAttackClip: {fileID: 8300000, guid: cc285da131049b74fafc66bc09ac282e, type: 3}
+  basicHitClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
+  magicHitClip: {fileID: 8300000, guid: 1e1120842518b6648824221f1255bee6, type: 3}
   healClip: {fileID: 8300000, guid: 813f8fd84653d9741bf65562c561e37a, type: 3}
   missClip: {fileID: 8300000, guid: 5d40f4d32780f104dba25c5d69d3ce0b, type: 3}
   deathClip: {fileID: 8300000, guid: 309d6975ddc980a4a931ba2d38febe0c, type: 3}
@@ -5183,7 +5189,7 @@ AudioSource:
   m_GameObject: {fileID: 1527837590}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -6943264065278085779, guid: 42c1702a470a52741a7746247eb875ca, type: 2}
+  OutputAudioMixerGroup: {fileID: 1961093072170679054, guid: 42c1702a470a52741a7746247eb875ca, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.75

@@ -46,7 +46,10 @@ public class Character : MonoBehaviour
     // Audio
     [Header("Audio")]
     public AudioSource characterAudioSource;
-    public AudioClip attackClip;
+    public AudioClip basicAttackClip;
+    public AudioClip magicAttackClip;
+    public AudioClip basicHitClip;
+    public AudioClip magicHitClip;
     public AudioClip healClip;
     public AudioClip missClip;
     public AudioClip deathClip;
@@ -117,13 +120,20 @@ public class Character : MonoBehaviour
 
     #region Take Hit
     // Take hit
-    public void TakeHit(float damage, float armor)
+    public void TakeHit(float damage, float armor, string damageType)
     {
         // If character is invencible, exit
         if(isInvencible)
         {
             return;
         }
+
+        // Add armor info
+        string enemyName = Bossfight.instance.GetEnemy().name + " ";
+        if(armor > 0f)
+            HUD.instance?.AddInfo("<color=#A90061>" + enemyName + damageType + " armor is " + armor + "</color>");
+        else
+            HUD.instance?.AddInfo("<color=#A90061>" + enemyName + "does not have " + damageType + " armor!</color>");
 
         // Decrease health and check death
         health -= Mathf.Clamp(damage - armor, 0f, damage);
@@ -160,7 +170,7 @@ public class Character : MonoBehaviour
 
     #region Damage
     // Calculate damage
-    public float CalculateDamage(float damage, float attackSuccessDice)
+    public float CalculateDamage(float damage, float attackSuccessDice, string damageType)
     {
         // Get a random value between 1 and 20 (1d20 roll)
         int dice = Random.Range(1, 21);
@@ -168,14 +178,16 @@ public class Character : MonoBehaviour
         // Critical success
         if(dice >= minCriticalValue)
         {
-            HUD.instance?.SetInfo(name + "'s critical hit! Total damage: " + 2 * damage);
+            PlayAudioFX(damageType == "basic" ? basicHitClip : magicHitClip);
+            HUD.instance?.SetInfo(name + "'s critical hit! Total " + damageType + " damage: " + 2 * damage);
             return 2 * damage;
         }
 
         // Success
         else if(dice >= attackSuccessDice)
         {
-            HUD.instance?.SetInfo(name + "'s successfull hit. Total damage: " + damage);
+            PlayAudioFX(damageType == "basic" ? basicHitClip : magicHitClip);
+            HUD.instance?.SetInfo(name + "'s successfull hit. Total " + damageType + " damage: " + damage);
             return damage;
         }
 
@@ -192,7 +204,7 @@ public class Character : MonoBehaviour
     public void BasicAttack()
     {
         // Play attack audio and disable player actions
-        PlayAudioFX(attackClip);
+        PlayAudioFX(basicAttackClip);
         HUD.instance?.DisablePlayerActions();
 
         // Check if enemy is invencible and if it is, exit
@@ -206,14 +218,14 @@ public class Character : MonoBehaviour
 
         // If enemy is NOT invencible, continue basic attack
         float enemyArmor = enemy.basicArmor;
-        StartCoroutine(AttackAnimation(basicDamage, enemyArmor, basicAttackSuccessDice));
+        StartCoroutine(AttackAnimation(basicDamage, enemyArmor, basicAttackSuccessDice, "basic"));
     }
 
     // Perform a magic attack
     public void MagicAttack()
     {
         // Play attack audio and disable player actions
-        PlayAudioFX(attackClip);
+        PlayAudioFX(magicAttackClip);
         HUD.instance?.DisablePlayerActions();
 
         // Check if enemy is invencible and if it is, exit
@@ -227,11 +239,11 @@ public class Character : MonoBehaviour
 
         // If enemy is NOT invencible, continue magic attack
         float enemyArmor = enemy.magicArmor;
-        StartCoroutine(AttackAnimation(magicDamage, enemyArmor, magicAttackSuccessDice));
+        StartCoroutine(AttackAnimation(magicDamage, enemyArmor, magicAttackSuccessDice, "magic"));
     }
 
     // Attack animation
-    IEnumerator AttackAnimation(float damage, float armor, float attackSuccessDice)
+    IEnumerator AttackAnimation(float damage, float armor, float attackSuccessDice, string damageType)
     {
         // Set attack animation
         animator.SetBool("isAttacking", true);
@@ -241,8 +253,8 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(length);
 
         // Calculate damage and inflinge it to enemy
-        float finalDamage = CalculateDamage(damage, attackSuccessDice);
-        Bossfight.instance.GetEnemy().TakeHit(finalDamage, armor);
+        float finalDamage = CalculateDamage(damage, attackSuccessDice, damageType);
+        Bossfight.instance.GetEnemy().TakeHit(finalDamage, armor, damageType);
 
         // Call next round
         Bossfight.instance.NextRound();

@@ -75,16 +75,30 @@ public class HUD : MonoBehaviour
     // Update method
     void Update()
     {
+        if(isPlayerTurn == Bossfight.instance.IsPlayerTurn())
+        {
+            return;
+        }
+
+        UpdateTurnInfo();
+        UpdateActionsInteractable();
+    }
+
+    // Update all turn infos
+    private void UpdateTurnInfo()
+    {
+        // Current character name
         currentCharacterText.text = Bossfight.instance.GetCurrentTurnCharacterName();
-        playerHealthText.text = Bossfight.instance.characters[0].health.ToString();
-        enemyHealthText.text = Bossfight.instance.characters[1].health.ToString();
+
+        // Health texts
+        string playerHealthTxt = Mathf.FloorToInt(Bossfight.instance.characters[0].health).ToString();
+        string enemyHealthTxt = Mathf.FloorToInt(Bossfight.instance.characters[1].health).ToString();
+        playerHealthText.text = playerHealthTxt;
+        enemyHealthText.text = enemyHealthTxt;
+
+        // Health bars
         playerHealth.value = Bossfight.instance.characters[0].health / basePlayerHealth;
         enemyHealth.value = Bossfight.instance.characters[1].health / baseEnemyHealth;
-
-        if(isPlayerTurn != Bossfight.instance.IsPlayerTurn())
-        {
-            UpdateActionsInteractable();
-        }
     }
 
     // Update player actions interactable status based on current character turn
@@ -160,6 +174,12 @@ public class HUD : MonoBehaviour
     public void SetInfo(string info)
     {
         turnInfoText.text = info;
+    }
+
+    // Add turn info on a new line
+    public void AddInfo(string info)
+    {
+        turnInfoText.text += "\n" + info;
     }
 
     // Set turn text

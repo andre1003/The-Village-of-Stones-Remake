@@ -39,8 +39,8 @@ public class AirStone : Stone
         user.BuffDamage(basicDamageBuff, magicDamageBuff);
 
         // Apply Air Stone debuffs
-        basicArmorDebuff = user.basicArmor * basicArmorDebuffPercent;
-        magicArmorDebuff = user.magicArmor * magicArmorDebuffPercent;
+        basicArmorDebuff = enemy.basicArmor * basicArmorDebuffPercent;
+        magicArmorDebuff = enemy.magicArmor * magicArmorDebuffPercent;
         enemy.DebuffArmor(basicArmorDebuff, magicArmorDebuff);
 
         // Call next round

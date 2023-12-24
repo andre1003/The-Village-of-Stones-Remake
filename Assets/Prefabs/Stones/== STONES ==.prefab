@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41962a4c2b906a4caaf01e3df7b339e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: Fire Stone
   description: 'The Fire Stone causes 30% of enemy''s base health as true damage.
 
 
@@ -133,13 +133,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc336d5bda582b6408a0a8ef293b7a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: Air Stone
   description: 'The Air Stone gives a 10% damage buff to the user and a 50% armor
-    debuff to the enemy for 4 rounds.
+    debuff to the enemy for 6 rounds.
 
 
     <color=#FFAC00>It can be used 3 times.</color>'
-  cooldown: 4
+  cooldown: 6
   isInCooldown: 0
   uses: 3
   basicDamageBuffPercent: 0.1

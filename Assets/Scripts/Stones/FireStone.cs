@@ -22,7 +22,7 @@ public class FireStone : Stone
 
         // Damage enemy
         float damage = enemy.GetBaseHealth() * damagePercent; 
-        enemy.TakeHit(damage, 0f);
+        enemy.TakeHit(damage, 0f, "true");
 
         // Call next round
         Bossfight.instance.NextRound();
