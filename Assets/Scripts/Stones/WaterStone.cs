@@ -26,6 +26,7 @@ public class WaterStone : Stone
         if(dice >= diceForFullHeal)
         {
             user.FullHeal();
+            HUD.instance.AddInfo(user.name + " was fully healed");
         }
 
         // Otherwise, just heal the heal points defined above
@@ -33,6 +34,7 @@ public class WaterStone : Stone
         {
             float heal = user.GetBaseHealth() * healPercent;
             user.Heal(heal);
+            HUD.instance.AddInfo(user.name + " healed " + heal);
         }
     }
 }

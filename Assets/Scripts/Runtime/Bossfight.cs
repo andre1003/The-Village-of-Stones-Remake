@@ -96,7 +96,7 @@ public class Bossfight : MonoBehaviour
                 }
                     
                 else
-                    GameFlow.instance.EndBossfight();
+                    GameFlow.instance.GameOver();
             }
 
             // Next step

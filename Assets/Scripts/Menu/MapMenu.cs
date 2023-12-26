@@ -33,7 +33,7 @@ public class MapMenu : MonoBehaviour
 
     // Map player
     public List<float> levelPostionsX;
-    public Transform playerTransform;
+    public RectTransform playerTransform;
 
     // Level index
     public int index = 0;
@@ -56,14 +56,14 @@ public class MapMenu : MonoBehaviour
     void Update()
     {
         // If there is no player or player is already in place, exit
-        if(playerTransform == null || playerTransform.position == target)
+        if(playerTransform == null || playerTransform.localPosition == target)
         {
             return;
         }
 
         // Update map player position
         time += Time.deltaTime / timeToReachTarget;
-        playerTransform.position = Vector3.Lerp(origin, target, time);
+        playerTransform.localPosition = Vector3.Lerp(origin, target, time);
     }
     // Increment level index
     public void IncrementLevelIndex()
@@ -101,7 +101,7 @@ public class MapMenu : MonoBehaviour
     {
         // Try to find map player by tag and get the Transform component
         GameObject mapPlayer = GameObject.FindGameObjectWithTag("MapPlayer");
-        playerTransform = !mapPlayer ? null : mapPlayer.GetComponent<Transform>();
+        playerTransform = !mapPlayer ? null : mapPlayer.GetComponent<RectTransform>();
 
         // If the Transform does not exist, exit
         if(!playerTransform)

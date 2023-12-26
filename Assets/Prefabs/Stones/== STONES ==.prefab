@@ -142,8 +142,8 @@ MonoBehaviour:
   cooldown: 6
   isInCooldown: 0
   uses: 3
-  basicDamageBuffPercent: 0.1
-  magicDamageBuffPercent: 0.1
+  basicDamageBuffPercent: 0.75
+  magicDamageBuffPercent: 0.75
   basicArmorDebuffPercent: 0.5
   magicArmorDebuffPercent: 0.5
 --- !u!1 &6152671255340698436
