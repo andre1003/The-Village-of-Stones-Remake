@@ -440,18 +440,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Voss
   description: The last monster
-  health: 100
+  health: 200
   isDead: 0
   isPlayer: 0
   isInvencible: 0
-  basicDamage: 1
-  magicDamage: 5
-  basicArmor: 0
-  magicArmor: 0
-  basicAttackSuccessDice: 1
+  basicDamage: 20
+  magicDamage: 35
+  basicArmor: 15
+  magicArmor: 25
+  basicAttackSuccessDice: 8
   magicAttackSuccessDice: 6
-  minCriticalValue: 20
-  basicHeal: 4
+  minCriticalValue: 18
+  basicHeal: 15
   stones:
   - {fileID: 0}
   animator: {fileID: 8366826236604264660}

@@ -3722,15 +3722,15 @@ MonoBehaviour:
   magicDamageLvl: 1
   name: Hero
   description: The hero of the village
-  health: 50
+  health: 70
   basicDamage: 10
   magicDamage: 10
-  basicArmor: 0
-  magicArmor: 0
-  basicAttackSuccessDice: 1
-  magicAttackSuccessDice: 1
+  basicArmor: 2
+  magicArmor: 2
+  basicAttackSuccessDice: 2
+  magicAttackSuccessDice: 2
   minCriticalValue: 15
-  basicHeal: 10
+  basicHeal: 7
 --- !u!1 &581241798
 GameObject:
   m_ObjectHideFlags: 0
@@ -8546,7 +8546,7 @@ MonoBehaviour:
   - 85
   - 250
   playerTransform: {fileID: 111661495}
-  index: 0
+  index: 2
   startButton: {fileID: 765981646}
 --- !u!4 &1126691298
 Transform:

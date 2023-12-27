@@ -110,7 +110,7 @@ public class PlayerStats : MonoBehaviour
     private void CheckLevelUp()
     {
         // If player has the required XP, level up
-        if(xp >= nextLevelXp)
+        while(xp >= nextLevelXp)
         {
             xp -= nextLevelXp;
             level++;
@@ -121,6 +121,6 @@ public class PlayerStats : MonoBehaviour
     // Calculate next level required XP
     private void CalculateNextLevelXp()
     {
-        nextLevelXp += 5;
+        nextLevelXp = Mathf.RoundToInt(nextLevelXp * 0.15f);
     }
 }
