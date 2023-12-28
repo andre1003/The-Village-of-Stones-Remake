@@ -1695,10 +1695,10 @@ MonoBehaviour:
   characterIndex: 0
   turn: 1
   isFighting: 0
-  winXp: 5
-  winCoins: 50
-  loseXp: 1
-  loseCoins: 20
+  winXp: 2000
+  winCoins: 3000
+  loseXp: 200
+  loseCoins: 300
   isSimulator: 0
   numberOfFights: 100
 --- !u!1 &633780287

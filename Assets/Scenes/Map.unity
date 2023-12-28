@@ -2909,7 +2909,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 210.00006, y: -150}
+  m_AnchoredPosition: {x: 210, y: -150}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &432192037
@@ -3715,7 +3715,7 @@ MonoBehaviour:
   coins: 0
   level: 1
   xp: 0
-  nextLevelXp: 5
+  nextLevelXp: 500
   basicArmorLvl: 1
   magicArmorLvl: 1
   basicDamageLvl: 1
@@ -4149,9 +4149,9 @@ RectTransform:
   - {fileID: 280499842}
   m_Father: {fileID: 1847091048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: 30}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -30}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &667944229
@@ -6503,6 +6503,7 @@ RectTransform:
   - {fileID: 636938078}
   - {fileID: 927653675}
   - {fileID: 432192036}
+  - {fileID: 1083314413}
   m_Father: {fileID: 1399641751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -6646,8 +6647,8 @@ CanvasGroup:
   m_GameObject: {fileID: 860099662}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &860099665
 MonoBehaviour:
@@ -7859,11 +7860,11 @@ RectTransform:
   m_Children:
   - {fileID: 1762421095}
   - {fileID: 788627318}
-  m_Father: {fileID: 1399641751}
+  m_Father: {fileID: 837154392}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50.86902}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -150}
   m_SizeDelta: {x: 130, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1083314414
@@ -8069,9 +8070,9 @@ RectTransform:
   - {fileID: 754414551}
   m_Father: {fileID: 1847091048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 30}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -50, y: -30}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1090819478
@@ -8546,7 +8547,7 @@ MonoBehaviour:
   - 85
   - 250
   playerTransform: {fileID: 111661495}
-  index: 2
+  index: 0
   startButton: {fileID: 765981646}
 --- !u!4 &1126691298
 Transform:
@@ -9489,8 +9490,8 @@ MonoBehaviour:
   basicDamageBuffPerLevel: 10
   magicDamageBuffPerLevel: 10
   maxLevel: 10
-  costPerLevel: 10
-  initialCost: 5
+  costPerLevel: 50
+  initialCost: 25
   basicArmorLvlText: {fileID: 829266223}
   magicArmorLvlText: {fileID: 237791096}
   basicDamageLvlText: {fileID: 1563313647}
@@ -9822,7 +9823,6 @@ RectTransform:
   - {fileID: 837154392}
   - {fileID: 867191758}
   - {fileID: 1795258979}
-  - {fileID: 1083314413}
   m_Father: {fileID: 1847091048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -10346,7 +10346,7 @@ GameObject:
   - component: {fileID: 1514158162}
   - component: {fileID: 1514158161}
   m_Layer: 5
-  m_Name: CharactersButton
+  m_Name: EnemyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10368,9 +10368,9 @@ RectTransform:
   - {fileID: 954650835}
   m_Father: {fileID: 1847091048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -30}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1514158161
