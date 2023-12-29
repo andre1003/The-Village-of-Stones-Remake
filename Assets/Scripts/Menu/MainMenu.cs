@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DontDestroyObjects;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
     // Fader
     public GameObject fadeGameObject;
     public Fader fader;
+    public TextMeshProUGUI versionText;
 
 
     // Awake method
     void Awake()
     {
         DontDestroyOnLoadManager.DestroyAll();
+        versionText.text = "Version " + Application.version;
     }
 
     // Play game
