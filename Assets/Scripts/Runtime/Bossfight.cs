@@ -70,6 +70,7 @@ public class Bossfight : MonoBehaviour
         characterIndex = isSimulator ? 1 : 0;
         turn = 1;
         isFighting = true;
+        HUD.instance.UpdateTurnInfo();
 
         if(isSimulator)
             NextRound();

@@ -85,7 +85,7 @@ public class HUD : MonoBehaviour
     }
 
     // Update all turn infos
-    private void UpdateTurnInfo()
+    public void UpdateTurnInfo()
     {
         // Current character name
         currentCharacterText.text = Bossfight.instance.GetCurrentTurnCharacterName();
