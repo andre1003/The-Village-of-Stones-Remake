@@ -154,6 +154,6 @@ public class GameFlow : MonoBehaviour
         }
         
         // Give rewards to player
-        PlayerStats.instance.GetRewards(coins, xp);
+        PlayerStats.instance?.GetRewards(coins, xp);
     }
 }

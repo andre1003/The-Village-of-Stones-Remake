@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -35,6 +36,9 @@ public class PlayerStats : MonoBehaviour
     public int magicArmorLvl = 1;
     public int basicDamageLvl = 1;
     public int magicDamageLvl = 1;
+
+    public TextMeshProUGUI rewardsText;
+    public Fader rewardsFader;
 
     //* Character info *//
     // Info
@@ -103,24 +107,39 @@ public class PlayerStats : MonoBehaviour
     {
         this.coins += coins;
         this.xp += xp;
+        DisplayRewards();
         CheckLevelUp();
+    }
+
+    private void DisplayRewards()
+    {
+        rewardsText.text = "+" + xp.ToString() + " XP\n<color=#FFAC00>+" + coins.ToString() + "Coins</color>";
+        StartCoroutine(RewardsDisplayDelay());
+    }
+
+    IEnumerator RewardsDisplayDelay()
+    {
+        rewardsFader.FadeIn(0.5f);
+        yield return new WaitForFade(rewardsFader);
+        yield return new WaitForSeconds(5f);
+        rewardsFader.FadeOut();
     }
 
     // Check level up
     private void CheckLevelUp()
     {
         // If player has the required XP, level up
-        while(xp >= nextLevelXp)
+        if(xp >= nextLevelXp)
         {
             xp -= nextLevelXp;
             level++;
-            CalculateNextLevelXp();
+            nextLevelXp += CalculateNextLevelXp();
         }
     }
 
     // Calculate next level required XP
-    private void CalculateNextLevelXp()
+    private int CalculateNextLevelXp()
     {
-        nextLevelXp = Mathf.RoundToInt(nextLevelXp * 0.15f);
+        return Mathf.RoundToInt(nextLevelXp * 0.15f);
     }
 }

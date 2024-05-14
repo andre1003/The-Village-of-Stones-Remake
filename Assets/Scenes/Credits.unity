@@ -2108,7 +2108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &704224142
 Transform:
   m_ObjectHideFlags: 0
@@ -5629,7 +5629,7 @@ MonoBehaviour:
   nextScene: MainMenu
   changeSceneWhenFinish: 0
   shouldUnloadScene: 0
-  kinematicClip: {fileID: 8300000, guid: b81770e5f2a8e7444ac0e15e7fa50562, type: 3}
+  kinematicClip: {fileID: 0}
   fader: {fileID: 1572935875}
   screens:
   - {fileID: 1484669639}

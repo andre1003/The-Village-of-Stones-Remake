@@ -3704,7 +3704,7 @@ MonoBehaviour:
   getStone: {fileID: 8300000, guid: 84234e81007f4f14984404f85a61301b, type: 3}
   gameOver: {fileID: 8300000, guid: 28fafe1f9453eb042a4aa44adfa58d29, type: 3}
   isFinalLevel: 0
-  stone: {fileID: 0}
+  stone: {fileID: 1712557591}
 --- !u!1 &1435145778
 GameObject:
   m_ObjectHideFlags: 0

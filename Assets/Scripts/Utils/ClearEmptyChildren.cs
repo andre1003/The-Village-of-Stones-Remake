@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearEmptyChildren : MonoBehaviour
+namespace DontDestroyObjects
 {
-    // LateUpdate method
-    void LateUpdate()
+    public class ClearEmptyChildren : MonoBehaviour
     {
-        int count = 0;
-        foreach(Transform child in transform)
-            count++;
-        if(count == 0)
-            Destroy(gameObject);
-        else
-            Destroy(this);
+        // LateUpdate method
+        void LateUpdate()
+        {
+            int count = 0;
+            foreach(Transform child in transform)
+                count++;
+            if(count == 0)
+                gameObject.DestroyObj();
+            else
+                Destroy(this);
+        }
     }
 }

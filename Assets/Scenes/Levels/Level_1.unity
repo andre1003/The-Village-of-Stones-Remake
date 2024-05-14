@@ -1507,7 +1507,7 @@ MonoBehaviour:
   getStone: {fileID: 8300000, guid: 84234e81007f4f14984404f85a61301b, type: 3}
   gameOver: {fileID: 8300000, guid: 28fafe1f9453eb042a4aa44adfa58d29, type: 3}
   isFinalLevel: 0
-  stone: {fileID: 0}
+  stone: {fileID: 1773654103}
 --- !u!114 &1155921844 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3363319890305837308, guid: 845b91e7606f588499941fe2a7a313fa, type: 3}
@@ -2677,6 +2677,10 @@ PrefabInstance:
     - target: {fileID: 1341929023606952027, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
       propertyPath: m_Name
       value: MusicAudio
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341929023606952027, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2019717617356489323, guid: 4bac23302df83b04cab9c3d416932d27, type: 3}
       propertyPath: defaultClip

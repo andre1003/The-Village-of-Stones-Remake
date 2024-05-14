@@ -227,6 +227,18 @@ public class Store : MonoBehaviour
         return initialCost * (level - 1) * costPerLevel;
     }
 
+    private string LevelCostString(int level)
+    {
+        if(level == maxLevel)
+            return "MAX OUT";
+
+        float cost = CalculateLevelCost(level);
+        string levelCost = "$ " + cost.ToString();
+        if(PlayerStats.instance.coins - tempCost < cost)
+            levelCost = "<color=#A10400>" + levelCost + "</color>";
+        return levelCost;
+    }
+
     // Update all costs
     private void UpdateInfo()
     {
@@ -235,10 +247,10 @@ public class Store : MonoBehaviour
         int basicDamageLvl = int.Parse(basicDamageLvlText.text);
         int magicDamageLvl = int.Parse(magicDamageLvlText.text);
 
-        basicArmorCostText.text = basicArmorLvl == maxLevel ? "MAX OUT" : "$ " + CalculateLevelCost(basicArmorLvl).ToString();
-        magicArmorCostText.text = magicArmorLvl == maxLevel ? "MAX OUT" : "$ " + CalculateLevelCost(magicArmorLvl).ToString();
-        basicDamageCostText.text = basicDamageLvl == maxLevel ? "MAX OUT" : "$ " + CalculateLevelCost(basicDamageLvl).ToString();
-        magicDamageCostText.text = magicDamageLvl == maxLevel ? "MAX OUT" : "$ " + CalculateLevelCost(magicDamageLvl).ToString();
+        basicArmorCostText.text = LevelCostString(basicArmorLvl + 1);
+        magicArmorCostText.text = LevelCostString(magicArmorLvl + 1);
+        basicDamageCostText.text = LevelCostString(basicDamageLvl + 1);
+        magicDamageCostText.text = LevelCostString(magicDamageLvl + 1);
 
         tempCostText.text = tempCost == 0f ? "" : "$ " + tempCost.ToString();
         coinsText.text = "$ " + PlayerStats.instance.coins.ToString();

@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoadManager.DestroyAll();
-        versionText.text = "Version " + Application.version;
+        versionText.text = Application.version;
     }
 
     // Play game

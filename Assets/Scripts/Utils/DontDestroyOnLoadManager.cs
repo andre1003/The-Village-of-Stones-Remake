@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace DontDestroyObjects
@@ -29,6 +30,13 @@ namespace DontDestroyObjects
                 if(obj != null)
                     Object.Destroy(obj);
             ddolObjects.Clear();
+        }
+
+        public static void DestroyObj(this GameObject obj)
+        {
+            if(obj != null && ddolObjects.Contains(obj))
+                ddolObjects.Remove(obj);
+            Object.Destroy(obj);
         }
     }
 }
