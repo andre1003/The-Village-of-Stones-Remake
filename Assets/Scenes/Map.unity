@@ -8550,7 +8550,7 @@ MonoBehaviour:
   - 85
   - 250
   playerTransform: {fileID: 111661495}
-  index: 3
+  index: 0
   startButton: {fileID: 765981646}
 --- !u!4 &1126691298
 Transform:

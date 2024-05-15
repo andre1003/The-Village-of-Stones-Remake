@@ -2001,8 +2001,8 @@ MonoBehaviour:
   animator: {fileID: 1733076280}
   characterAudioSource: {fileID: 1527837593}
   basicAttackClip: {fileID: 8300000, guid: 75997cbf3640d4241a0b0f3e636db287, type: 3}
-  magicAttackClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
-  basicHitClip: {fileID: 8300000, guid: cc285da131049b74fafc66bc09ac282e, type: 3}
+  magicAttackClip: {fileID: 8300000, guid: cc285da131049b74fafc66bc09ac282e, type: 3}
+  basicHitClip: {fileID: 8300000, guid: 2d2323a0ba8fa7e4db6b3eaac761a917, type: 3}
   magicHitClip: {fileID: 8300000, guid: 1e1120842518b6648824221f1255bee6, type: 3}
   healClip: {fileID: 8300000, guid: 813f8fd84653d9741bf65562c561e37a, type: 3}
   missClip: {fileID: 8300000, guid: 5d40f4d32780f104dba25c5d69d3ce0b, type: 3}
